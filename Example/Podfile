@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'NokeMobileLibrary_Example' do
+  pod 'NokeMobileLibrary', :path => '../'
+
+  target 'NokeMobileLibrary_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
