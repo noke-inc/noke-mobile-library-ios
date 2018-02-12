@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    NokeDeviceManager.shared().setAPIKey("eyJhbGciOiJOT0tFX01PQklMRV9TQU5EQk9YIiwidHlwIjoiSldUIn0.eyJhbGciOiJOT0tFX01PQklMRV9TQU5EQk9YIiwiY29tcGFueV91dWlkIjoiZmRhMmZkMjItNWQ3Yi00NGMyLTk2ZmItYjUzYmQ2NmQ2ZmMxIiwiaXNzIjoibm9rZS5jb20iLCJpc3N1ZV9kYXRlIjoiMjAxOC0wMi0wOVQxNjoxMzoyMi4yNDgxNDE4LTA3OjAwIn0.e450cf7445e96aae74a50df2de4abd01c55f4321")
+        NokeDeviceManager.shared().setAPIKey("API_KEY_HERE")
         NokeDeviceManager.shared().changeDefaultUploadUrl("https://coreapi-sandbox.appspot.com/upload/")
         return true
     }
