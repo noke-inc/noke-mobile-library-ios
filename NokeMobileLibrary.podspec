@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'NokeMobileLibrary'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'A library for interacting with Noke Devices'
 
   s.description      = <<-DESC
@@ -21,6 +21,8 @@ The Nokē Mobile Library provides an easy-to-use and stable way to communicate w
   s.source           = { :git => 'https://github.com/noke-inc/noke-mobile-library-ios.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/nokelocks'
 
+  s.swift_version = '4.0'
+
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'NokeMobileLibrary/Classes/**/*'
@@ -31,7 +33,10 @@ The Nokē Mobile Library provides an easy-to-use and stable way to communicate w
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   s.frameworks = 'Nokego'
-  s.xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => '"${PODS_ROOT}/Nokego.framework"' }
+  s.xcconfig = {
+      'FRAMEWORK_SEARCH_PATHS' => '"${PODS_ROOT}/Nokego.framework"',
+      'ENABLE_BITCODE[sdk=iphoneos*]' => 'NO'
+    }
   s.vendored_frameworks = "Example/Pods/Nokego.framework"
   # s.dependency 'AFNetworking', '~> 2.3'
 end

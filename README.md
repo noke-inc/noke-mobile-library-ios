@@ -1,6 +1,5 @@
 # Nokē Mobile Library for iOS #
 
-[![CI Status](http://img.shields.io/travis/sapsley/NokeMobileLibrary.svg?style=flat)](https://travis-ci.org/sapsley/NokeMobileLibrary)
 [![Version](https://img.shields.io/cocoapods/v/NokeMobileLibrary.svg?style=flat)](http://cocoapods.org/pods/NokeMobileLibrary)
 [![License](https://img.shields.io/cocoapods/l/NokeMobileLibrary.svg?style=flat)](http://cocoapods.org/pods/NokeMobileLibrary)
 [![Platform](https://img.shields.io/cocoapods/p/NokeMobileLibrary.svg?style=flat)](http://cocoapods.org/pods/NokeMobileLibrary)
