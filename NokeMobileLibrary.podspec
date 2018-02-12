@@ -9,24 +9,17 @@
 Pod::Spec.new do |s|
   s.name             = 'NokeMobileLibrary'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of NokeMobileLibrary.'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
+  s.summary          = 'A library for interacting with Noke Devices'
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+The Nokē Mobile Library provides an easy-to-use and stable way to communicate with Nokē Devices via Bluetooth.  It must be used in conjunction with the Nokē Core API for full functionality such as unlocking locks and uploading activity. When implemented correctly, the Nokē Mobile Library along with the Nokē Core API will allow users the ability to: unlock the lock online and offline, assign and provision quick-click codes, track activity and usage, add and remove lock keys when needed, manage fobs, and sync lock data.
                        DESC
 
-  s.homepage         = 'https://github.com/sapsley/NokeMobileLibrary'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'sapsley' => 'spencer.apsley@gmail.com' }
-  s.source           = { :git => 'https://github.com/sapsley/NokeMobileLibrary.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.homepage         = 'https://github.com/noke-inc/noke-mobile-library-ios'
+  s.license          = { :type => 'Apache-2.0', :file => 'LICENSE' }
+  s.author           = { 'Spencer Apsley' => 'spencer@noke.com' }
+  s.source           = { :git => 'https://github.com/noke-inc/noke-mobile-library-ios.git', :tag => s.version.to_s }
+  s.social_media_url = 'https://twitter.com/nokelocks'
 
   s.ios.deployment_target = '8.0'
 
@@ -37,6 +30,8 @@ TODO: Add long description of the pod here.
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
+  s.frameworks = 'Nokego'
+  s.xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => '"${PODS_ROOT}/Nokego.framework"' }
+  s.vendored_frameworks = "Example/Pods/Nokego.framework"
   # s.dependency 'AFNetworking', '~> 2.3'
 end

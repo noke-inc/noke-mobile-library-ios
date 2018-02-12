@@ -1,0 +1,22 @@
+{
+  "name": "NokeMobileLibrary",
+  "version": "0.1.0",
+  "summary": "A short description of NokeMobileLibrary.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/sapsley/NokeMobileLibrary",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "sapsley": "spencer.apsley@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/sapsley/NokeMobileLibrary.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "NokeMobileLibrary/Classes/**/*"
+}
