@@ -428,6 +428,7 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
         var request = URLRequest(url: URL.init(string: url)!)
         request.httpMethod = "POST"
         request.httpBody = jsonData
+        request.addValue(String.init(format: "Bearer %@", self.apiKey), forHTTPHeaderField: "Authorization")
         
         let task = URLSession.shared.dataTask(with: request){data, response, error in
             guard let data = data, error == nil else{
