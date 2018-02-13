@@ -29,10 +29,6 @@ pod install
 
 - Import the library to any of your classes by using `import NokeMobileLibrary` and begin working on your project
 
-- **Important!** The NokeMobileLibrary uses an embedded framework written in Go.  Gomobile does not currently support Bitcode which means **you must disable Bitcode for the project to work:**.
-
-In the **Project navigator**, select the topmost project item, and select the **Build Settings** tab. Type `bitcode` in the search bar and change the **Enable Bitcode** setting to **No**
-
 - Once you've add the CocoaPod to your project, add the Mobile API Key by setting it in the AppDelegate
 NokeDeviceManager.shared().setAPIKey("YOUR_KEY_HERE")
 
@@ -151,7 +147,7 @@ currentNoke.sendCommands(commandString)
 
 ## License
 
-NokeMobileLibrary is available under the Apache 2.0 license. See the LICENSE file for more info.
+Nokē Mobile Library is available under the Apache 2.0 license. See the LICENSE file for more info.
 
 Copyright © 2018 Nokē Inc. All rights reserved.
 
