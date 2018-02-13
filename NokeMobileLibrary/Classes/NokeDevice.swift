@@ -312,8 +312,6 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
         newData.withUnsafeMutableBytes{(bytes: UnsafeMutablePointer<UInt8>)->Void in
             let dataBytes = bytes
             let destByte = Int(dataBytes[0])
-            debugPrint(self.bytesToString(data: data, start: 0, length: 20))
-        
             switch destByte{
                 case Constants.SERVER_Dest:
                     if(self.session != nil){
@@ -329,7 +327,6 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
                     switch resultByte{
                     case Constants.SUCCESS_ResultType:
                         self.moveToNext()
-                        debugPrint("Received App Packet. Count: ", self.commandArray.count)
                         if(self.commandArray.count == 0){
                             self.lockState = NokeDeviceLockState.nokeDeviceLockStateUnlocked
                             self.connectionState = NokeDeviceConnectionState.nokeDeviceConnectionStateUnlocked
