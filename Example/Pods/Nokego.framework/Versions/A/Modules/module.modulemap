@@ -1,8 +1,0 @@
-framework module "Nokego" {
-	header "ref.h"
-    header "Nokego.objc.h"
-    header "Universe.objc.h"
-    header "Nokego.h"
-
-    export *
-}

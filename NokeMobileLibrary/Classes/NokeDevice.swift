@@ -8,7 +8,6 @@
 
 import Foundation
 import CoreBluetooth
-import Nokego
 
 
 /// Protocol for interacting with the Noke device (in virtually all cases this is the NokeDeviceManager)

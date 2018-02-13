@@ -32,11 +32,5 @@ The Nokē Mobile Library provides an easy-to-use and stable way to communicate w
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  s.frameworks = 'Nokego'
-  s.xcconfig = {
-      'FRAMEWORK_SEARCH_PATHS' => '"${PODS_ROOT}/Nokego.framework"',
-      'ENABLE_BITCODE[sdk=iphoneos*]' => 'NO'
-    }
-  s.vendored_frameworks = "Example/Pods/Nokego.framework"
   # s.dependency 'AFNetworking', '~> 2.3'
 end

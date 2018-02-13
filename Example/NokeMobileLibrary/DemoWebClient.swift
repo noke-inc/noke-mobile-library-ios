@@ -9,7 +9,6 @@
 import Foundation
 import NokeMobileLibrary
 
-
 let serverUrl = "http://slacker.noke/"
 
 public protocol DemoWebClientDelegate{
@@ -61,9 +60,22 @@ public class DemoWebClient: NSObject{
         
             let responseString = String(data: data, encoding: .utf8)
             print(responseString!)
-            self.delegate?.didReceiveUnlockResponse(data: data)
+            if(url.contains("unlock")){
+                self.delegate?.didReceiveUnlockResponse(data: data)
+            }
         }
         
         task.resume()
+    }
+    
+    public func requestActivity(){
+        
+        let url = String.init(format:"%@%@", serverUrl, "activity/")
+        let jsonBody = [String: Any]()
+        
+        if(JSONSerialization.isValidJSONObject(jsonBody)){
+            guard let jsonData = try? JSONSerialization.data(withJSONObject: jsonBody, options: JSONSerialization.WritingOptions.prettyPrinted) else{return}
+            self.doRequest(url: url, jsonData: jsonData)
+        }
     }
 }

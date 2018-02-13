@@ -20,7 +20,6 @@
 
 import Foundation
 import CoreBluetooth
-import Nokego
 
 
 /**
@@ -455,9 +454,9 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
      - Parameters:
      - data: The JSON data received from the endpoint
      */
-    internal func didReceiveUploadResponse(data: data){
+    internal func didReceiveUploadResponse(data: Data){
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
-        if let dictionary = jsonData as? [String: Any] {
+        if let dictionary = json as? [String: Any] {
             let errorCode = dictionary["error_code"] as! Int
             if(errorCode == 0){
                 self.clearUploadQueue()

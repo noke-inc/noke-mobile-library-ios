@@ -19,12 +19,14 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
         NokeDeviceManager.shared().delegate = self
         
         //Add locks to device manager
-        let noke = NokeDevice.init(name: "Test Lock", mac: "XX:XX:XX:XX:XX:XX")
+        let noke = NokeDevice.init(name: "Test Lock", mac: "D7:EE:3C:07:8F:68")
         NokeDeviceManager.shared().addNoke(noke!)
         
         //Setup UI
         backgroundButton.addTarget(self, action: #selector(clickLockButton(_:)), for: .touchUpInside)
         view.addSubview(backgroundButton)
+        activityButton.addTarget(self, action: #selector(clickActivityButton(_:)), for: .touchUpInside)
+        view.addSubview(activityButton)
         lockNameLabel.text = "No Lock Connected"
         view.addSubview(lockNameLabel)
         view.addSubview(lockImageView)
@@ -56,6 +58,7 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
             statusLabel.text = String.init(format: "%@ syncing", noke.name)
         case .nokeDeviceConnectionStateUnlocked:
             statusLabel.text = String.init(format:"%@ unlocked. Battery %d", noke.name, noke.battery)
+            makeButtonColor(UIColor(red:0.05, green:0.62, blue:0.10, alpha:1.0))
             break
         case .nokeDeviceConnectionStateDisconnected:
             statusLabel.text = String.init(format:"%@ disconnected. Lock state: %d", noke.name, (noke.lockState?.rawValue)!)
@@ -175,6 +178,16 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
         return view
     }()
     
+    lazy var activityButton: UIButton = {
+        let view = UIButton()
+        view.frame.size.width = self.view.frame.size.width
+        view.frame.size.height = 60
+        view.frame.origin.y = self.view.frame.size.height/3 + 40 + 60
+        view.backgroundColor = UIColor.darkGray
+        view.setTitle("Get Activity", for: UIControlState.normal)
+        return view
+    }()
+    
     func makeButtonColor(_ color: UIColor){
         UIView.animate(withDuration: 0.25, animations: {
             self.backgroundButton.layer.backgroundColor = color.cgColor
@@ -193,6 +206,10 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
             DemoWebClient.shared().delegate = self
             DemoWebClient.shared().requestUnlock(noke: currentNoke!, email: emailField.text!)
         }
+    }
+    
+    @IBAction func clickActivityButton(_ sender: Any) {
+        DemoWebClient.shared().requestActivity()
     }
 
 }
