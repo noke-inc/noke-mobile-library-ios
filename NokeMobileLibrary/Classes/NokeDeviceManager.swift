@@ -411,12 +411,48 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
             jsonBody["logs"] = globalUploadQueue
             
             if(JSONSerialization.isValidJSONObject(jsonBody)){
-                guard let jsonData = try? JSONSerialization.data(withJSONObject:jsonBody, options: JSONSerialization.WritingOptions.prettyPrinted) else{return}
-                let jsonString = String(data: jsonData, encoding: String.Encoding.utf8) as String!
-                print(jsonString ?? "no data")
-                let uploadCallback = NokeGoUploadCallback()
-                debugPrint(apiKey)
-                NokegoUploadData(jsonString, self.uploadUrl, uploadCallback, apiKey)
+                guard let jsonData = try? JSONSerialization.data(withJSONObject: jsonBody, options: JSONSerialization.WritingOptions.prettyPrinted) else{return}
+                self.doRequest(url: self.uploadUrl, jsonData: jsonData)
+            }
+        }
+    }
+    
+    internal func doRequest(url: String, jsonData: Data){
+        
+        var request = URLRequest(url: URL.init(string: url)!)
+        request.httpMethod = "POST"
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request){data, response, error in
+            guard let data = data, error == nil else{
+                print("error=\(String(describing: error))")
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200{
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(String(describing: response))")
+            }
+            
+            let responseString = String(data: data, encoding: .utf8)
+            print(responseString!)
+            self.didReceiveUploadResponse(data: data)
+        }
+        
+        task.resume()
+    }
+    
+    internal func didReceiveUploadResponse(data: data){
+        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+        if let dictionary = jsonData as? [String: Any] {
+            let errorCode = dictionary["error_code"] as! Int
+            if(errorCode == 0){
+                self.clearUploadQueue()
+            }
+            else{
+                let error = NokeDeviceManagerError(rawValue: errorCode)
+                let message = dictionary["message"] as! String
+                self.delegate?.nokeErrorDidOccur(error: error!, message: message, noke: nil)
             }
         }
     }
