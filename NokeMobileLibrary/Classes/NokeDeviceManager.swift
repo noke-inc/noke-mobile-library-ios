@@ -399,7 +399,7 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
         globalUploadQueue.append(sessionPacket)
     }
     
-    //Clears all Noke device repsonses from the upload queue
+    /// Clears all Noke device repsonses from the upload queue
     public func clearUploadQueue(){
         globalUploadQueue.removeAll()
     }
@@ -417,6 +417,13 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
         }
     }
     
+    /**
+     Makes a web request to the Noke Core API
+     
+     - Parameters:
+     - url: The url for the web request
+     - data: The JSON data to send
+     */
     internal func doRequest(url: String, jsonData: Data){
         
         var request = URLRequest(url: URL.init(string: url)!)
@@ -442,6 +449,12 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
         task.resume()
     }
     
+    /**
+     Parses the response from the upload data endpoint
+     
+     - Parameters:
+     - data: The JSON data received from the endpoint
+     */
     internal func didReceiveUploadResponse(data: data){
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
         if let dictionary = jsonData as? [String: Any] {
