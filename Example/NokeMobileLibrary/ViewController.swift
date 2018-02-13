@@ -118,7 +118,7 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
     lazy var backgroundButton: UIButton! = {
         let view = UIButton()
         view.frame.size.width = self.view.frame.size.width
-        view.frame.size.height = self.view.frame.size.height/3
+        view.frame.size.height = self.view.frame.size.height/3 - 20
         view.backgroundColor = UIColor.darkGray
         return view
     }()
@@ -148,8 +148,8 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
     lazy var statusLabel: UILabel! = {
         let view = UILabel()
         view.frame.size.width = self.view.frame.size.width
-        view.frame.size.height = 40
-        view.frame.origin.y = self.view.frame.size.height/3
+        view.frame.size.height = 60
+        view.frame.origin.y = self.view.frame.size.height/3 - 20
         view.backgroundColor = UIColor.darkGray
         view.textColor = UIColor.white
         view.font = UIFont.init(name: "HelveticaNeue-Thin", size: 18)
