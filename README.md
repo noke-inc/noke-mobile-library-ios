@@ -101,9 +101,9 @@ func bluetoothManagerDidUpdateState(state: NokeManagerBluetoothState) {
     }
 ```
 
-### Connecting to Nokē Device ###
+### Connecting to a Nokē Device ###
 
-* When a Nokē Device is broadcasting and has been detected by the `NokeDeviceManager` the Noke Device updates state to `Discovered`.  The manager can then connect to the Nokē Device.
+* When a Nokē Device is broadcasting and has been detected by the `NokeDeviceManager` the Nokē Device updates state to `Discovered`.  The manager can then connect to the Nokē Device.
 
 ```swift
 case .nokeDeviceConnectionStateDiscovered:
@@ -143,6 +143,16 @@ currentNoke.sendCommands(commandString)
 ```
 
 * Once the Nokē device receives the command, it will verify that the keys are correct and unlock.
+
+### Uploading Activity Logs ###
+
+The Nokē Mobile Library automatically uploads all responses from the Nokē device to the Nokē Core API for parsing.  Responses that contain activity logs are stored in the database and can be accessed using endpoints from the API.  Please see the Nokē Core API documentation for more details.
+
+* The library is set to upload responses to the production API.  If you need to change this url for testing or other custom implementations, you can change the url using the 'NokeDeviceManagerService'
+
+```swift
+NokeDeviceManager.shared().changeDefaultUploadUrl("NEW_URL_HERE")
+```
 
 
 ## License
