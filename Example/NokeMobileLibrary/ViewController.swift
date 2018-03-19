@@ -19,7 +19,7 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
         NokeDeviceManager.shared().delegate = self
         
         //Add locks to device manager
-        let noke = NokeDevice.init(name: "Test Lock", mac: "XX:XX:XX:XX:XX:XX")
+        let noke = NokeDevice.init(name: "New Lock", mac: "XX:XX:XX:XX:XX:XX")
         NokeDeviceManager.shared().addNoke(noke!)
         
         //Setup UI

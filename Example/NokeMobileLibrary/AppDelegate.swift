@@ -16,8 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        NokeDeviceManager.shared().setAPIKey("YOUR_KEY_HERE")
-        NokeDeviceManager.shared().changeDefaultUploadUrl("https://coreapi-sandbox.appspot.com/upload/")
+        NokeDeviceManager.shared().setAPIKey("API_KEY_HERE")
+        NokeDeviceManager.shared().changeDefaultUploadUrl("https://coreapi-sandbox.appspot.com/upload/")//Upload endpoint for sandbox API environment
+        //NokeDeviceManager.shared().setAllowAllNokeDevices(true) //Set to allow discovery of devices that haven't been added to the array
         return true
     }
 

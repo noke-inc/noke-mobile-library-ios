@@ -75,13 +75,20 @@ func nokeErrorDidOccur(error: NokeDeviceManagerError, message: String, noke: Nok
 
 ### Scanning for Nokē Devices ###
 
-* The `NokeDeviceManager` class only scans for devices that have been added to the device array.
+* By default, the `NokeDeviceManager` class only scans for devices that have been added to the device array.
 
 ```swift
 //Add locks to device manager
 let noke = NokeDevice.init(name: "LOCK NAME", mac: "XX:XX:XX:XX:XX:XX")
 NokeDeviceManager.shared().addNoke(noke!)
 ```
+
+* To allow the `NokeDeviceManager` to discover all Noke devices, use the following method:
+
+```swift
+NokeDeviceManager.shared().setAllowAllNokeDevices(true)
+```
+
 **Note:** Make sure that the Bluetooth Manager is in the Powered On State before beginning scanning or you will encounter an error. The `bluetoothManagerDidUpdateState` protocol method can be used to receive updates on the state
 
 ```swift
