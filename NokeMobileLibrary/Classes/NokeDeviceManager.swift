@@ -114,6 +114,9 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     /// Shared instance of NokeDeviceManager
     static var sharedNokeDeviceManager: NokeDeviceManager?
     
+    /// Boolean that allows SDK to discover devices that haven't been added to the array
+    var allowAllNokeDevices: Bool = false
+    
     /**
      Initializes a new NokeDeviceManager
      - Returns: NokeDeviceManager
@@ -172,13 +175,18 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
         }
     }
     
+    /// Allows NokeDeviceManager to discover devices that haven't been added to the device array
+    public func setAllowAllNokeDevices(_ allow: Bool){
+        allowAllNokeDevices = allow
+    }
+    
     /// MARK: Central Manager Delegate Methods
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         self.delegate?.bluetoothManagerDidUpdateState(state: NokeManagerBluetoothState.init(rawValue: central.state.rawValue)!)        
     }
     
+    
     public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        
         
         var broadcastName : String? = advertisementData[CBAdvertisementDataLocalNameKey] as? String
         if(broadcastName == nil || broadcastName?.count != 19){
@@ -205,9 +213,22 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
             mac = "??:??:??:??:??:??"
         }
         
-        let noke = self.nokeWithMac(mac)
+        var noke = self.nokeWithMac(mac)
         if(noke != nil){
             
+            noke?.delegate = NokeDeviceManager.shared()
+            noke?.peripheral = peripheral
+            noke?.peripheral?.delegate = noke
+            
+            let broadcastData = advertisementData[CBAdvertisementDataManufacturerDataKey]
+            if(broadcastData != nil){
+                let hardwareVersion = peripheral.name
+                noke?.version = hardwareVersion!
+            }
+            noke?.connectionState = .nokeDeviceConnectionStateDiscovered
+            self.delegate?.nokeDeviceDidUpdateState(to: (noke?.connectionState)!, noke: noke!)
+        }else if(allowAllNokeDevices){            
+            noke = NokeDevice.init(name: broadcastName!, mac: mac)
             noke?.delegate = NokeDeviceManager.shared()
             noke?.peripheral = peripheral
             noke?.peripheral?.delegate = noke
