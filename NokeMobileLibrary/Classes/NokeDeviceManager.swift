@@ -190,7 +190,11 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
         
         var broadcastName : String? = advertisementData[CBAdvertisementDataLocalNameKey] as? String
         if(broadcastName == nil || broadcastName?.count != 19){
-            broadcastName = peripheral.name!
+            if(peripheral.name != nil){
+                broadcastName = peripheral.name
+            }else{
+                return
+            }
         }
         
         let devicename : String = broadcastName!
