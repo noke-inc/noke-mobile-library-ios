@@ -131,5 +131,9 @@ struct Constants {
     static let QCFULL =             0xFF
     static let QCONETIME =          0x01
     static let QCDISABLED =         0x00
+    
+    //Offline Key Types
+    static let OFFLINE_KEY_LENGTH =  32
+    static let OFFLINE_COMMAND_LENGTH = 40
 }
 
