@@ -75,7 +75,9 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
     }
     
     func nokeErrorDidOccur(error: NokeDeviceManagerError, message: String, noke: NokeDevice?) {
-        statusLabel.text = String.init(format: "Error %d: %@", error.rawValue, message)
+        DispatchQueue.main.sync {
+            statusLabel.text = String.init(format: "Error %d: %@", error.rawValue, message)
+        }        
     }
     
     func bluetoothManagerDidUpdateState(state: NokeManagerBluetoothState) {
