@@ -35,6 +35,9 @@ public enum NokeDeviceManagerError : Int {
     case nokeDeviceBatteryDataResult        = 266 //(200 + 66) BATTERYDATA_ResultType = 0x66
     case nokeDeviceErrorInvalidResult       = 267 //(200 + FF) INVALID_ResultType = 0xFF
     case nokeDeviceErrorUnknown             = 268
+    
+    //Noke Mobile Library Errors
+    case nokeLibraryErrorInvalidOfflineKey  = 301
 }
 
 //Defines used when interacting with the lock

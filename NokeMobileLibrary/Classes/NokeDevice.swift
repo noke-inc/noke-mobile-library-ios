@@ -407,6 +407,11 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
         }
     }
     
+    /**
+     Sends a command string from the Noke Core API to the Noke device
+     
+     - Parameter commands: A command string from the Core API. Commands are delimited by '+'
+     */
     public func sendCommands(_ commands: String){
         let commandsArr = commands.components(separatedBy: "+")
         for command: String in commandsArr{
@@ -415,18 +420,34 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
         self.writeCommandArray()
     }
     
-    
+    /**
+     Sets offline key and command used for unlocking offline
+     
+     - Parameters:
+          -key: String used to encrypt the command to the lock. Received from the Core API
+          -command: String sent to the lock to unlock offline. Received from the Core API
+     */
     public func setOfflineValues(key: String, command: String){
         self.offlineKey = key
         self.unlockCmd = command
     }
     
+    /**
+     Sets offline values before offline unlocking
+     
+     - Parameters:
+     -key: String used to encrypt the command to the lock. Received from the Core API
+     -command: String sent to the lock to unlock offline. Received from the Core API
+     */
     public func offlineUnlock(key: String, command: String){
         self.offlineKey = key
         self.unlockCmd = command
         self.offlineUnlock()
     }
     
+    /**
+     Unlocks the lock using the offline key and the unlock command.  If the keys and commands have been set, no internet connection is required.
+     */
     public func offlineUnlock(){
         if(offlineKey.count == Constants.OFFLINE_KEY_LENGTH && unlockCmd.count == Constants.OFFLINE_COMMAND_LENGTH){
             var keydata = Data(capacity: offlineKey.count/2)
@@ -456,18 +477,27 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
             let timeStamp = UInt64(currentDateTime.timeIntervalSince1970);
             let timedata = Data.init(bytes: [UInt8((timeStamp >> 24) & 0xFF), UInt8((timeStamp >> 16) & 0xFF), UInt8((timeStamp >> 8) & 0xFF), UInt8((timeStamp & 0xFF))])
             
-            let finalCmdData = createOfflineUnlock(self.mac, session: self.stringToBytes(hexstring: self.session!)!, preSessionKey: keydata, unlockCmd: cmddata, timestamp: timedata)
+            let finalCmdData = createOfflineUnlock(preSessionKey: keydata, unlockCmd: cmddata, timestamp: timedata)
             
             self.addCommandToCommandArray(finalCmdData)
             self.writeCommandArray()
+        }else{
+            NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeLibraryErrorInvalidOfflineKey, message: "Offline Key/Command is not a valid length", noke: self)
         }
     }
     
-    fileprivate func createOfflineUnlock(_ mac: String, session: Data, preSessionKey: Data, unlockCmd: Data, timestamp: Data) -> Data
+    /**
+     Creates the offline unlock command, adds the current timestamp, and encrypts using the keys.
+     
+     - Parameters:
+     - preSessionKey: key used to encrypt commands
+     - unlockCmd: command to be encrypted
+     - timestamp: Current time to be embedded into the command
+    */
+    fileprivate func createOfflineUnlock(preSessionKey: Data, unlockCmd: Data, timestamp: Data) -> Data
     {
         let newCommandPacket = byteArray.allocate(capacity: 20);
-        var key = self.createOfflineCombinedKey(mac, session: self.stringToBytes(hexstring: self.session!)!, baseKey: preSessionKey);
-        
+        var key = self.createOfflineCombinedKey(baseKey:preSessionKey);
         var unlockCmdBytes = [UInt8](unlockCmd);
         
         var x = 0;
@@ -501,19 +531,17 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
         cmddata[15] = UInt8.init(truncatingIfNeeded: checksum)
         
         key.withUnsafeMutableBytes {(bytes: UnsafeMutablePointer<UInt8>)->Void in
-            
             var keyBytes = bytes;
             self.copyArray(newCommandPacket, outStart: 4, dataIn: self.encryptPacket(keyBytes, data: cmddata), inStart: 0, size: 16);
-            
         }
         
         return Data.init(bytes: [newCommandPacket[0], newCommandPacket[1], newCommandPacket[2], newCommandPacket[3], newCommandPacket[4], newCommandPacket[5], newCommandPacket[6], newCommandPacket[7], newCommandPacket[8], newCommandPacket[9], newCommandPacket[10], newCommandPacket[11], newCommandPacket[12], newCommandPacket[13], newCommandPacket[14], newCommandPacket[15], newCommandPacket[16], newCommandPacket[17], newCommandPacket[18], newCommandPacket[19]]);
-        
     }
     
-    
-    fileprivate func createOfflineCombinedKey(_ mac: String, session: Data, baseKey: Data) -> Data{
+    //Creates offline key by combining the offline key with the session
+    fileprivate func createOfflineCombinedKey(baseKey: Data) -> Data{
         
+        let session = stringToBytes(hexstring: self.session!)!
         var sessionBytes = [UInt8](session);
         var baseKeyBytes = [UInt8](baseKey);
         
