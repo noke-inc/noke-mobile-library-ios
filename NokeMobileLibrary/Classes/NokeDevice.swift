@@ -531,7 +531,7 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
         cmddata[15] = UInt8.init(truncatingIfNeeded: checksum)
         
         key.withUnsafeMutableBytes {(bytes: UnsafeMutablePointer<UInt8>)->Void in
-            var keyBytes = bytes;
+            let keyBytes = bytes;
             self.copyArray(newCommandPacket, outStart: 4, dataIn: self.encryptPacket(keyBytes, data: cmddata), inStart: 0, size: 16);
         }
         
@@ -622,7 +622,7 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
     fileprivate func encryptPacket(_ combinedKey: byteArray, data: byteArray) -> byteArray
     {
         let tempKey = byteArray.allocate(capacity: 16);
-        var buffer = byteArray.allocate(capacity: 16);
+        let buffer = byteArray.allocate(capacity: 16);
         self.copyArray(tempKey, dataIn: combinedKey, size: 16);
         aes_enc_dec(data, tempKey, 1);
         self.copyArray(buffer, dataIn: data, size: 16);
