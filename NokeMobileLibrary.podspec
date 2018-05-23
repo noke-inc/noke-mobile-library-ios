@@ -25,7 +25,7 @@ The Nokē Mobile Library provides an easy-to-use and stable way to communicate w
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'NokeMobileLibrary/Classes/**/*'
+  s.source_files = 'NokeMobileLibrary/Classes/**/*', 'NokeMobileLibrary/Example/Pods/Target\ Support\ Files/NokeMobileLibrary/NokeMobileLibrary-umbrella.h'
   
   # s.resource_bundles = {
   #   'NokeMobileLibrary' => ['NokeMobileLibrary/Assets/*.png']

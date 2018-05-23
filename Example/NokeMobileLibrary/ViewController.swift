@@ -21,7 +21,6 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
         //Add locks to device manager
         let noke = NokeDevice.init(name: "New Lock", mac: "XX:XX:XX:XX:XX:XX")
         NokeDeviceManager.shared().addNoke(noke!)
-       
         
         //Setup UI
         backgroundButton.addTarget(self, action: #selector(clickLockButton(_:)), for: .touchUpInside)
@@ -78,7 +77,7 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
     func nokeErrorDidOccur(error: NokeDeviceManagerError, message: String, noke: NokeDevice?) {
         DispatchQueue.main.sync {
             statusLabel.text = String.init(format: "Error %d: %@", error.rawValue, message)
-        }        
+        }
     }
     
     func bluetoothManagerDidUpdateState(state: NokeManagerBluetoothState) {
