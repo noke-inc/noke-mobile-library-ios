@@ -151,6 +151,27 @@ currentNoke.sendCommands(commandString)
 
 * Once the Nokē device receives the command, it will verify that the keys are correct and unlock.
 
+#### Unlocking Offline ####
+
+* A Noke device can be unlocked without a network connection.  This requires an offline key and an unlock command, both of which can be received by the server via the [Noke Core API](https://github.com/noke-inc/noke-core-api-documentation).. This two values should be cached on the phone to be used at a later time.
+
+The offline key and unlock command should be set on the Noke device object before being used:
+
+```swift
+noke.setOfflineValues(key:"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", command: "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy")
+```
+They can also be set at the time of offline unlocking:
+```swift
+ noke.offlineUnlock(key:"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", command: "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy")
+```
+Once the values are set, the offline unlock function can be called at any time to unlock the Noke device:
+```swift
+ noke.offlineUnlock()
+```
+
+Logs, errors, and callbacks will continue to function the same as when unlocking online.
+
+
 ### Uploading Activity Logs ###
 
 The Nokē Mobile Library automatically uploads all responses from the Nokē device to the Nokē Core API for parsing.  Responses that contain activity logs are stored in the database and can be accessed using endpoints from the API.  Please see the Nokē Core API documentation for more details.

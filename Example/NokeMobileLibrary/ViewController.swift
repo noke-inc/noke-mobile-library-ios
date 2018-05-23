@@ -21,6 +21,7 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
         //Add locks to device manager
         let noke = NokeDevice.init(name: "New Lock", mac: "XX:XX:XX:XX:XX:XX")
         NokeDeviceManager.shared().addNoke(noke!)
+       
         
         //Setup UI
         backgroundButton.addTarget(self, action: #selector(clickLockButton(_:)), for: .touchUpInside)
