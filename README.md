@@ -153,7 +153,7 @@ currentNoke.sendCommands(commandString)
 
 #### Unlocking Offline ####
 
-* A Noke device can be unlocked without a network connection.  This requires an offline key and an unlock command, both of which can be received by the server via the [Noke Core API](https://github.com/noke-inc/noke-core-api-documentation).. This two values should be cached on the phone to be used at a later time.
+* A Noke device can be unlocked without a network connection.  This requires an offline key and an unlock command, both of which can be received by the server via the [Noke Core API](https://github.com/noke-inc/noke-core-api-documentation). This two values should be cached on the phone to be used at a later time.
 
 The offline key and unlock command should be set on the Noke device object before being used:
 
