@@ -200,9 +200,6 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
     
     @IBAction func clickLockButton(_ sender: Any) {
         
-        NokeDeviceManager.shared().removeNoke(mac: "XX:XX:XX:XX:XX:XX")
-        
-        /**
         if(currentNoke == nil){
             statusLabel.text = "Noke Not Connected"
         }
@@ -214,7 +211,6 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
             DemoWebClient.shared().delegate = self
             DemoWebClient.shared().requestUnlock(noke: currentNoke!, email: emailField.text!)
         }
-        **/
     }
     
     @IBAction func clickActivityButton(_ sender: Any) {
