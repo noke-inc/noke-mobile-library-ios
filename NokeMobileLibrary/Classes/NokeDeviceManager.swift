@@ -281,7 +281,7 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     /**
      Adds Noke Device to array of managed Noke Devices
  
-     Parameter noke: The noke device to be added
+     - Parameter noke: The noke device to be added
      */
     public func addNoke(_ noke: NokeDevice){
         self.insertNokeDevice(noke)
@@ -291,7 +291,7 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     /**
      Inserts device into array after checking for duplicates
      
-     Parameter noke: The noke device to be added
+     - Parameter noke: The noke device to be added
     */
     fileprivate func insertNokeDevice(_ noke:NokeDevice){
         let newnoke = self.nokeWithMac(noke.mac)
@@ -300,12 +300,22 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
         }
     }
     
+    /**
+     Removes device from nokeDevices array
+     
+     - Parameter noke: The noke device to be removed
+     */
     public func removeNoke(noke: NokeDevice){
         if let index = nokeDevices.index(of:noke) {
             nokeDevices.remove(at: index)
         }
     }
     
+    /**
+     Removes device from nokeDevices array
+     
+     - Parameter mac: The mac address of the noke device to be removed
+     */
     public func removeNoke(mac: String){
         let noke = self.nokeWithMac(mac)
         if(noke != nil){
@@ -315,14 +325,25 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
         }
     }
     
+    //Removes all devices from nokeDevices array
     public func removeAllNoke(){
         nokeDevices.removeAll()
     }
     
+    /**
+     Gets a count of all the devices in the nokeDevice array
+     
+     - Returns: Count of devices as Int
+     */
     public func getNokeCount()->Int{
         return nokeDevices.count
     }
     
+    /**
+     Returns an array of all the devices in the nokeDevice array
+     
+     - Returns: Array of NokeDevice objects
+     */
     public func getAllNoke()->Array<NokeDevice>{
         return nokeDevices
     }

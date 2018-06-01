@@ -148,15 +148,15 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
      -Returns: A beautiful, ready-to-use, Noke device just for you
      */
     public init(name: String, mac: String, serial: String, uuid: String, version: String, trackingKey: String, battery: UInt64, unlockCmd: String, offlineKey: String){
-        self.name = name;
-        self.mac = mac;
-        self.serial = serial;
+        self.name = name
+        self.mac = mac
+        self.serial = serial
         self.uuid = uuid
-        self.version = version;
-        self.trackingKey = trackingKey;
-        self.battery = battery;
-        self.unlockCmd = unlockCmd;
-        self.offlineKey = offlineKey;
+        self.version = version
+        self.trackingKey = trackingKey
+        self.battery = battery
+        self.unlockCmd = unlockCmd
+        self.offlineKey = offlineKey
     }
     
     /// Method used to encode class to be stored in User Defaults
@@ -455,14 +455,14 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
             regex.enumerateMatches(in: offlineKey, options: [], range: NSMakeRange(0, offlineKey.count)) { match, flags, stop in
                 let byteString = (offlineKey as NSString).substring(with: match!.range)
                 var num = UInt8(byteString, radix: 16)!
-                keydata.append(&num, count: 1);
+                keydata.append(&num, count: 1)
             }
             
             guard keydata.count > 0 else {
                 return
             }
             
-            var cmddata = Data(capacity:unlockCmd.count/2);
+            var cmddata = Data(capacity:unlockCmd.count/2)
             regex.enumerateMatches(in: unlockCmd, options: [], range: NSMakeRange(0, unlockCmd.count)) { match, flags, stop in
                 let byteCmdString = (unlockCmd as NSString).substring(with: match!.range)
                 var cmdnum = UInt8(byteCmdString, radix: 16)!
@@ -473,8 +473,8 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
                 return
             }
             
-            let currentDateTime = Date();
-            let timeStamp = UInt64(currentDateTime.timeIntervalSince1970);
+            let currentDateTime = Date()
+            let timeStamp = UInt64(currentDateTime.timeIntervalSince1970)
             let timedata = Data.init(bytes: [UInt8((timeStamp >> 24) & 0xFF), UInt8((timeStamp >> 16) & 0xFF), UInt8((timeStamp >> 8) & 0xFF), UInt8((timeStamp & 0xFF))])
             
             let finalCmdData = createOfflineUnlock(preSessionKey: keydata, unlockCmd: cmddata, timestamp: timedata)
@@ -496,64 +496,64 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
     */
     fileprivate func createOfflineUnlock(preSessionKey: Data, unlockCmd: Data, timestamp: Data) -> Data
     {
-        let newCommandPacket = byteArray.allocate(capacity: 20);
-        var key = self.createOfflineCombinedKey(baseKey:preSessionKey);
-        var unlockCmdBytes = [UInt8](unlockCmd);
+        let newCommandPacket = byteArray.allocate(capacity: 20)
+        var key = self.createOfflineCombinedKey(baseKey:preSessionKey)
+        var unlockCmdBytes = [UInt8](unlockCmd)
         
-        var x = 0;
+        var x = 0
         while x<4 {
-            newCommandPacket[x] = unlockCmdBytes[x];
-            x += 1;
+            newCommandPacket[x] = unlockCmdBytes[x]
+            x += 1
         }
         
-        let cmddata = byteArray.allocate(capacity: 16);
+        let cmddata = byteArray.allocate(capacity: 16)
         
-        var i = 0;
+        var i = 0
         while i<16 {
-            cmddata[i] = unlockCmd[i+4];
-            i += 1;
+            cmddata[i] = unlockCmd[i+4]
+            i += 1
         }
         
-        var timeStampBytes = [UInt8](timestamp);
+        var timeStampBytes = [UInt8](timestamp)
         
-        cmddata[2] = timeStampBytes[3];
-        cmddata[3] = timeStampBytes[2];
-        cmddata[4] = timeStampBytes[1];
-        cmddata[5] = timeStampBytes[0];
+        cmddata[2] = timeStampBytes[3]
+        cmddata[3] = timeStampBytes[2]
+        cmddata[4] = timeStampBytes[1]
+        cmddata[5] = timeStampBytes[0]
         
-        var checksum:Int = 0;
-        var n = 0;
+        var checksum:Int = 0
+        var n = 0
         while n<15 {
-            checksum += Int(cmddata[n]);
-            n += 1;
+            checksum += Int(cmddata[n])
+            n += 1
         }
         
         cmddata[15] = UInt8.init(truncatingIfNeeded: checksum)
         
         key.withUnsafeMutableBytes {(bytes: UnsafeMutablePointer<UInt8>)->Void in
-            let keyBytes = bytes;
-            self.copyArray(newCommandPacket, outStart: 4, dataIn: self.encryptPacket(keyBytes, data: cmddata), inStart: 0, size: 16);
+            let keyBytes = bytes
+            self.copyArray(newCommandPacket, outStart: 4, dataIn: self.encryptPacket(keyBytes, data: cmddata), inStart: 0, size: 16)
         }
         
-        return Data.init(bytes: [newCommandPacket[0], newCommandPacket[1], newCommandPacket[2], newCommandPacket[3], newCommandPacket[4], newCommandPacket[5], newCommandPacket[6], newCommandPacket[7], newCommandPacket[8], newCommandPacket[9], newCommandPacket[10], newCommandPacket[11], newCommandPacket[12], newCommandPacket[13], newCommandPacket[14], newCommandPacket[15], newCommandPacket[16], newCommandPacket[17], newCommandPacket[18], newCommandPacket[19]]);
+        return Data.init(bytes: [newCommandPacket[0], newCommandPacket[1], newCommandPacket[2], newCommandPacket[3], newCommandPacket[4], newCommandPacket[5], newCommandPacket[6], newCommandPacket[7], newCommandPacket[8], newCommandPacket[9], newCommandPacket[10], newCommandPacket[11], newCommandPacket[12], newCommandPacket[13], newCommandPacket[14], newCommandPacket[15], newCommandPacket[16], newCommandPacket[17], newCommandPacket[18], newCommandPacket[19]])
     }
     
     //Creates offline key by combining the offline key with the session
     fileprivate func createOfflineCombinedKey(baseKey: Data) -> Data{
         
         let session = stringToBytes(hexstring: self.session!)!
-        var sessionBytes = [UInt8](session);
-        var baseKeyBytes = [UInt8](baseKey);
+        var sessionBytes = [UInt8](session)
+        var baseKeyBytes = [UInt8](baseKey)
         
-        var total:Int;
-        var x = 0;
+        var total:Int
+        var x = 0
         while x<16 {
             
-            total = Int(baseKeyBytes[x]) + Int(sessionBytes[x]);
-            baseKeyBytes[x] = UInt8.init(truncatingIfNeeded: total);
-            x += 1;
+            total = Int(baseKeyBytes[x]) + Int(sessionBytes[x])
+            baseKeyBytes[x] = UInt8.init(truncatingIfNeeded: total)
+            x += 1
         }
-        return Data.init(bytes: baseKeyBytes);
+        return Data.init(bytes: baseKeyBytes)
     }
     
     
@@ -573,60 +573,60 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
     /// Converts byte array (data) to hex string
     internal func bytesToString(data:Data, start:Int, length:Int) -> String
     {
-        var bytes = [UInt8](data);
-        let hex = NSMutableString(string: "");
-        var x = 0;
+        var bytes = [UInt8](data)
+        let hex = NSMutableString(string: "")
+        var x = 0
         while x < length {
-            hex.appendFormat("%02x", bytes[x + start]);
-            x += 1;
+            hex.appendFormat("%02x", bytes[x + start])
+            x += 1
         }
-        let immutableHex = String.init(hex);
-        return immutableHex;
+        let immutableHex = String.init(hex)
+        return immutableHex
     }
     
     fileprivate func copyArray(_ dataOut: byteArray, outStart: Int, dataIn: byteArray, inStart: Int, size: Int){
         
-        var x = 0;
+        var x = 0
         while x < size {
-            dataOut[x+outStart] = dataIn[x+inStart];
-            x += 1;
+            dataOut[x+outStart] = dataIn[x+inStart]
+            x += 1
         }
         
     }
     
     fileprivate func copyArray(_ dataOut: byteArray, dataIn: byteArray, size: Int)
     {
-        var x = 0;
+        var x = 0
         while x < size {
             
-            dataOut[x] = dataIn[x];
-            x += 1;
+            dataOut[x] = dataIn[x]
+            x += 1
         }
     }
     
     fileprivate func copyArray(_ dataOut: Data, dataIn: Data, size: Int) -> Data
     {
-        var bytesDataOut = [UInt8](dataOut);
-        var bytesDataIn = [UInt8](dataIn);
+        var bytesDataOut = [UInt8](dataOut)
+        var bytesDataIn = [UInt8](dataIn)
         
-        var x = 0;
+        var x = 0
         while x < size {
             
-            bytesDataOut[x] = bytesDataIn[x];
-            x += 1;
+            bytesDataOut[x] = bytesDataIn[x]
+            x += 1
         }
         
-        return Data.init(bytes: bytesDataOut);
+        return Data.init(bytes: bytesDataOut)
     }
     
     fileprivate func encryptPacket(_ combinedKey: byteArray, data: byteArray) -> byteArray
     {
-        let tempKey = byteArray.allocate(capacity: 16);
-        let buffer = byteArray.allocate(capacity: 16);
-        self.copyArray(tempKey, dataIn: combinedKey, size: 16);
-        aes_enc_dec(data, tempKey, 1);
-        self.copyArray(buffer, dataIn: data, size: 16);
+        let tempKey = byteArray.allocate(capacity: 16)
+        let buffer = byteArray.allocate(capacity: 16)
+        self.copyArray(tempKey, dataIn: combinedKey, size: 16)
+        aes_enc_dec(data, tempKey, 1)
+        self.copyArray(buffer, dataIn: data, size: 16)
         
-        return buffer;
+        return buffer
     }
 }
