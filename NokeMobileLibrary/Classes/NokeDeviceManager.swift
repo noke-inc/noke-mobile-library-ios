@@ -319,6 +319,14 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
         nokeDevices.removeAll()
     }
     
+    public func getNokeCount()->Int{
+        return nokeDevices.count
+    }
+    
+    public func getAllNoke()->Array<NokeDevice>{
+        return nokeDevices
+    }
+    
     /**
      Gets noke device from array with matching UUID
     
