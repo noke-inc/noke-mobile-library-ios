@@ -20,6 +20,8 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
         
         //Add locks to device manager
         let noke = NokeDevice.init(name: "New Lock", mac: "XX:XX:XX:XX:XX:XX")
+        //noke?.setOfflineValues(key: <#T##String#>, command: <#T##String#>)
+        //noke?.offlineUnlock()
         NokeDeviceManager.shared().addNoke(noke!)
         
         //Setup UI
@@ -197,6 +199,10 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
     }
     
     @IBAction func clickLockButton(_ sender: Any) {
+        
+        NokeDeviceManager.shared().removeNoke(mac: "XX:XX:XX:XX:XX:XX")
+        
+        /**
         if(currentNoke == nil){
             statusLabel.text = "Noke Not Connected"
         }
@@ -208,6 +214,7 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
             DemoWebClient.shared().delegate = self
             DemoWebClient.shared().requestUnlock(noke: currentNoke!, email: emailField.text!)
         }
+        **/
     }
     
     @IBAction func clickActivityButton(_ sender: Any) {

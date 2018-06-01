@@ -300,6 +300,25 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
         }
     }
     
+    public func removeNoke(noke: NokeDevice){
+        if let index = nokeDevices.index(of:noke) {
+            nokeDevices.remove(at: index)
+        }
+    }
+    
+    public func removeNoke(mac: String){
+        let noke = self.nokeWithMac(mac)
+        if(noke != nil){
+            if let index = nokeDevices.index(of:noke!) {
+                nokeDevices.remove(at: index)
+            }
+        }
+    }
+    
+    public func removeAllNoke(){
+        nokeDevices.removeAll()
+    }
+    
     /**
      Gets noke device from array with matching UUID
     
