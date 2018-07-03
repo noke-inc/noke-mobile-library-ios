@@ -199,6 +199,7 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
     }
     
     @IBAction func clickLockButton(_ sender: Any) {
+    
         
         if(currentNoke == nil){
             statusLabel.text = "Noke Not Connected"
