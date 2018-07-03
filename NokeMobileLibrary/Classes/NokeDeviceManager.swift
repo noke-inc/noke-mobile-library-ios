@@ -218,6 +218,9 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
         }
         
         var noke = self.nokeWithMac(mac)
+        
+        noke?.lastSeen = Date().timeIntervalSince1970
+        
         if(noke != nil){
             
             noke?.delegate = NokeDeviceManager.shared()
