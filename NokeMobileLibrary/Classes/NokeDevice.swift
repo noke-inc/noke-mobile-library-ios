@@ -30,6 +30,9 @@ public enum NokeDeviceLockState : Int{
 /// Class stores information about the Noke device and contains methods for interacting with the Noke device
 public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
     
+    /// Time Interval representing the most recent time the device was discovered
+    public var lastSeen: Double = 0.0
+    
     /// typealias used for handling bytes from the lock
     typealias byteArray = UnsafeMutablePointer<UInt8>
     
