@@ -100,7 +100,7 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     public var delegate: NokeDeviceManagerDelegate?
     
     /// Array of Noke devices managed by the NokeDeviceManager
-    var nokeDevices = [NokeDevice]()
+    var nokeDevices = [String: NokeDevice]()
     
     /// Queue of responses from lock ready to be uploaded
     fileprivate var globalUploadQueue = [Dictionary<String,Any>]()
@@ -279,56 +279,48 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     }
     
     
-    /// MARK: Noke Device Array Methods
+    /// MARK: Noke Device Dictionary Methods
     
     /**
-     Adds Noke Device to array of managed Noke Devices
+     Adds Noke Device to dictionary of managed Noke Devices
  
      - Parameter noke: The noke device to be added
      */
     public func addNoke(_ noke: NokeDevice){
         self.insertNokeDevice(noke)
-        self.saveNokeDevices()
     }
     
     /**
-     Inserts device into array after checking for duplicates
+     Inserts device into dictionary after checking for duplicates
      
      - Parameter noke: The noke device to be added
     */
     fileprivate func insertNokeDevice(_ noke:NokeDevice){
         let newnoke = self.nokeWithMac(noke.mac)
         if(newnoke == nil){
-            nokeDevices.append(noke)
+            nokeDevices[noke.mac] = noke
         }
     }
     
     /**
-     Removes device from nokeDevices array
+     Removes device from nokeDevices dictionary
      
      - Parameter noke: The noke device to be removed
      */
     public func removeNoke(noke: NokeDevice){
-        if let index = nokeDevices.index(of:noke) {
-            nokeDevices.remove(at: index)
-        }
+        nokeDevices.removeValueForKey(noke.mac)
     }
     
     /**
-     Removes device from nokeDevices array
+     Removes device from nokeDevices dictionary
      
      - Parameter mac: The mac address of the noke device to be removed
      */
     public func removeNoke(mac: String){
-        let noke = self.nokeWithMac(mac)
-        if(noke != nil){
-            if let index = nokeDevices.index(of:noke!) {
-                nokeDevices.remove(at: index)
-            }
-        }
+        nokeDevices.removeValueForKey(mac)
     }
     
-    //Removes all devices from nokeDevices array
+    //Removes all devices from nokeDevices dictionary
     public func removeAllNoke(){
         nokeDevices.removeAll()
     }
@@ -347,19 +339,21 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
      
      - Returns: Array of NokeDevice objects
      */
-    public func getAllNoke()->Array<NokeDevice>{
+    public func getAllNoke()->Dictionary<String,NokeDevice>{
         return nokeDevices
     }
     
     /**
-     Gets noke device from array with matching UUID
+     Gets noke device from dictionary with matching UUID
     
      - Parameters: UUID of intended Noke device
      
      - Returns: Noke device with requested UUID
      */
     public func nokeWithUUID(_ uuid: String)->NokeDevice?{
-        for noke: NokeDevice in self.nokeDevices{
+        
+        var nokeArray = nokeDevices.copy
+        for noke: NokeDevice in nokeArray{
             if(noke.uuid == uuid){
                 return noke
             }
@@ -368,7 +362,7 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     }
     
     /**
-     Gets noke device from array with matching MAC address
+     Gets noke device from dictionary with matching MAC address
      
      - Parameters: MAC address of intended Noke device
      
@@ -391,33 +385,14 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
      - Returns: Noke device with requested peripheral
      */
     public func nokeWithPeripheral(_ peripheral:CBPeripheral)->NokeDevice?{
-        for noke:NokeDevice in self.nokeDevices{
+        
+        var nokeArray = nokeDevices.copy
+        for noke:NokeDevice in nokeArray{
             if(noke.peripheral == peripheral){
                 return noke
             }
         }
         return nil
-    }
-    
-    
-    /// Saves noke devices to user defaults for offline access
-    public func saveNokeDevices(){
-        var encodedNokeDevices = [Data]()
-        for noke:NokeDevice in self.nokeDevices{
-            let encodedNoke = NSKeyedArchiver.archivedData(withRootObject: noke)
-            encodedNokeDevices.append(encodedNoke)
-        }
-        UserDefaults.standard.set(encodedNokeDevices, forKey: nokeDevicesDefaultsKey)
-    }
-    
-
-    /// Loads noke devices from user defaults
-    public func loadNokeDevices(){
-        let cachedNokeDevices = UserDefaults.standard.object(forKey: nokeDevicesDefaultsKey) as? [Data]
-        for encodedNoke:Data in cachedNokeDevices!{
-            let noke = NSKeyedUnarchiver.unarchiveObject(with: encodedNoke) as? NokeDevice
-            self.insertNokeDevice(noke!)
-        }
     }
     
     /// Sets Mobile API Key for uploading logs to the Core API
