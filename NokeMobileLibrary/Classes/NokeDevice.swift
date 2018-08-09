@@ -131,6 +131,7 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
         
         self.unlockCmd = ""
         self.offlineKey = ""
+        self.lockState = NokeDeviceLockState.nokeDeviceLockStateLocked
         super.init()
     }
     

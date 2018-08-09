@@ -266,7 +266,7 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
         if(noke == nil){
             return
         }
-        noke?.connectionState = .nokeDeviceConnectionStateDisconnected
+        noke!.connectionState = .nokeDeviceConnectionStateDisconnected
         delegate?.nokeDeviceDidUpdateState(to: (noke?.connectionState)!, noke: noke!)
         self.uploadData()
     }
@@ -308,7 +308,7 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
      - Parameter noke: The noke device to be removed
      */
     public func removeNoke(noke: NokeDevice){
-        nokeDevices.removeValueForKey(noke.mac)
+        nokeDevices.removeValue(forKey: noke.mac)
     }
     
     /**
@@ -317,7 +317,7 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
      - Parameter mac: The mac address of the noke device to be removed
      */
     public func removeNoke(mac: String){
-        nokeDevices.removeValueForKey(mac)
+        nokeDevices.removeValue(forKey: mac)
     }
     
     //Removes all devices from nokeDevices dictionary
@@ -352,7 +352,7 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
      */
     public func nokeWithUUID(_ uuid: String)->NokeDevice?{
         
-        var nokeArray = nokeDevices.copy
+        let nokeArray = Array(nokeDevices.values)
         for noke: NokeDevice in nokeArray{
             if(noke.uuid == uuid){
                 return noke
@@ -369,12 +369,7 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
      - Returns: Noke device with requested MAC address
      */
     public func nokeWithMac(_ mac: String)->NokeDevice?{
-        for noke: NokeDevice in self.nokeDevices{
-            if(noke.mac == mac){
-                return noke
-            }
-        }
-        return nil
+        return nokeDevices[mac]
     }
     
     /**
@@ -386,7 +381,7 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
      */
     public func nokeWithPeripheral(_ peripheral:CBPeripheral)->NokeDevice?{
         
-        var nokeArray = nokeDevices.copy
+        let nokeArray = Array(nokeDevices.values)
         for noke:NokeDevice in nokeArray{
             if(noke.peripheral == peripheral){
                 return noke
