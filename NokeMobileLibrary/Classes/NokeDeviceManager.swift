@@ -395,6 +395,10 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
         self.apiKey = apiKey
     }
     
+    internal func getAPIKey()->String{
+        return self.apiKey
+    }
+    
     /// Sets Upload URL for uploading Noke device responses to the Core API
     public func changeDefaultUploadUrl(_ newUploadURL: String){
         self.uploadUrl = newUploadURL
@@ -455,38 +459,14 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
             
             if(JSONSerialization.isValidJSONObject(jsonBody)){
                 guard let jsonData = try? JSONSerialization.data(withJSONObject: jsonBody, options: JSONSerialization.WritingOptions.prettyPrinted) else{return}
-                self.doRequest(url: self.uploadUrl, jsonData: jsonData)
+                NokeLibraryApiClient().doRequest(url: self.uploadUrl, jsonData: jsonData) { (data) in
+                    self.didReceiveUploadResponse(data: (data)!)
+                }
             }
         }
     }
     
-    /**
-     Makes a web request to the Noke Core API
-     
-     - Parameters:
-     - url: The url for the web request
-     - data: The JSON data to send
-     */
-    internal func doRequest(url: String, jsonData: Data){
-        
-        var request = URLRequest(url: URL.init(string: url)!)
-        request.httpMethod = "POST"
-        request.httpBody = jsonData
-        request.addValue(String.init(format: "Bearer %@", self.apiKey), forHTTPHeaderField: "Authorization")
-        
-        let task = URLSession.shared.dataTask(with: request){data, response, error in
-            guard let data = data, error == nil else{
-                return
-            }
-            
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200{
-            }
-            
-            self.didReceiveUploadResponse(data: data)
-        }
-        
-        task.resume()
-    }
+    
     
     /**
      Parses the response from the upload data endpoint
