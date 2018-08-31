@@ -40,6 +40,13 @@ public enum NokeDeviceManagerError : Int {
     case nokeLibraryErrorInvalidOfflineKey  = 301
 }
 
+public enum NokeLibraryMode : Int {
+    case SANDBOX      = 0;
+    case PRODUCTION   = 1;
+    case DEVELOP      = 2;
+}
+
+
 //Defines used when interacting with the lock
 struct Constants {
     
@@ -146,9 +153,4 @@ struct ApiURL {
     static let developUploadURL         = "https://lock-api-dev.appspot.com/"
 }
 
-struct NokeLibraryMode {
-    static let SANDBOX      = 0;
-    static let PRODUCTION   = 1;
-    static let DEVELOP      = 2;
-}
 

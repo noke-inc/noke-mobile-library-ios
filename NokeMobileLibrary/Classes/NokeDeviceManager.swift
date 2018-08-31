@@ -134,6 +134,8 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
         super.init()
         cm = CBCentralManager.init(delegate: self, queue: nil)
     }
+
+    
     
     /**
      Used for getting the shared instance of NokeDeviceManager
@@ -409,8 +411,18 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     }
     
     /// Sets Upload URL for uploading Noke device responses to the Core API
-    public func changeDefaultUploadUrl(_ newUploadURL: String){
-        self.uploadUrl = newUploadURL
+    public func setLibraryMode(_ mode: NokeLibraryMode){
+        switch mode {
+        case NokeLibraryMode.SANDBOX:
+            self.uploadUrl = ApiURL.sandboxUploadURL
+            break
+        case NokeLibraryMode.PRODUCTION:
+            self.uploadUrl = ApiURL.productionUploadURL
+            break
+        case NokeLibraryMode.DEVELOP:
+            self.uploadUrl = ApiURL.developUploadURL
+            break
+        }
     }
     
     /// Saves upload packets to user defaults to ensure they're cached before uploading
