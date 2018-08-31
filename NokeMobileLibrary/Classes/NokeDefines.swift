@@ -140,3 +140,15 @@ struct Constants {
     static let OFFLINE_COMMAND_LENGTH = 40
 }
 
+struct ApiURL {
+    static let sandboxUploadURL         = "https://coreapi-sandbox.appspot.com/"
+    static let productionUploadURL      = "https://coreapi-beta.appspot.com/"
+    static let developUploadURL         = "https://lock-api-dev.appspot.com/"
+}
+
+struct NokeLibraryMode {
+    static let SANDBOX      = 0;
+    static let PRODUCTION   = 1;
+    static let DEVELOP      = 2;
+}
+

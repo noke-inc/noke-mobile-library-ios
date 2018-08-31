@@ -11,6 +11,8 @@ import NokeMobileLibrary
 
 class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClientDelegate {
     
+    
+    
     var currentNoke : NokeDevice?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,6 +82,10 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
         DispatchQueue.main.sync {
             statusLabel.text = String.init(format: "Error %d: %@", error.rawValue, message)
         }
+    }
+    
+    func didUploadData(result: Int, message: String) {
+        debugPrint("DID UPLOAD DATA")
     }
     
     func bluetoothManagerDidUpdateState(state: NokeManagerBluetoothState) {

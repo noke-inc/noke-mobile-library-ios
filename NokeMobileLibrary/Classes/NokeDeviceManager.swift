@@ -78,6 +78,15 @@ public protocol NokeDeviceManagerDelegate
      */
     func nokeErrorDidOccur(error: NokeDeviceManagerError, message: String, noke: NokeDevice?)
     
+    /**
+      Called after data from the lock is upload to the API
+ 
+    - Parameters:
+        - result: Result of the data being uploaded (success or failure)
+        - message: Contains details of the upload result
+    */
+    func didUploadData(result: Int, message: String)
+    
     func bluetoothManagerDidUpdateState(state: NokeManagerBluetoothState)
 }
 
@@ -91,7 +100,7 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     let globalUploadDefaultsKey = "noke-mobile-upload-queue"
     
     /// URL string for uploading data
-    public var uploadUrl = "https://lock-api-dev.appspot.com/upload/"
+    public var uploadUrl = ""
     
     /// URL string for fetching unlock commands
     public var unlockUrl: String = ""
@@ -459,13 +468,12 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
             
             if(JSONSerialization.isValidJSONObject(jsonBody)){
                 guard let jsonData = try? JSONSerialization.data(withJSONObject: jsonBody, options: JSONSerialization.WritingOptions.prettyPrinted) else{return}
-                NokeLibraryApiClient().doRequest(url: self.uploadUrl, jsonData: jsonData) { (data) in
+                NokeLibraryApiClient().doRequest(url: self.uploadUrl + API.UPLOAD, jsonData: jsonData) { (data) in
                     self.didReceiveUploadResponse(data: (data)!)
                 }
             }
         }
     }
-    
     
     
     /**
@@ -478,14 +486,105 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
         if let dictionary = json as? [String: Any] {
             let errorCode = dictionary["error_code"] as! Int
+            let message = dictionary["message"] as! String
             if(errorCode == 0){
                 self.clearUploadQueue()
+                self.delegate?.didUploadData(result: errorCode, message: message)
             }
             else{
+                let error = NokeDeviceManagerError(rawValue: errorCode)
+                self.delegate?.nokeErrorDidOccur(error: error!, message: message, noke: nil)
+            }
+        }
+    }
+    
+    internal func restoreDevice(noke : NokeDevice){
+        noke.isRestoring = true;
+    }
+    
+    
+    /// Ensures the keys in the lock and keys on the server remain synced
+    public func restoreKey(noke : NokeDevice){
+
+            var jsonBody = [String: Any]()
+            jsonBody["session"] = noke.session
+            jsonBody["mac"] = noke.mac
+        
+        
+            if(JSONSerialization.isValidJSONObject(jsonBody)){
+                guard let jsonData = try? JSONSerialization.data(withJSONObject: jsonBody, options: JSONSerialization.WritingOptions.prettyPrinted) else{return}
+                NokeLibraryApiClient().doRequest(url: self.uploadUrl + API.RESTORE, jsonData: jsonData) { (data) in
+                    self.didReceiveRestoreResponse(data: (data)!, noke: noke)
+                }
+            }
+        
+    }
+    
+    
+    /**
+     Parses the response from the restore key data endpoint
+     
+     - Parameters:
+     - data: The JSON data received from the endpoint
+     - noke: The device that is being restored
+     */
+    internal func didReceiveRestoreResponse(data: Data, noke: NokeDevice){
+        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+        if let dictionary = json as? [String: Any] {
+            let errorCode = dictionary["error_code"] as! Int
+            if(errorCode == 0){
+                let dataDict = dictionary["data"] as? [String: Any]
+                let commandString = dataDict!["commands"] as! String
+                noke.sendCommands(commandString)
+            }
+            else{
+                noke.isRestoring = false
                 let error = NokeDeviceManagerError(rawValue: errorCode)
                 let message = dictionary["message"] as! String
                 self.delegate?.nokeErrorDidOccur(error: error!, message: message, noke: nil)
             }
         }
     }
+    
+    
+    /// Ensures the keys in the lock and keys on the server remain synced
+    public func confirmRestore(noke : NokeDevice, commandid : Int){
+        
+        var jsonBody = [String: Any]()
+        jsonBody["command_id"] = noke.session
+        jsonBody["mac"] = noke.mac
+        
+        if(JSONSerialization.isValidJSONObject(jsonBody)){
+            guard let jsonData = try? JSONSerialization.data(withJSONObject: jsonBody, options: JSONSerialization.WritingOptions.prettyPrinted) else{return}
+            NokeLibraryApiClient().doRequest(url: self.uploadUrl + API.CONFIRM_RESTORE, jsonData: jsonData) { (data) in
+                self.didReceiveConfirmResponse(data: (data)!, noke: noke)
+            }
+        }
+    }
+    
+    
+    /**
+     Parses the response from the confirm restore data endpoint
+     
+     - Parameters:
+     - data: The JSON data received from the endpoint
+     */
+    internal func didReceiveConfirmResponse(data: Data, noke: NokeDevice){
+        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+        if let dictionary = json as? [String: Any] {
+            let errorCode = dictionary["error_code"] as! Int
+            let message = dictionary["message"] as! String
+            if(errorCode == 0){
+                self.delegate?.didUploadData(result: errorCode, message: "Restore Successful: " + message)
+            }
+            else{
+                noke.isRestoring = false
+                let error = NokeDeviceManagerError(rawValue: errorCode)
+                self.delegate?.nokeErrorDidOccur(error: error!, message: message, noke: nil)
+            }
+        }
+    }
+    
+    
+    
 }

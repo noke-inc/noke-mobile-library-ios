@@ -96,6 +96,9 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
     /// Unique key used for encrypting the unlock command for offline unlocking
     var offlineKey: String = ""
     
+    /// Indicates if the lock keys need to be restored
+    var isRestoring: Bool = false
+    
     /// UUID of the Noke service
     internal static func nokeServiceUUID() -> (CBUUID){
         return CBUUID.init(string: "1bc50001-0200-d29e-e511-446c609db825")
@@ -330,16 +333,30 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
                     let resultByte = Int(data[1])
                     switch resultByte{
                     case Constants.SUCCESS_ResultType:
-                        self.moveToNext()
-                        if(self.commandArray.count == 0){
-                            self.lockState = NokeDeviceLockState.nokeDeviceLockStateUnlocked
-                            self.connectionState = NokeDeviceConnectionState.nokeDeviceConnectionStateUnlocked
-                            NokeDeviceManager.shared().delegate?.nokeDeviceDidUpdateState(to: self.connectionState!, noke: self)
+                        if(isRestoring){
+                            let commandid = Int(data[2])
+                            commandArray.removeAll()
+                            NokeDeviceManager.shared().clearUploadQueue()
+                            self.isRestoring = false
+                            NokeDeviceManager.shared().confirmRestore(noke: self, commandid: commandid)
+                            NokeDeviceManager.shared().disconnectNokeDevice(self)
+                        }else{
+                            self.moveToNext()
+                            if(self.commandArray.count == 0){
+                                self.lockState = NokeDeviceLockState.nokeDeviceLockStateUnlocked
+                                self.connectionState = NokeDeviceConnectionState.nokeDeviceConnectionStateUnlocked
+                                NokeDeviceManager.shared().delegate?.nokeDeviceDidUpdateState(to: self.connectionState!, noke: self)
+                            }
                         }
                         break
                     case Constants.INVALIDKEY_ResultType:
                         NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorInvalidKey, message: "Invalid Key Result", noke: self)
                         self.moveToNext()
+                        if(self.commandArray.count == 0){
+                            if(!isRestoring){
+                                NokeDeviceManager.shared().restoreDevice(noke: self)
+                            }
+                        }
                         break
                     case Constants.INVALIDCMD_ResultType:
                         NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorInvalidCmd, message: "Invalid Command Result", noke: self)
