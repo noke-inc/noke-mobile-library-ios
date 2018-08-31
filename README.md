@@ -75,6 +75,11 @@ func nokeErrorDidOccur(error: NokeDeviceManagerError, message: String, noke: Nok
 
 ### Scanning for Nokē Devices ###
 
+ * The library requires that a mode be set before scanning. The mode determines where the device responses are uploaded (it should be either SANDBOX or PRODUCTION)'
+ ```swift
+ NokeDeviceManager.shared().setLibraryMode(NokeLibraryMode.SANDBOX)
+ ```
+
 * By default, the `NokeDeviceManager` class only scans for devices that have been added to the device array.
 
 ```swift
@@ -176,10 +181,10 @@ Logs, errors, and callbacks will continue to function the same as when unlocking
 
 The Nokē Mobile Library automatically uploads all responses from the Nokē device to the Nokē Core API for parsing.  Responses that contain activity logs are stored in the database and can be accessed using endpoints from the API.  Please see the Nokē Core API documentation for more details.
 
-* The library is set to upload responses to the production API.  If you need to change this url for testing or other custom implementations, you can change the url using the 'NokeDeviceManagerService'
+*The library requires you to set a mode before scanning. The mode determines where the device responses are uploaded (it should be either SANDBOX or PRODUCTION)'
 
 ```swift
-NokeDeviceManager.shared().changeDefaultUploadUrl("NEW_URL_HERE")
+NokeDeviceManager.shared().setLibraryMode(NokeLibraryMode.SANDBOX)
 ```
 
 
