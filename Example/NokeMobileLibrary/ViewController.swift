@@ -79,9 +79,7 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
     }
     
     func nokeErrorDidOccur(error: NokeDeviceManagerError, message: String, noke: NokeDevice?) {
-        DispatchQueue.main.sync {
-            statusLabel.text = String.init(format: "Error %d: %@", error.rawValue, message)
-        }
+        debugPrint(message)
     }
     
     func didUploadData(result: Int, message: String) {
