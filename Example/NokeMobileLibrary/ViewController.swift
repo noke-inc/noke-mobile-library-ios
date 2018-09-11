@@ -78,6 +78,10 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
         }
     }
     
+    func nokeDeviceDidShutdown(noke: NokeDevice, isLocked: Bool, didTimeout: Bool) {
+        statusLabel.text = "Noke did shutdown"
+    }
+    
     func nokeErrorDidOccur(error: NokeDeviceManagerError, message: String, noke: NokeDevice?) {
         debugPrint(message)
     }
