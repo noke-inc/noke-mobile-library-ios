@@ -4,6 +4,22 @@
 [![License](https://img.shields.io/cocoapods/l/NokeMobileLibrary.svg?style=flat)](http://cocoapods.org/pods/NokeMobileLibrary)
 [![Platform](https://img.shields.io/cocoapods/p/NokeMobileLibrary.svg?style=flat)](http://cocoapods.org/pods/NokeMobileLibrary)
 
+## **** Recent Changes (v0.5.1) ****
+* The library requires that a mode be set before scanning. The mode determines where the device responses are uploaded. Options are:
+
+* ```SANDBOX```
+* ```PRODUCTION```
+
+The mode determines where responses from the lock are uploaded.  **Setting an upload URL manually is no longer supported**
+
+* New delegate method has been added to the ```NokeDeviceManagerDelegate```: 
+
+```swift
+   func nokeDeviceDidShutdown(noke: NokeDevice, isLocked: Bool, didTimeout: Bool)
+```
+
+## Summary
+
 The Nokē Mobile Library provides an easy-to-use and stable way to communicate with Nokē Devices via Bluetooth.  It must be used in conjunction with the Nokē Core API for full functionality such as unlocking locks and uploading activity.
 
 ![Nokē Core API Overview](https://imgur.com/vY2llC9.png)
