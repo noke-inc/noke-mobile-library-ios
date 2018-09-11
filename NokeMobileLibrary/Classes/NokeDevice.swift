@@ -352,11 +352,11 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
                     case Constants.INVALIDKEY_ResultType:
                         NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorInvalidKey, message: "Invalid Key Result", noke: self)
                         self.moveToNext()
-                        if(self.commandArray.count == 0){
-                            if(!isRestoring){
-                                NokeDeviceManager.shared().restoreDevice(noke: self)
-                            }
-                        }
+//                        if(self.commandArray.count == 0){
+//                            if(!isRestoring){
+//                                NokeDeviceManager.shared().restoreDevice(noke: self)
+//                            }
+//                        }
                         break
                     case Constants.INVALIDCMD_ResultType:
                         NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorInvalidCmd, message: "Invalid Command Result", noke: self)
@@ -368,12 +368,21 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
                         break
                     case Constants.SHUTDOWN_ResultType:
                         let lockStateByte = Int32(data[2])
+                        var isLocked = true
                         if(lockStateByte == 0){
                             self.lockState = NokeDeviceLockState.nokeDeviceLockStateUnlocked
+                            isLocked = false
                         }
                         else if(lockStateByte == 1){
                             self.lockState = NokeDeviceLockState.nokeDeviceLockStateLocked
                         }
+                        
+                        let timeoutStateByte = Int32(data[3])
+                        var didTimeout = true
+                        if(timeoutStateByte == 1){
+                            didTimeout = false
+                        }
+                        NokeDeviceManager.shared().delegate?.nokeDeviceDidShutdown(noke: self, isLocked: isLocked, didTimeout: didTimeout)
                         break
                     case Constants.INVALIDDATA_ResultType:
                         NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorInvalidData, message: "Invalid Data Result", noke: self)

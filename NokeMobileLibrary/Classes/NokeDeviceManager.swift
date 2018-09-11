@@ -68,6 +68,18 @@ public protocol NokeDeviceManagerDelegate
      */
     func nokeDeviceDidUpdateState(to state: NokeDeviceConnectionState, noke: NokeDevice)
     
+    
+    /**
+     Called after the lock shuts down
+     
+     - Parameters:
+     - noke: The Noke device that shutdown
+     - isLocked: Indicates if the lock was locked or unlocked when it shutdown
+     - didTimeout: Indicates if the lock timed out or was shutdown manually
+     */
+    func nokeDeviceDidShutdown(noke: NokeDevice, isLocked: Bool, didTimeout: Bool)
+    
+    
     /**
       Called when the Noke Mobile library encounters an error. Please see error types for possible errors
  
