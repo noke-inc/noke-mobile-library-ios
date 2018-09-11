@@ -7,8 +7,8 @@
 ## **** Recent Changes (v0.5.1) ****
 * The library requires that a mode be set before scanning. The mode determines where the device responses are uploaded. Options are:
 
-* ```SANDBOX```
-* ```PRODUCTION```
+   * ```SANDBOX```
+   * ```PRODUCTION```
 
 The mode determines where responses from the lock are uploaded.  **Setting an upload URL manually is no longer supported**
 
