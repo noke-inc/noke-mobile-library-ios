@@ -21,10 +21,13 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
         NokeDeviceManager.shared().delegate = self
         
         //Add locks to device manager
-        let noke = NokeDevice.init(name: "New Lock", mac: "XX:XX:XX:XX:XX:XX")
+        let noke = NokeDevice.init(name: "TEST LOCK", mac: "XX:XX:XX:XX:XX:XX")
+       NokeDeviceManager.shared().addNoke(noke!)
+        
+        
         //noke?.setOfflineValues(key: <#T##String#>, command: <#T##String#>)
         //noke?.offlineUnlock()
-        NokeDeviceManager.shared().addNoke(noke!)
+        emailField.text = "NO EMAIL REQUIRED"
         
         //Setup UI
         backgroundButton.addTarget(self, action: #selector(clickLockButton(_:)), for: .touchUpInside)
@@ -47,7 +50,23 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
     func nokeDeviceDidUpdateState(to state: NokeDeviceConnectionState, noke: NokeDevice) {
         switch state {
         case .nokeDeviceConnectionStateDiscovered:
-            statusLabel.text = String.init(format:"%@ discovered", noke.name)
+            var lockState = ""
+            switch(noke.lockState){
+            case .nokeDeviceLockStateLocked:
+                lockState = "Locked"
+                break
+            case .nokeDeviceLockStateUnlocked:
+                lockState = "Unlocked"
+                break
+            case .nokeDeviceLockStateUnshackled:
+                lockState = "Unshackled"
+                break
+            default:
+                lockState = "Unknown"
+                break
+            }
+            
+            statusLabel.text = String.init(format:"%@ discovered (%@)", noke.name, lockState)
             NokeDeviceManager.shared().stopScan()
             NokeDeviceManager.shared().connectToNokeDevice(noke)
             break
@@ -65,7 +84,7 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
             makeButtonColor(UIColor(red:0.05, green:0.62, blue:0.10, alpha:1.0))
             break
         case .nokeDeviceConnectionStateDisconnected:
-            statusLabel.text = String.init(format:"%@ disconnected. Lock state: %d", noke.name, (noke.lockState?.rawValue)!)
+            statusLabel.text = String.init(format:"%@ disconnected. Lock state: %d", noke.name, noke.lockState.rawValue)
             NokeDeviceManager.shared().cacheUploadQueue()
             makeButtonColor(UIColor.darkGray)
             lockNameLabel.text = "No Lock Connected"
