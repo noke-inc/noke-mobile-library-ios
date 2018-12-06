@@ -110,6 +110,8 @@ NokeDeviceManager.shared().addNoke(noke!)
 NokeDeviceManager.shared().setAllowAllNokeDevices(true)
 ```
 
+*You can check the lock state (`noke.lockState`) of the Noke object returned in the `nokeDeviceDidUpdateState` method to know if the lock is unlocked, locked, or unshackled.  HD locks running version 3.13+ will update in realtime as they're discovered
+
 **Note:** Make sure that the Bluetooth Manager is in the Powered On State before beginning scanning or you will encounter an error. The `bluetoothManagerDidUpdateState` protocol method can be used to receive updates on the state
 
 ```swift
@@ -128,6 +130,8 @@ func bluetoothManagerDidUpdateState(state: NokeManagerBluetoothState) {
         }
     }
 ```
+
+
 
 ### Connecting to a Nokē Device ###
 
