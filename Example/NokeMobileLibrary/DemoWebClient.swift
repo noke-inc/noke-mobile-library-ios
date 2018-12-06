@@ -9,7 +9,7 @@
 import Foundation
 import NokeMobileLibrary
 
-let serverUrl = "EXAMPLE SERVER"
+let serverUrl = "DEMO_SERVER_URL_HERE"
 
 public protocol DemoWebClientDelegate{
     func didReceiveUnlockResponse(data: Data)
@@ -41,12 +41,25 @@ public class DemoWebClient: NSObject{
         }
     }
     
+    public func requestUnshackle(noke: NokeDevice, email: String){
+        
+        let url = String.init(format:"%@%@", serverUrl, "unshackle/")
+        var jsonBody = [String: Any]()
+        jsonBody["session"] = noke.session
+        jsonBody["mac"] = noke.mac
+        jsonBody["email"] = email
+        
+        if(JSONSerialization.isValidJSONObject(jsonBody)){
+            guard let jsonData = try? JSONSerialization.data(withJSONObject: jsonBody, options: JSONSerialization.WritingOptions.prettyPrinted) else{return}
+            self.doRequest(url: url, jsonData: jsonData)
+        }
+    }
+    
     internal func doRequest(url: String, jsonData: Data){
     
         var request = URLRequest(url: URL.init(string: url)!)
         request.httpMethod = "POST"
         request.httpBody = jsonData
-    
         let task = URLSession.shared.dataTask(with: request){data, response, error in
             guard let data = data, error == nil else{
                 print("error=\(String(describing: error))")
