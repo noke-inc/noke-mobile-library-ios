@@ -248,6 +248,9 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
         }
         
         var noke = self.nokeWithMac(mac)
+        if(noke == nil && allowAllNokeDevices){
+            noke = NokeDevice.init(name: broadcastName!, mac: mac)
+        }
         
         noke?.lastSeen = Date().timeIntervalSince1970
         
@@ -256,37 +259,30 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
             noke?.delegate = NokeDeviceManager.shared()
             noke?.peripheral = peripheral
             noke?.peripheral?.delegate = noke
+            noke?.lockState = NokeDeviceLockState.nokeDeviceLockStateLocked
             
             let broadcastData = advertisementData[CBAdvertisementDataManufacturerDataKey]
             if(broadcastData != nil){
-                let hardwareVersion = peripheral.name
-                noke?.version = hardwareVersion!
                 
                 var broadcastBytes = broadcastData as! Data
-                broadcastBytes.withUnsafeMutableBytes{(bytes: UnsafeMutablePointer<UInt8>)->Void in
-                    let lockStateBroadcast = (bytes[2] >> 5) & 0x01
-                    let lockStateBroadcast2 = (bytes[2] >> 6) & 0x01
-                    let lockState = lockStateBroadcast + lockStateBroadcast2
-                    noke?.lockState = NokeDeviceLockState(rawValue: Int(lockState))!
-                    debugPrint("BROADCAST: ", lockState)                    
+                noke?.setVersion(data: broadcastBytes, deviceName: broadcastName ?? "Invalid Device")
+                
+                
+                
+                if(noke?.getHardwareVersion().contains(Constants.NOKE_HW_TYPE_HD_LOCK) ?? false){
+                    let startIndex = noke?.version.index((noke?.version.startIndex)!, offsetBy: 2)
+                    if(Int((noke?.getSoftwareVersion()[startIndex!..<(noke?.getSoftwareVersion().endIndex)!])!)! >= 13){
+                        broadcastBytes.withUnsafeMutableBytes{(bytes: UnsafeMutablePointer<UInt8>)->Void in
+                            let lockStateBroadcast = (bytes[2] >> 5) & 0x01
+                            let lockStateBroadcast2 = (bytes[2] >> 6) & 0x01
+                            let lockState = lockStateBroadcast + lockStateBroadcast2
+                            noke?.lockState = NokeDeviceLockState(rawValue: Int(lockState))!
+                        }
+                    }else{
+                        noke?.lockState = NokeDeviceLockState.nokeDeviceLockStateUnknown
+                    }
+                    
                 }
-                
-                
-                
-                
-            }
-            noke?.connectionState = .nokeDeviceConnectionStateDiscovered
-            self.delegate?.nokeDeviceDidUpdateState(to: (noke?.connectionState)!, noke: noke!)
-        }else if(allowAllNokeDevices){            
-            noke = NokeDevice.init(name: broadcastName!, mac: mac)
-            noke?.delegate = NokeDeviceManager.shared()
-            noke?.peripheral = peripheral
-            noke?.peripheral?.delegate = noke
-            
-            let broadcastData = advertisementData[CBAdvertisementDataManufacturerDataKey]
-            if(broadcastData != nil){
-                let hardwareVersion = peripheral.name
-                noke?.version = hardwareVersion!
             }
             noke?.connectionState = .nokeDeviceConnectionStateDiscovered
             self.delegate?.nokeDeviceDidUpdateState(to: (noke?.connectionState)!, noke: noke!)

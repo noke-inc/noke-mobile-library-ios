@@ -51,6 +51,15 @@ public enum NokeLibraryMode : Int {
 //Defines used when interacting with the lock
 struct Constants {
     
+    static let NOKE_DEVICE_IDENTIFIER_STRING = "NOKE"
+    
+    static let NOKE_HW_TYPE_1ST_GEN_PADLOCK         = "2P";
+    static let NOKE_HW_TYPE_2ND_GEN_PADLOCK         = "3P";
+    static let NOKE_HW_TYPE_ULOCK                   = "2U";
+    static let NOKE_HW_TYPE_HD_LOCK                 = "2I";
+    static let NOKE_HW_TYPE_DOOR_CONTROLLER         = "2E";
+    static let NOKE_HW_TYPE_PB12                    = "1C";
+    
     //KEY LENGTHS
     static let AESKEYLEN =      16
     static let KEYLEN =         12

@@ -260,6 +260,41 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
         self.peripheral?.readValue(for: self.sessionCharacteristic!)
     }
     
+    /**
+         Parses through the broadcast data and pulls out the version
+     
+     Parameters
+           data: broadcast data from the lock
+     
+ 
+     */
+    public func setVersion(data: Data, deviceName: String){
+        var byteData = data    
+        if(deviceName.contains(Constants.NOKE_DEVICE_IDENTIFIER_STRING)){
+            byteData.withUnsafeMutableBytes{(bytes: UnsafeMutablePointer<UInt8>)->Void in
+                let majorVersion = bytes[3]
+                let minorVersion = bytes[4]
+                
+                let startIndex = deviceName.index(deviceName.startIndex, offsetBy: 4)
+                let endIndex = deviceName.index(startIndex, offsetBy:2)
+                let hardwareVersion = String(deviceName[startIndex..<endIndex])
+                self.version = String(format: "%@-%d.%d", hardwareVersion,majorVersion,minorVersion)
+                debugPrint("BROADCAST: ", lockState)
+            }
+        }
+    }
+    
+    public func getHardwareVersion()->String{
+        let endIndex = version.index(version.startIndex, offsetBy:2)
+        return String(version[version.startIndex..<endIndex])
+    }
+    
+    public func getSoftwareVersion()->String{
+        let startIndex = version.index(version.startIndex, offsetBy: 3)
+        return String(version[startIndex..<version.endIndex])
+    }
+    
+    
     /// MARK: CBPeripheral Delegate Methods
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         if(error != nil){
