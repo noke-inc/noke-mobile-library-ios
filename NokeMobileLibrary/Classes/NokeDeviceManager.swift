@@ -138,6 +138,9 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     /// Boolean that allows SDK to discover devices that haven't been added to the array
     var allowAllNokeDevices: Bool = false
     
+    /// typealias used for handling bytes from the lock
+    public typealias byteArray = UnsafeMutablePointer<UInt8>
+    
     /**
      Initializes a new NokeDeviceManager
      - Returns: NokeDeviceManager
@@ -258,6 +261,19 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
             if(broadcastData != nil){
                 let hardwareVersion = peripheral.name
                 noke?.version = hardwareVersion!
+                
+                var broadcastBytes = broadcastData as! Data
+                broadcastBytes.withUnsafeMutableBytes{(bytes: UnsafeMutablePointer<UInt8>)->Void in
+                    let lockStateBroadcast = (bytes[2] >> 5) & 0x01
+                    let lockStateBroadcast2 = (bytes[2] >> 6) & 0x01
+                    let lockState = lockStateBroadcast + lockStateBroadcast2
+                    noke?.lockState = NokeDeviceLockState(rawValue: Int(lockState))!
+                    debugPrint("BROADCAST: ", lockState)                    
+                }
+                
+                
+                
+                
             }
             noke?.connectionState = .nokeDeviceConnectionStateDiscovered
             self.delegate?.nokeDeviceDidUpdateState(to: (noke?.connectionState)!, noke: noke!)

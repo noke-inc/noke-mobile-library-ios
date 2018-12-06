@@ -23,8 +23,10 @@ protocol NokeDeviceDelegate
     - Locked: Noke device locked
  */
 public enum NokeDeviceLockState : Int{
+    case nokeDeviceLockStateUnknown = -1
     case nokeDeviceLockStateUnlocked = 0
-    case nokeDeviceLockStateLocked = 1
+    case nokeDeviceLockStateUnshackled = 1
+    case nokeDeviceLockStateLocked = 2
 }
 
 /// Class stores information about the Noke device and contains methods for interacting with the Noke device
@@ -34,7 +36,7 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
     public var lastSeen: Double = 0.0
     
     /// typealias used for handling bytes from the lock
-    typealias byteArray = UnsafeMutablePointer<UInt8>
+    public typealias byteArray = UnsafeMutablePointer<UInt8>
     
     /// Name of the Noke device (strictly cosmetic)
     public var name: String = ""
@@ -70,7 +72,7 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
     public var connectionState: NokeDeviceConnectionState?
     
     /// Lock state of the Noke device
-    public var lockState: NokeDeviceLockState?
+    public var lockState: NokeDeviceLockState = NokeDeviceLockState.nokeDeviceLockStateLocked
     
     /// Bluetooth Gatt Service of Noke device
     var nokeService: CBService?
