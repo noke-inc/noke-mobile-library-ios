@@ -390,6 +390,15 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
                         NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorInvalidData, message: "Invalid Data Result", noke: self)
                         self.moveToNext()
                         break
+                    case Constants.FAILEDTOLOCK_ResultType:
+                        NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorInvalidData, message: "Failed To Lock", noke: self)
+                        break
+                    case Constants.FAILEDTOUNLOCK_ResultType:
+                        NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorInvalidData, message: "Failed To Unlock", noke: self)
+                        break
+                    case Constants.FAILEDTOUNSHACKLE_ResultType:
+                        NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorInvalidData, message: "Failed To Unshackle", noke: self)
+                        break
                     case Constants.INVALID_ResultType:
                         NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorInvalidResult, message: "Invalid Result", noke: self)
                         self.moveToNext()

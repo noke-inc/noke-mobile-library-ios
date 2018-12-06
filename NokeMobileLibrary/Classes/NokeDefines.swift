@@ -97,6 +97,9 @@ struct Constants {
     static let SHUTDOWN_ResultType = 0x64
     static let INVALIDDATA_ResultType = 0x65
     static let BATTERYDATA_ResultType = 0x66
+    static let FAILEDTOLOCK_ResultType = 0x68
+    static let FAILEDTOUNLOCK_ResultType = 0x69
+    static let FAILEDTOUNSHACKLE_ResultType = 0x6A
     static let INVALID_ResultType = 0xFF
     
     //COMMUNICATION PACKET TYPES
