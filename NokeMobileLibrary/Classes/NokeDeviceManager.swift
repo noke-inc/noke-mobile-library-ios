@@ -148,6 +148,9 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     override init(){
         super.init()
         cm = CBCentralManager.init(delegate: self, queue: nil)
+        if let state = NokeManagerBluetoothState.init(rawValue: cm.state.rawValue) {
+            delegate?.bluetoothManagerDidUpdateState(state: state)
+        }
     }
 
     
