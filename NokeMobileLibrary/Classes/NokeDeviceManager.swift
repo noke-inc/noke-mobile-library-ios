@@ -118,7 +118,13 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     public var unlockUrl: String = ""
     
     /// Delegate for NokeDeviceManager, calls protocol methods
-    public var delegate: NokeDeviceManagerDelegate?
+    public var delegate: NokeDeviceManagerDelegate? {
+        didSet{
+            if let state = NokeManagerBluetoothState.init(rawValue: cm.state.rawValue) {
+                delegate?.bluetoothManagerDidUpdateState(state: state)
+            }
+        }
+    }
     
     /// Array of Noke devices managed by the NokeDeviceManager
     var nokeDevices = [String: NokeDevice]()
@@ -148,9 +154,6 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     override init(){
         super.init()
         cm = CBCentralManager.init(delegate: self, queue: nil)
-        if let state = NokeManagerBluetoothState.init(rawValue: cm.state.rawValue) {
-            delegate?.bluetoothManagerDidUpdateState(state: state)
-        }
     }
 
     
