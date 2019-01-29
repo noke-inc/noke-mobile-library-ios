@@ -104,8 +104,22 @@ public protocol NokeDeviceManagerDelegate
  
     - Parameters:
        - state: The current power state of the bluetooth manager (off, on, etc)
-    */    
+    */
     func bluetoothManagerDidUpdateState(state: NokeManagerBluetoothState)
+    
+    /**
+     Called if using the library without the Core API to handle the responses from the lock
+     
+     - Parameters:
+         - data: response packets received from the lock and formatted to be uploaded to the server
+      */
+    func didReceiveUploadData(data: [String:Any])
+}
+
+extension NokeDeviceManagerDelegate{
+    func didReceiveUploadData(data: [String:Any]){
+        //Empty method used as a default implementation
+    }
 }
 
 /// Manages bluetooth interactions with Noke Devices
@@ -461,6 +475,8 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
             break
         case NokeLibraryMode.DEVELOP:
             self.uploadUrl = ApiURL.developUploadURL
+        case NokeLibraryMode.OPEN:
+            self.uploadUrl = ApiURL.openString
             break
         }
     }
@@ -515,14 +531,20 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     /// Formats data and sends it to Noke Core API for parsing and storing
     public func uploadData(){
         if(self.globalUploadQueue.count > 0){
-            var jsonBody = [String: Any]()
-            jsonBody["logs"] = globalUploadQueue
-            
-            if(JSONSerialization.isValidJSONObject(jsonBody)){
-                guard let jsonData = try? JSONSerialization.data(withJSONObject: jsonBody, options: JSONSerialization.WritingOptions.prettyPrinted) else{return}
-                NokeLibraryApiClient().doRequest(url: self.uploadUrl + API.UPLOAD, jsonData: jsonData) { (data) in
-                    self.didReceiveUploadResponse(data: (data)!)
+            if(uploadUrl != ApiURL.openString){
+                var jsonBody = [String: Any]()
+                jsonBody["logs"] = globalUploadQueue
+                
+                if(JSONSerialization.isValidJSONObject(jsonBody)){
+                    guard let jsonData = try? JSONSerialization.data(withJSONObject: jsonBody, options: JSONSerialization.WritingOptions.prettyPrinted) else{return}
+                    NokeLibraryApiClient().doRequest(url: self.uploadUrl + API.UPLOAD, jsonData: jsonData) { (data) in
+                        self.didReceiveUploadResponse(data: (data)!)
+                    }
                 }
+            }else{
+                var jsonBody = [String: Any]()
+                jsonBody["data"] = globalUploadQueue
+                delegate?.didReceiveUploadData(data: jsonBody)
             }
         }
     }

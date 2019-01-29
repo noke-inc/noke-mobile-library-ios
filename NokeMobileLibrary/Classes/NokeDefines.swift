@@ -45,6 +45,7 @@ public enum NokeLibraryMode : Int {
     case SANDBOX      = 0;
     case PRODUCTION   = 1;
     case DEVELOP      = 2;
+    case OPEN         = 3;
 }
 
 
@@ -164,6 +165,7 @@ struct ApiURL {
     static let sandboxUploadURL         = "https://coreapi-sandbox.appspot.com/"
     static let productionUploadURL      = "https://coreapi-beta.appspot.com/"
     static let developUploadURL         = "https://lock-api-dev.appspot.com/"
+    static let openString               = "OPEN"
 }
 
 
