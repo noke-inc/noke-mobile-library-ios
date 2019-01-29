@@ -99,6 +99,12 @@ public protocol NokeDeviceManagerDelegate
     */
     func didUploadData(result: Int, message: String)
     
+    /**
+      Called when the bluetooth manager updates its power state
+ 
+    - Parameters:
+       - state: The current power state of the bluetooth manager (off, on, etc)
+    */    
     func bluetoothManagerDidUpdateState(state: NokeManagerBluetoothState)
 }
 
