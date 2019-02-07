@@ -293,8 +293,6 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
                 var broadcastBytes = broadcastData as! Data
                 noke?.setVersion(data: broadcastBytes, deviceName: broadcastName ?? "Invalid Device")
                 
-                
-                
                 if(noke?.getHardwareVersion().contains(Constants.NOKE_HW_TYPE_HD_LOCK) ?? false){
                     let startIndex = noke?.version.index((noke?.version.startIndex)!, offsetBy: 2)
                     if(Int((noke?.getSoftwareVersion()[startIndex!..<(noke?.getSoftwareVersion().endIndex)!])!)! >= 13){
@@ -302,12 +300,24 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
                             let lockStateBroadcast = (bytes[2] >> 5) & 0x01
                             let lockStateBroadcast2 = (bytes[2] >> 6) & 0x01
                             let lockState = lockStateBroadcast + lockStateBroadcast2
+
                             noke?.lockState = NokeDeviceLockState(rawValue: Int(lockState))!
                         }
                     }else{
                         noke?.lockState = NokeDeviceLockState.nokeDeviceLockStateUnknown
                     }
                     
+                }else if(noke?.getHardwareVersion().contains(Constants.NOKE_HW_TYPE_ULOCK) ?? false){
+                    broadcastBytes.withUnsafeMutableBytes{(bytes: UnsafeMutablePointer<UInt8>)->Void in
+                    let lockStateBroadcast = (bytes[2] >> 5) & 0x01
+                    let lockStateBroadcast2 = (bytes[2] >> 6) & 0x01
+                    let lockState = lockStateBroadcast + lockStateBroadcast2
+                        if(lockState == 0){
+                            noke?.lockState = NokeDeviceLockState.nokeDeviceLockStateUnlocked
+                        }else{
+                            noke?.lockState = NokeDeviceLockState.nokeDeviceLockStateLocked
+                        }
+                    }
                 }
             }
             noke?.connectionState = .nokeDeviceConnectionStateDiscovered
