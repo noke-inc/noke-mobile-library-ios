@@ -9,7 +9,7 @@
 import Foundation
 import NokeMobileLibrary
 
-let serverUrl = "DEMO_SERVER_URL_HERE"
+let serverUrl = "CLIENT_SERVER_URL_HERE"
 
 public protocol DemoWebClientDelegate{
     func didReceiveUnlockResponse(data: Data)

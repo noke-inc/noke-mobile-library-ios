@@ -9,9 +9,7 @@
 import UIKit
 import NokeMobileLibrary
 
-class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClientDelegate {
-    
-    
+class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClientDelegate {    
     
     var currentNoke : NokeDevice?
     override func viewDidLoad() {
@@ -21,8 +19,14 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
         NokeDeviceManager.shared().delegate = self
         
         //Add locks to device manager
-        let noke = NokeDevice.init(name: "TEST LOCK", mac: "XX:XX:XX:XX:XX:XX")
-       NokeDeviceManager.shared().addNoke(noke!)
+        let macs = [ "XX:XX:XX:XX:XX:XX"]
+        
+            for mac in macs {
+                let noke = NokeDevice.init(name: mac, mac: mac)
+                NokeDeviceManager.shared().addNoke(noke!)
+            }
+        
+        
         
         
         //noke?.setOfflineValues(key: <#T##String#>, command: <#T##String#>)
@@ -82,6 +86,7 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
         case .nokeDeviceConnectionStateUnlocked:
             statusLabel.text = String.init(format:"%@ unlocked. Battery %d", noke.name, noke.battery)
             makeButtonColor(UIColor(red:0.05, green:0.62, blue:0.10, alpha:1.0))
+            NokeDeviceManager.shared().startScanForNokeDevices()
             break
         case .nokeDeviceConnectionStateDisconnected:
             statusLabel.text = String.init(format:"%@ disconnected. Lock state: %d", noke.name, noke.lockState.rawValue)
@@ -128,8 +133,8 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
     func didReceiveUnlockResponse(data: Data) {
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
         if let dictionary = json as? [String: Any]{
-            let result = dictionary["result"] as! Bool
-            if(result){
+            let result = dictionary["result"] as! String
+            if(result == "success"){
                 print("REQUEST WORKED")
                 let dataobj = dictionary["data"] as! [String:Any]
                 let commandString = dataobj["commands"] as! String
