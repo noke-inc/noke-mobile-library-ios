@@ -106,21 +106,9 @@ public protocol NokeDeviceManagerDelegate
        - state: The current power state of the bluetooth manager (off, on, etc)
     */
     func bluetoothManagerDidUpdateState(state: NokeManagerBluetoothState)
-    
-    /**
-     Called if using the library without the Core API to handle the responses from the lock
-     
-     - Parameters:
-         - data: response packets received from the lock and formatted to be uploaded to the server
-      */
-    func didReceiveUploadData(data: [String:Any])
 }
 
-extension NokeDeviceManagerDelegate{
-    func didReceiveUploadData(data: [String:Any]){
-        //Empty method used as a default implementation
-    }
-}
+
 
 /// Manages bluetooth interactions with Noke Devices
 public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDelegate
@@ -554,7 +542,7 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
             }else{
                 var jsonBody = [String: Any]()
                 jsonBody["data"] = globalUploadQueue
-                delegate?.didReceiveUploadData(data: jsonBody)
+                //delegate?.didReceiveUploadData(data: jsonBody)
             }
         }
     }
