@@ -9,7 +9,7 @@
 import Foundation
 import NokeMobileLibrary
 
-let serverUrl = "CLIENT_SERVER_URL_HERE"
+let serverUrl = "https://release-008-dot-coreapi-beta.appspot.com/"
 
 public protocol DemoWebClientDelegate{
     func didReceiveUnlockResponse(data: Data)
@@ -29,7 +29,7 @@ public class DemoWebClient: NSObject{
 
     public func requestUnlock(noke: NokeDevice, email: String){
     
-        let url = String.init(format:"%@%@", serverUrl, "unlock/")
+        let url = String.init(format:"%@%@", serverUrl, "fwupdate/")
         var jsonBody = [String: Any]()
         jsonBody["session"] = noke.session
         jsonBody["mac"] = noke.mac
@@ -60,6 +60,8 @@ public class DemoWebClient: NSObject{
         var request = URLRequest(url: URL.init(string: url)!)
         request.httpMethod = "POST"
         request.httpBody = jsonData
+        let apiKey = "eyJhbGciOiJOT0tFX1BSSVZBVEUiLCJ0eXAiOiJKV1QifQ.eyJhbGciOiJOT0tFX1BSSVZBVEUiLCJjb21wYW55X3V1aWQiOiI4NmI1ZWMxYi05ZDQ0LTRmMGEtOTBiYS00MzZkMTkzMWUzZDIiLCJpc3MiOiJub2tlLmNvbSJ9.6009234be8a0ca17a7ba739931a21ad4f72b19b0"
+        request.addValue(String.init(format: "Bearer %@", apiKey), forHTTPHeaderField: "Authorization")
         let task = URLSession.shared.dataTask(with: request){data, response, error in
             guard let data = data, error == nil else{
                 print("error=\(String(describing: error))")
@@ -73,7 +75,7 @@ public class DemoWebClient: NSObject{
         
             let responseString = String(data: data, encoding: .utf8)
             print(responseString!)
-            if(url.contains("unlock")){
+            if(url.contains("unshackle")){
                 self.delegate?.didReceiveUnlockResponse(data: data)
             }
         }

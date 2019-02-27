@@ -289,7 +289,9 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
                             let lockStateBroadcast2 = (bytes[2] >> 6) & 0x01
                             let lockState = lockStateBroadcast + lockStateBroadcast2
 
+                            print("LOCK STATE BROADCAST: ",lockStateBroadcast,lockStateBroadcast2)
                             noke?.lockState = NokeDeviceLockState(rawValue: Int(lockState))!
+                            print("LOCK STATE: ", noke?.lockState)
                         }
                     }else{
                         noke?.lockState = NokeDeviceLockState.nokeDeviceLockStateUnknown
