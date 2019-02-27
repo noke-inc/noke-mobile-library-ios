@@ -514,16 +514,16 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
      -key: String used to encrypt the command to the lock. Received from the Core API
      -command: String sent to the lock to unlock offline. Received from the Core API
      */
-    public func offlineUnlock(key: String, command: String){
+    public func offlineUnlock(key: String, command: String) ->String{
         self.offlineKey = key
         self.unlockCmd = command
-        self.offlineUnlock()
+        return self.offlineUnlock()
     }
     
     /**
      Unlocks the lock using the offline key and the unlock command.  If the keys and commands have been set, no internet connection is required.
      */
-    public func offlineUnlock(){
+    public func offlineUnlock()->String{
         if(offlineKey.count == Constants.OFFLINE_KEY_LENGTH && unlockCmd.count == Constants.OFFLINE_COMMAND_LENGTH){
             var keydata = Data(capacity: offlineKey.count/2)
             let regex = try! NSRegularExpression(pattern: "[0-9a-f]{1,2}", options: .caseInsensitive)
@@ -534,7 +534,7 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
             }
             
             guard keydata.count > 0 else {
-                return
+                return ""
             }
             
             var cmddata = Data(capacity:unlockCmd.count/2)
@@ -545,7 +545,7 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
             }
             
             guard cmddata.count > 0 else {
-                return
+                return ""
             }
             
             let currentDateTime = Date()
@@ -556,8 +556,10 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
             
             self.addCommandToCommandArray(finalCmdData)
             self.writeCommandArray()
+            return String.init(timeStamp)
         }else{
             NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeLibraryErrorInvalidOfflineKey, message: "Offline Key/Command is not a valid length", noke: self)
+            return ""
         }
     }
     
