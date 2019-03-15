@@ -208,6 +208,7 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
     
     /// Called when initial bluetooth connection has been established
     fileprivate func didConnect(){
+        commandArray = Array<Data>()
         self.peripheral?.delegate = self
         self.peripheral!.discoverServices([NokeDevice.nokeServiceUUID()])
     }
@@ -230,6 +231,18 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
             let batteryString = String.init(format: "%02x%02x", batteryArray[0],batteryArray[1])
             let batteryResult = UInt64(batteryString, radix:16)
             battery = batteryResult!
+        }
+    }
+    
+    
+    /**
+     Clears command array. This helps to prevent invalid commands from being sent to the lock and causing errors
+    */
+    internal func clearCommandArray(){
+        if(commandArray == nil){
+            commandArray = Array<Data>()
+        }else{
+            commandArray.removeAll()
         }
     }
     
