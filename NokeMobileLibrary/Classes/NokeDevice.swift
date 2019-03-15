@@ -208,7 +208,7 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
     
     /// Called when initial bluetooth connection has been established
     fileprivate func didConnect(){
-        commandArray = Array<Data>()
+        clearCommandArray()
         self.peripheral?.delegate = self
         self.peripheral!.discoverServices([NokeDevice.nokeServiceUUID()])
     }
@@ -502,6 +502,7 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
      */
     public func sendCommands(_ commands: String){
         let commandsArr = commands.components(separatedBy: "+")
+        clearCommandArray()
         for command: String in commandsArr{
             self.addCommandToCommandArray(self.stringToBytes(hexstring: command)!)
         }
