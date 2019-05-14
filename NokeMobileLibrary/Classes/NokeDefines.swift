@@ -57,7 +57,7 @@ struct Constants {
     static let NOKE_HW_TYPE_1ST_GEN_PADLOCK         = "2P";
     static let NOKE_HW_TYPE_2ND_GEN_PADLOCK         = "3P";
     static let NOKE_HW_TYPE_ULOCK                   = "2U";
-    static let NOKE_HW_TYPE_HD_LOCK                 = "2I";
+    static let NOKE_HW_TYPE_HD_LOCK                 = "I";
     static let NOKE_HW_TYPE_DOOR_CONTROLLER         = "2E";
     static let NOKE_HW_TYPE_PB12                    = "1C";
     

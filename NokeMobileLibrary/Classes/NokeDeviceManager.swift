@@ -282,19 +282,12 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
                 noke?.setVersion(data: broadcastBytes, deviceName: broadcastName ?? "Invalid Device")
                 
                 if(noke?.getHardwareVersion().contains(Constants.NOKE_HW_TYPE_HD_LOCK) ?? false){
-                    let startIndex = noke?.version.index((noke?.version.startIndex)!, offsetBy: 2)
-                    if(Int((noke?.getSoftwareVersion()[startIndex!..<(noke?.getSoftwareVersion().endIndex)!])!)! >= 13){
-                        broadcastBytes.withUnsafeMutableBytes{(bytes: UnsafeMutablePointer<UInt8>)->Void in
-                            let lockStateBroadcast = (bytes[2] >> 5) & 0x01
-                            let lockStateBroadcast2 = (bytes[2] >> 6) & 0x01
-                            let lockState = lockStateBroadcast + lockStateBroadcast2
-
-                            noke?.lockState = NokeDeviceLockState(rawValue: Int(lockState))!
-                        }
-                    }else{
-                        noke?.lockState = NokeDeviceLockState.nokeDeviceLockStateUnknown
+                    broadcastBytes.withUnsafeMutableBytes{(bytes: UnsafeMutablePointer<UInt8>)->Void in
+                        let lockStateBroadcast = (bytes[2] >> 5) & 0x01
+                        let lockStateBroadcast2 = (bytes[2] >> 6) & 0x01
+                        let lockState = lockStateBroadcast + lockStateBroadcast2
+                        noke?.lockState = NokeDeviceLockState(rawValue: Int(lockState))!
                     }
-                    
                 }else if(noke?.getHardwareVersion().contains(Constants.NOKE_HW_TYPE_ULOCK) ?? false){
                     broadcastBytes.withUnsafeMutableBytes{(bytes: UnsafeMutablePointer<UInt8>)->Void in
                     let lockStateBroadcast = (bytes[2] >> 5) & 0x01
