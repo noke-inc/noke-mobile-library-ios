@@ -53,7 +53,7 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
     
     func nokeDeviceDidUpdateState(to state: NokeDeviceConnectionState, noke: NokeDevice) {
         switch state {
-        case .nokeDeviceConnectionStateDiscovered:
+        case .Discovered:
             var lockState = ""
             switch(noke.lockState){
             case .nokeDeviceLockStateLocked:
@@ -74,21 +74,21 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
             NokeDeviceManager.shared().stopScan()
             //NokeDeviceManager.shared().connectToNokeDevice(noke)
             break
-        case .nokeDeviceConnectionStateConnected:
+        case .Connected:
             statusLabel.text = String.init(format:"%@ connected", noke.name)
             print(noke.session!)
             self.lockNameLabel.text = noke.name
             currentNoke = noke
             makeButtonColor(UIColor(red:0.00, green:0.44, blue:0.81, alpha:1.0))
             break
-        case .nokeDeviceConnectionStateSyncing:
+        case .Syncing:
             statusLabel.text = String.init(format: "%@ syncing", noke.name)
-        case .nokeDeviceConnectionStateUnlocked:
+        case .Unlocked:
             statusLabel.text = String.init(format:"%@ unlocked. Battery %d", noke.name, noke.battery)
             makeButtonColor(UIColor(red:0.05, green:0.62, blue:0.10, alpha:1.0))
             NokeDeviceManager.shared().startScanForNokeDevices()
             break
-        case .nokeDeviceConnectionStateDisconnected:
+        case .Disconnected:
             statusLabel.text = String.init(format:"%@ disconnected. Lock state: %d", noke.name, noke.lockState.rawValue)
             NokeDeviceManager.shared().cacheUploadQueue()
             makeButtonColor(UIColor.darkGray)
