@@ -630,7 +630,7 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
             self.copyArray(newCommandPacket, outStart: 4, dataIn: self.encryptPacket(keyBytes, data: cmddata), inStart: 0, size: 16)
         }
         
-        return Data.init(bytes: [newCommandPacket[0], newCommandPacket[1], newCommandPacket[2], newCommandPacket[3], newCommandPacket[4], newCommandPacket[5], newCommandPacket[6], newCommandPacket[7], newCommandPacket[8], newCommandPacket[9], newCommandPacket[10], newCommandPacket[11], newCommandPacket[12], newCommandPacket[13], newCommandPacket[14], newCommandPacket[15], newCommandPacket[16], newCommandPacket[17], newCommandPacket[18], newCommandPacket[19]])
+        return Data.init([newCommandPacket[0], newCommandPacket[1], newCommandPacket[2], newCommandPacket[3], newCommandPacket[4], newCommandPacket[5], newCommandPacket[6], newCommandPacket[7], newCommandPacket[8], newCommandPacket[9], newCommandPacket[10], newCommandPacket[11], newCommandPacket[12], newCommandPacket[13], newCommandPacket[14], newCommandPacket[15], newCommandPacket[16], newCommandPacket[17], newCommandPacket[18], newCommandPacket[19]])
     }
     
     //Creates offline key by combining the offline key with the session
@@ -648,7 +648,7 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
             baseKeyBytes[x] = UInt8.init(truncatingIfNeeded: total)
             x += 1
         }
-        return Data.init(bytes: baseKeyBytes)
+        return Data.init(baseKeyBytes)
     }
     
     
@@ -711,7 +711,7 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
             x += 1
         }
         
-        return Data.init(bytes: bytesDataOut)
+        return Data.init(bytesDataOut)
     }
     
     fileprivate func encryptPacket(_ combinedKey: byteArray, data: byteArray) -> byteArray
