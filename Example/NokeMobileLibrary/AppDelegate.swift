@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         NokeDeviceManager.shared().setAPIKey("API_KEY_HERE")
         NokeDeviceManager.shared().setLibraryMode(NokeLibraryMode.SANDBOX)//Sets the library mode
         //NokeDeviceManager.shared().setAllowAllNokeDevices(true) //Set to allow discovery of devices that haven't been added to the array

@@ -42,7 +42,7 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
         view.addSubview(lockNameLabel)
         view.addSubview(lockImageView)
         view.addSubview(statusLabel)
-        view.bringSubview(toFront: lockImageView)
+        view.bringSubviewToFront(lockImageView)
         view.addSubview(emailField)
     }
 
@@ -72,7 +72,7 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
             
             statusLabel.text = String.init(format:"%@ discovered (%@)", noke.name, lockState)
             NokeDeviceManager.shared().stopScan()
-            NokeDeviceManager.shared().connectToNokeDevice(noke)
+            //NokeDeviceManager.shared().connectToNokeDevice(noke)
             break
         case .nokeDeviceConnectionStateConnected:
             statusLabel.text = String.init(format:"%@ connected", noke.name)
@@ -177,7 +177,7 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
         view.frame.origin.x = self.view.frame.size.width/3
         view.frame.origin.y = 30
         view.image = UIImage.init(named: "LockIcon")
-        view.contentMode = UIViewContentMode.scaleAspectFit
+        view.contentMode = UIView.ContentMode.scaleAspectFit
         return view
     }()
     
@@ -202,7 +202,7 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
         view.placeholder = "Email"
         view.font = UIFont.init(name: "HelveticaNeue-Thin", size: 18)
         
-        view.leftViewMode = UITextFieldViewMode.always
+        view.leftViewMode = UITextField.ViewMode.always
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 60))
         imageView.contentMode = .scaleAspectFit
         var image = UIImage(named: "AccountIcon")
@@ -220,7 +220,7 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
         view.frame.size.height = 60
         view.frame.origin.y = self.view.frame.size.height/3 + 40 + 60
         view.backgroundColor = UIColor.darkGray
-        view.setTitle("Get Activity", for: UIControlState.normal)
+        view.setTitle("Get Activity", for: UIControl.State.normal)
         return view
     }()
     
