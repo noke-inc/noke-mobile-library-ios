@@ -18,9 +18,9 @@ protocol NokeDeviceDelegate
 }
 
 /**
-    Lock states of Noke Devices
-    - Unlocked: Noke device unlocked OR Device has been locked but phone never received updated status
-    - Locked: Noke device locked
+ Lock states of Noke Devices
+ - Unlocked: Noke device unlocked OR Device has been locked but phone never received updated status
+ - Locked: Noke device locked
  */
 public enum NokeDeviceLockState : Int{
     case nokeDeviceLockStateUnknown = -1
@@ -67,6 +67,9 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
     
     /// Battery level of the Noke device in millivolts
     public var battery: UInt64 = 0
+    
+    /// RSSI level of the Noke device
+    public var RSSI: NSNumber = -127
     
     /// Connection state of the Noke device
     public var connectionState: NokeDeviceConnectionState?
@@ -122,13 +125,13 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
     }
     
     /**
-        Initializes a new Noke device with provided properties
- 
+     Initializes a new Noke device with provided properties
+     
      - Parameters:
-        - name: Name of the noke device (strictly for UI purposes)
-        - mac: MAC address of noke device.  NokeDeviceManager will scan for this mac address
- 
-        -Returns: A beautiful, ready-to-use, Noke device just for you
+     - name: Name of the noke device (strictly for UI purposes)
+     - mac: MAC address of noke device.  NokeDeviceManager will scan for this mac address
+     
+     -Returns: A beautiful, ready-to-use, Noke device just for you
      */
     public init?(name: String, mac: String){
         self.name = name
@@ -144,15 +147,15 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
      Initializes a new Noke device with provided properties. This is mostly used when loading cached locks from user defaults, but can also be used to initialize a Noke device when more properties are known
      
      - Parameters:
-        - name: Name of the noke device (strictly for UI purposes)
-        - mac: MAC address of noke device.  NokeDeviceManager will scan for this mac address
-        - serial: Serial address of the Noke device, laser-engraved on the device during manufacturing
-        - uuid: Unique identifier of the Noke device, assigned by iOS
-        - version: Hardware and firmware version of the Noke device
-        - trackingKey: Tracking key of the Noke device used to track activity
-        - battery: Battery level of the lock in millivolts
-        - unlockCmd: Unlock command used for offline unlocking
-        - offlineKey: Key used to encrypt the offline unlock command
+     - name: Name of the noke device (strictly for UI purposes)
+     - mac: MAC address of noke device.  NokeDeviceManager will scan for this mac address
+     - serial: Serial address of the Noke device, laser-engraved on the device during manufacturing
+     - uuid: Unique identifier of the Noke device, assigned by iOS
+     - version: Hardware and firmware version of the Noke device
+     - trackingKey: Tracking key of the Noke device used to track activity
+     - battery: Battery level of the lock in millivolts
+     - unlockCmd: Unlock command used for offline unlocking
+     - offlineKey: Key used to encrypt the offline unlock command
      
      -Returns: A beautiful, ready-to-use, Noke device just for you
      */
@@ -184,15 +187,15 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
     /// Method used to decode class to reload from User Defaults
     public required convenience init?(coder aDecoder: NSCoder) {
         guard   let name = aDecoder.decodeObject(forKey: "name") as? String,
-                let mac = aDecoder.decodeObject(forKey: "mac") as? String,
-                let serial = aDecoder.decodeObject(forKey: "serial") as? String,
-                let uuid = aDecoder.decodeObject(forKey: "uuid") as? String,
-                let version = aDecoder.decodeObject(forKey: "version") as? String,
-                let trackingKey = aDecoder.decodeObject(forKey: "trackingkey") as? String,
-                let battery = aDecoder.decodeObject(forKey: "battery") as? UInt64,
-                let unlockCmd = aDecoder.decodeObject(forKey: "unlockcmd") as? String,
-                let offlineKey = aDecoder.decodeObject(forKey: "offlinekey") as? String
-        else{return nil}
+            let mac = aDecoder.decodeObject(forKey: "mac") as? String,
+            let serial = aDecoder.decodeObject(forKey: "serial") as? String,
+            let uuid = aDecoder.decodeObject(forKey: "uuid") as? String,
+            let version = aDecoder.decodeObject(forKey: "version") as? String,
+            let trackingKey = aDecoder.decodeObject(forKey: "trackingkey") as? String,
+            let battery = aDecoder.decodeObject(forKey: "battery") as? UInt64,
+            let unlockCmd = aDecoder.decodeObject(forKey: "unlockcmd") as? String,
+            let offlineKey = aDecoder.decodeObject(forKey: "offlinekey") as? String
+            else{return nil}
         
         self.init(
             name: name,
@@ -237,7 +240,7 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
     
     /**
      Clears command array. This helps to prevent invalid commands from being sent to the lock and causing errors
-    */
+     */
     internal func clearCommandArray(){
         if(commandArray == nil){
             commandArray = Array<Data>()
@@ -247,9 +250,9 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
     }
     
     /**
-        Adds encrypted command to array to be sent to Noke device
- 
-        - Parameter data: 20 byte command to be sent to the lock
+     Adds encrypted command to array to be sent to Noke device
+     
+     - Parameter data: 20 byte command to be sent to the lock
      */
     internal func addCommandToCommandArray(_ data: Data){
         if(commandArray == nil){
@@ -274,15 +277,15 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
     }
     
     /**
-         Parses through the broadcast data and pulls out the version
+     Parses through the broadcast data and pulls out the version
      
      Parameters
-           data: broadcast data from the lock
+     data: broadcast data from the lock
      
- 
+     
      */
     public func setVersion(data: Data, deviceName: String){
-        var byteData = data    
+        var byteData = data
         if(deviceName.contains(Constants.NOKE_DEVICE_IDENTIFIER_STRING)){
             byteData.withUnsafeMutableBytes{(bytes: UnsafeMutablePointer<UInt8>)->Void in
                 let majorVersion = bytes[3]
@@ -345,7 +348,7 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         if(error != nil){
             return
-        }        
+        }
         if(characteristic == self.rxCharacteristic){
             let response = characteristic.value
             _ = self.receivedDataFromLock(response!)
@@ -362,106 +365,106 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
      - App packets: Unencrypted responses that indicate whether command succeeded or failed.
      
      - Parameter data: 20 byte response from the lock
-    */
+     */
     fileprivate func receivedDataFromLock(_ data: Data){
         var newData = data
         newData.withUnsafeMutableBytes{(bytes: UnsafeMutablePointer<UInt8>)->Void in
             let dataBytes = bytes
             let destByte = Int(dataBytes[0])
             switch destByte{
-                case Constants.SERVER_Dest:
-                    if(self.session != nil){
-                        NokeDeviceManager.shared().addUploadPacketToQueue(
-                            response: self.bytesToString(data: data, start: 0, length: 20),
-                            session: self.session!,
-                            mac: self.mac)
-                    }
-                    break
+            case Constants.SERVER_Dest:
+                if(self.session != nil){
+                    NokeDeviceManager.shared().addUploadPacketToQueue(
+                        response: self.bytesToString(data: data, start: 0, length: 20),
+                        session: self.session!,
+                        mac: self.mac)
+                }
+                break
             case Constants.APP_Dest:
                 
-                    let resultByte = Int(data[1])
-                    switch resultByte{
-                    case Constants.SUCCESS_ResultType:
-                        if(isRestoring){
-                            let commandid = Int(data[2])
-                            commandArray.removeAll()
-                            NokeDeviceManager.shared().clearUploadQueue()
-                            self.isRestoring = false
-                            NokeDeviceManager.shared().confirmRestore(noke: self, commandid: commandid)
-                            NokeDeviceManager.shared().disconnectNokeDevice(self)
-                        }else{
-                            self.moveToNext()
-                            if(self.commandArray.count == 0){
-                                self.lockState = NokeDeviceLockState.nokeDeviceLockStateUnlocked
-                                self.connectionState = NokeDeviceConnectionState.nokeDeviceConnectionStateUnlocked
-                                NokeDeviceManager.shared().delegate?.nokeDeviceDidUpdateState(to: self.connectionState!, noke: self)
-                            }
-                        }
-                        break
-                    case Constants.INVALIDKEY_ResultType:
-                        NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorInvalidKey, message: "Invalid Key Result", noke: self)
+                let resultByte = Int(data[1])
+                switch resultByte{
+                case Constants.SUCCESS_ResultType:
+                    if(isRestoring){
+                        let commandid = Int(data[2])
+                        commandArray.removeAll()
+                        NokeDeviceManager.shared().clearUploadQueue()
+                        self.isRestoring = false
+                        NokeDeviceManager.shared().confirmRestore(noke: self, commandid: commandid)
+                        NokeDeviceManager.shared().disconnectNokeDevice(self)
+                    }else{
                         self.moveToNext()
-//                        if(self.commandArray.count == 0){
-//                            if(!isRestoring){
-//                                NokeDeviceManager.shared().restoreDevice(noke: self)
-//                            }
-//                        }
-                        break
-                    case Constants.INVALIDCMD_ResultType:
-                        NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorInvalidCmd, message: "Invalid Command Result", noke: self)
-                        self.moveToNext()
-                        break
-                    case Constants.INVALIDPERMISSION_ResultType:
-                        NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorInvalidPermission, message: "Invalid Permission (wrong key) Result", noke: self)
-                        self.moveToNext()
-                        break
-                    case Constants.SHUTDOWN_ResultType:
-                        let lockStateByte = Int32(data[2])
-                        var isLocked = true
-                        if(lockStateByte == 0){
+                        if(self.commandArray.count == 0){
                             self.lockState = NokeDeviceLockState.nokeDeviceLockStateUnlocked
-                            isLocked = false
+                            self.connectionState = NokeDeviceConnectionState.Unlocked
+                            NokeDeviceManager.shared().delegate?.nokeDeviceDidUpdateState(to: self.connectionState!, noke: self)
                         }
-                        else if(lockStateByte == 1){
-                            self.lockState = NokeDeviceLockState.nokeDeviceLockStateLocked
-                        }
-                        
-                        let timeoutStateByte = Int32(data[3])
-                        var didTimeout = true
-                        if(timeoutStateByte == 1){
-                            didTimeout = false
-                        }
-                        NokeDeviceManager.shared().delegate?.nokeDeviceDidShutdown(noke: self, isLocked: isLocked, didTimeout: didTimeout)
-                        break
-                    case Constants.INVALIDDATA_ResultType:
-                        NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorInvalidData, message: "Invalid Data Result", noke: self)
-                        self.moveToNext()
-                        break
-                    case Constants.FAILEDTOLOCK_ResultType:
-                        NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorInvalidData, message: "Failed To Lock", noke: self)
-                        break
-                    case Constants.FAILEDTOUNLOCK_ResultType:
-                        NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorInvalidData, message: "Failed To Unlock", noke: self)
-                        break
-                    case Constants.FAILEDTOUNSHACKLE_ResultType:
-                        NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorInvalidData, message: "Failed To Unshackle", noke: self)
-                        break
-                    case Constants.INVALID_ResultType:
-                        NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorInvalidResult, message: "Invalid Result", noke: self)
-                        self.moveToNext()
-                        break
-                    default:
-                        NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorUnknown, message: "Unable to recognize result", noke: self)
-                        self.moveToNext()
-                        break
                     }
                     break
-                
-                case Constants.INVALID_ResponseType:
-                    NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorInvalidResult, message: "Invalid packet received", noke: self)
+                case Constants.INVALIDKEY_ResultType:
+                    NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorInvalidKey, message: "Invalid Key Result", noke: self)
+                    self.moveToNext()
+                    //                        if(self.commandArray.count == 0){
+                    //                            if(!isRestoring){
+                    //                                NokeDeviceManager.shared().restoreDevice(noke: self)
+                    //                            }
+                    //                        }
+                    break
+                case Constants.INVALIDCMD_ResultType:
+                    NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorInvalidCmd, message: "Invalid Command Result", noke: self)
+                    self.moveToNext()
+                    break
+                case Constants.INVALIDPERMISSION_ResultType:
+                    NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorInvalidPermission, message: "Invalid Permission (wrong key) Result", noke: self)
+                    self.moveToNext()
+                    break
+                case Constants.SHUTDOWN_ResultType:
+                    let lockStateByte = Int32(data[2])
+                    var isLocked = true
+                    if(lockStateByte == 0){
+                        self.lockState = NokeDeviceLockState.nokeDeviceLockStateUnlocked
+                        isLocked = false
+                    }
+                    else if(lockStateByte == 1){
+                        self.lockState = NokeDeviceLockState.nokeDeviceLockStateLocked
+                    }
+                    
+                    let timeoutStateByte = Int32(data[3])
+                    var didTimeout = true
+                    if(timeoutStateByte == 1){
+                        didTimeout = false
+                    }
+                    NokeDeviceManager.shared().delegate?.nokeDeviceDidShutdown(noke: self, isLocked: isLocked, didTimeout: didTimeout)
+                    break
+                case Constants.INVALIDDATA_ResultType:
+                    NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorInvalidData, message: "Invalid Data Result", noke: self)
+                    self.moveToNext()
+                    break
+                case Constants.FAILEDTOLOCK_ResultType:
+                    NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorInvalidData, message: "Failed To Lock", noke: self)
+                    break
+                case Constants.FAILEDTOUNLOCK_ResultType:
+                    NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorInvalidData, message: "Failed To Unlock", noke: self)
+                    break
+                case Constants.FAILEDTOUNSHACKLE_ResultType:
+                    NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorInvalidData, message: "Failed To Unshackle", noke: self)
+                    break
+                case Constants.INVALID_ResultType:
+                    NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorInvalidResult, message: "Invalid Result", noke: self)
+                    self.moveToNext()
                     break
                 default:
+                    NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorUnknown, message: "Unable to recognize result", noke: self)
+                    self.moveToNext()
                     break
+                }
+                break
+                
+            case Constants.INVALID_ResponseType:
+                NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorInvalidResult, message: "Invalid packet received", noke: self)
+                break
+            default:
+                break
             }
         }
     }
@@ -479,14 +482,14 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
     }
     
     /**
-      Makes the necessary checks and then requests the unlock commands from the server (or generates the unlock command if offline)
-      This method is also responsible for sending the command to the lock after it's received
+     Makes the necessary checks and then requests the unlock commands from the server (or generates the unlock command if offline)
+     This method is also responsible for sending the command to the lock after it's received
      Before unlocking, please check:
-        - unlock URL is set on the NokeDeviceManager
-        - unlock endpoint has been properly implemented on server
-        - Noke Device is provided with valid offline key and command (if unlocking offline)
-        - A internet connection is present (if unlocking online)
-    */
+     - unlock URL is set on the NokeDeviceManager
+     - unlock endpoint has been properly implemented on server
+     - Noke Device is provided with valid offline key and command (if unlocking offline)
+     - A internet connection is present (if unlocking online)
+     */
     public func unlock(){
         if(Reachability.isConnectedToNetwork()){
             
@@ -513,8 +516,8 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
      Sets offline key and command used for unlocking offline
      
      - Parameters:
-          -key: String used to encrypt the command to the lock. Received from the Core API
-          -command: String sent to the lock to unlock offline. Received from the Core API
+     -key: String used to encrypt the command to the lock. Received from the Core API
+     -command: String sent to the lock to unlock offline. Received from the Core API
      */
     public func setOfflineValues(key: String, command: String){
         self.offlineKey = key
@@ -528,16 +531,16 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
      -key: String used to encrypt the command to the lock. Received from the Core API
      -command: String sent to the lock to unlock offline. Received from the Core API
      */
-    public func offlineUnlock(key: String, command: String) ->String{
+    public func offlineUnlock(key: String, command: String, addTimestamp: Bool? = true) ->String{
         self.offlineKey = key
         self.unlockCmd = command
-        return self.offlineUnlock()
+        return self.offlineUnlock(addTimestamp: addTimestamp)
     }
     
     /**
      Unlocks the lock using the offline key and the unlock command.  If the keys and commands have been set, no internet connection is required.
      */
-    public func offlineUnlock()->String{
+    public func offlineUnlock(addTimestamp: Bool? = true)->String{
         if(offlineKey.count == Constants.OFFLINE_KEY_LENGTH && unlockCmd.count == Constants.OFFLINE_COMMAND_LENGTH){
             var keydata = Data(capacity: offlineKey.count/2)
             let regex = try! NSRegularExpression(pattern: "[0-9a-f]{1,2}", options: .caseInsensitive)
@@ -564,7 +567,7 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
             
             let currentDateTime = Date()
             let timeStamp = UInt64(currentDateTime.timeIntervalSince1970)
-            let timedata = Data.init(bytes: [UInt8((timeStamp >> 24) & 0xFF), UInt8((timeStamp >> 16) & 0xFF), UInt8((timeStamp >> 8) & 0xFF), UInt8((timeStamp & 0xFF))])
+            let timedata = Data.init([UInt8((timeStamp >> 24) & 0xFF), UInt8((timeStamp >> 16) & 0xFF), UInt8((timeStamp >> 8) & 0xFF), UInt8((timeStamp & 0xFF))])
             
             let finalCmdData = createOfflineUnlock(preSessionKey: keydata, unlockCmd: cmddata, timestamp: timedata)
             
@@ -584,8 +587,8 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
      - preSessionKey: key used to encrypt commands
      - unlockCmd: command to be encrypted
      - timestamp: Current time to be embedded into the command
-    */
-    fileprivate func createOfflineUnlock(preSessionKey: Data, unlockCmd: Data, timestamp: Data) -> Data
+     */
+    fileprivate func createOfflineUnlock(preSessionKey: Data, unlockCmd: Data, timestamp: Data, addTimestamp: Bool? = false) -> Data
     {
         let newCommandPacket = byteArray.allocate(capacity: 20)
         var key = self.createOfflineCombinedKey(baseKey:preSessionKey)
@@ -605,21 +608,22 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
             i += 1
         }
         
-        var timeStampBytes = [UInt8](timestamp)
         
-        cmddata[2] = timeStampBytes[3]
-        cmddata[3] = timeStampBytes[2]
-        cmddata[4] = timeStampBytes[1]
-        cmddata[5] = timeStampBytes[0]
-        
-        var checksum:Int = 0
-        var n = 0
-        while n<15 {
-            checksum += Int(cmddata[n])
-            n += 1
+        if(addTimestamp ?? true){
+            var timeStampBytes = [UInt8](timestamp)
+            cmddata[2] = timeStampBytes[3]
+            cmddata[3] = timeStampBytes[2]
+            cmddata[4] = timeStampBytes[1]
+            cmddata[5] = timeStampBytes[0]
+            
+            var checksum:Int = 0
+            var n = 0
+            while n<15 {
+                checksum += Int(cmddata[n])
+                n += 1
+            }
+            cmddata[15] = UInt8.init(truncatingIfNeeded: checksum)
         }
-        
-        cmddata[15] = UInt8.init(truncatingIfNeeded: checksum)
         
         key.withUnsafeMutableBytes {(bytes: UnsafeMutablePointer<UInt8>)->Void in
             let keyBytes = bytes
