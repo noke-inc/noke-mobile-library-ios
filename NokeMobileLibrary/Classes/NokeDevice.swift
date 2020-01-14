@@ -23,6 +23,21 @@ protocol NokeDeviceDelegate
  - Locked: Noke device locked
  */
 public enum NokeDeviceLockState : Int{
+    @available(*, unavailable, renamed: "Unknown")
+    case nokeDeviceLockStateUnknown = -100
+    @available(*, unavailable, renamed: "Unlocked")
+    case nokeDeviceLockStateUnlocked = 100
+    @available(*, unavailable, renamed: "Unshackled")
+    case nokeDeviceLockStateUnshackled = 200
+    @available(*, unavailable, renamed: "Locked")
+    case nokeDeviceLockStateLocked = 300
+    @available(*, unavailable, renamed: "Unshackling")
+    case nokeDeviceLockStateUnshackling = 400
+    @available(*, unavailable, renamed: "Unlocking")
+    case nokeDeviceLockStateUnlocking = 500
+    @available(*, unavailable, renamed: "LockedNoMagnet")
+    case nokeDeviceLockStateLockedNoMagnet = 700
+    
     case Unknown = -1
     case Unlocked = 0
     case Unshackled = 2
@@ -78,7 +93,7 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
     public var connectionState: NokeDeviceConnectionState?
     
     /// Lock state of the Noke device
-    public var lockState: NokeDeviceLockState = NokeDeviceLockState.nokeDeviceLockStateLocked
+    public var lockState: NokeDeviceLockState = NokeDeviceLockState.Locked
     
     /// Bluetooth Gatt Service of Noke device
     var nokeService: CBService?
@@ -142,7 +157,7 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
         
         self.unlockCmd = ""
         self.offlineKey = ""
-        self.lockState = NokeDeviceLockState.nokeDeviceLockStateLocked
+        self.lockState = NokeDeviceLockState.Locked
         super.init()
     }
     
@@ -398,7 +413,7 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
                     }else{
                         self.moveToNext()
                         if(self.commandArray.count == 0){
-                            self.lockState = NokeDeviceLockState.nokeDeviceLockStateUnlocked
+                            self.lockState = NokeDeviceLockState.Unlocked
                             self.connectionState = NokeDeviceConnectionState.Unlocked
                             NokeDeviceManager.shared().delegate?.nokeDeviceDidUpdateState(to: self.connectionState!, noke: self)
                         }
@@ -425,11 +440,11 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
                     let lockStateByte = Int32(data[2])
                     var isLocked = true
                     if(lockStateByte == 0){
-                        self.lockState = NokeDeviceLockState.nokeDeviceLockStateUnlocked
+                        self.lockState = NokeDeviceLockState.Unlocked
                         isLocked = false
                     }
                     else if(lockStateByte == 1){
-                        self.lockState = NokeDeviceLockState.nokeDeviceLockStateLocked
+                        self.lockState = NokeDeviceLockState.Locked
                     }
                     
                     let timeoutStateByte = Int32(data[3])

@@ -282,7 +282,7 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
             noke?.delegate = NokeDeviceManager.shared()
             noke?.peripheral = peripheral
             noke?.peripheral?.delegate = noke
-            noke?.lockState = NokeDeviceLockState.nokeDeviceLockStateLocked
+            noke?.lockState = NokeDeviceLockState.Locked
             
             let broadcastData = advertisementData[CBAdvertisementDataManufacturerDataKey]
             if(broadcastData != nil){
@@ -297,7 +297,7 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
                         let lockStateBroadcast3 = (bytes[2] >> 7) & 0x01
                         let lockStateString = "\(lockStateBroadcast3)\(lockStateBroadcast2)\(lockStateBroadcast)"
                         let lockState = Int.init(lockStateString, radix: 2)
-                        noke?.lockState = NokeDeviceLockState(rawValue: lockState ?? -1) ?? NokeDeviceLockState.nokeDeviceLockStateUnknown
+                        noke?.lockState = NokeDeviceLockState(rawValue: lockState ?? -1) ?? NokeDeviceLockState.Unknown
                     }
                 }else if(noke?.getHardwareVersion().contains(Constants.NOKE_HW_TYPE_ULOCK) ?? false){
                     broadcastBytes.withUnsafeMutableBytes{(bytes: UnsafeMutablePointer<UInt8>)->Void in
@@ -305,9 +305,9 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
                     let lockStateBroadcast2 = (bytes[2] >> 6) & 0x01
                     let lockState = lockStateBroadcast + lockStateBroadcast2
                         if(lockState == 0){
-                            noke?.lockState = NokeDeviceLockState.nokeDeviceLockStateUnlocked
+                            noke?.lockState = NokeDeviceLockState.Unlocked
                         }else{
-                            noke?.lockState = NokeDeviceLockState.nokeDeviceLockStateLocked
+                            noke?.lockState = NokeDeviceLockState.Locked
                         }
                     }
                 }
