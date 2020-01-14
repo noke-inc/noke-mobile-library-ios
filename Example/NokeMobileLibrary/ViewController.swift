@@ -56,14 +56,23 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
         case .Discovered:
             var lockState = ""
             switch(noke.lockState){
-            case .nokeDeviceLockStateLocked:
+            case .Locked:
                 lockState = "Locked"
                 break
-            case .nokeDeviceLockStateUnlocked:
+            case .Unlocked:
                 lockState = "Unlocked"
                 break
-            case .nokeDeviceLockStateUnshackled:
+            case .Unshackled:
                 lockState = "Unshackled"
+                break
+            case .Unlocking:
+                lockState = "Unlocking"
+                break
+            case .Unshackling:
+                lockState = "Unshackling"
+                break
+            case .LockedNoMagnet:
+                lockState = "Locked (No Magnet)"
                 break
             default:
                 lockState = "Unknown"
@@ -72,7 +81,7 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
             
             statusLabel.text = String.init(format:"%@ discovered (%@)", noke.name, lockState)
             NokeDeviceManager.shared().stopScan()
-            //NokeDeviceManager.shared().connectToNokeDevice(noke)
+            NokeDeviceManager.shared().connectToNokeDevice(noke)
             break
         case .Connected:
             statusLabel.text = String.init(format:"%@ connected", noke.name)
