@@ -294,8 +294,10 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
                     broadcastBytes.withUnsafeMutableBytes{(bytes: UnsafeMutablePointer<UInt8>)->Void in
                         let lockStateBroadcast = (bytes[2] >> 5) & 0x01
                         let lockStateBroadcast2 = (bytes[2] >> 6) & 0x01
-                        let lockState = lockStateBroadcast + lockStateBroadcast2
-                        noke?.lockState = NokeDeviceLockState(rawValue: Int(lockState))!
+                        let lockStateBroadcast3 = (bytes[2] >> 7) & 0x01
+                        let lockStateString = "\(lockStateBroadcast3)\(lockStateBroadcast2)\(lockStateBroadcast)"
+                        let lockState = Int.init(lockStateString, radix: 2)
+                        noke?.lockState = NokeDeviceLockState(rawValue: lockState ?? -1) ?? NokeDeviceLockState.nokeDeviceLockStateUnknown
                     }
                 }else if(noke?.getHardwareVersion().contains(Constants.NOKE_HW_TYPE_ULOCK) ?? false){
                     broadcastBytes.withUnsafeMutableBytes{(bytes: UnsafeMutablePointer<UInt8>)->Void in

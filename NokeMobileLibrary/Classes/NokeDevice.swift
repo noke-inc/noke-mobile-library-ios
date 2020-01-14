@@ -25,8 +25,11 @@ protocol NokeDeviceDelegate
 public enum NokeDeviceLockState : Int{
     case nokeDeviceLockStateUnknown = -1
     case nokeDeviceLockStateUnlocked = 0
-    case nokeDeviceLockStateUnshackled = 1
-    case nokeDeviceLockStateLocked = 2
+    case nokeDeviceLockStateUnshackled = 2
+    case nokeDeviceLockStateLocked = 3
+    case nokeDeviceLockStateUnshackling = 4
+    case nokeDeviceLockStateUnlocking = 5
+    case nokeDeviceLockStateLockedNoMagnet = 7
 }
 
 /// Class stores information about the Noke device and contains methods for interacting with the Noke device
