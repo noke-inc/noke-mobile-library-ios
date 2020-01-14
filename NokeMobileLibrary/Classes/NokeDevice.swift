@@ -23,13 +23,13 @@ protocol NokeDeviceDelegate
  - Locked: Noke device locked
  */
 public enum NokeDeviceLockState : Int{
-    case nokeDeviceLockStateUnknown = -1
-    case nokeDeviceLockStateUnlocked = 0
-    case nokeDeviceLockStateUnshackled = 2
-    case nokeDeviceLockStateLocked = 3
-    case nokeDeviceLockStateUnshackling = 4
-    case nokeDeviceLockStateUnlocking = 5
-    case nokeDeviceLockStateLockedNoMagnet = 7
+    case Unknown = -1
+    case Unlocked = 0
+    case Unshackled = 2
+    case Locked = 3
+    case Unshackling = 4
+    case Unlocking = 5
+    case LockedNoMagnet = 7
 }
 
 /// Class stores information about the Noke device and contains methods for interacting with the Noke device
