@@ -9,7 +9,9 @@
 import UIKit
 import NokeMobileLibrary
 
-class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClientDelegate {    
+class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClientDelegate {
+   
+    
     
     var currentNoke : NokeDevice?
     override func viewDidLoad() {
@@ -122,6 +124,10 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
     func didUploadData(result: Int, message: String) {
         debugPrint("DID UPLOAD DATA")
     }
+    
+    func nokeReadyForFirmwareUpdate(noke: NokeDevice) {
+           //HANDLE FIRMWARE UPDATING HERE
+       }
     
     func bluetoothManagerDidUpdateState(state: NokeManagerBluetoothState) {
         switch (state) {
