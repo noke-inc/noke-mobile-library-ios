@@ -39,6 +39,7 @@ import CoreBluetooth
     case Connected = 3
     case Syncing = 4
     case Unlocked = 5
+    case Error = 6
 }
 
 @objc public enum NokeManagerBluetoothState : Int{
@@ -152,7 +153,7 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     fileprivate var apiKey: String = ""
     
     /// CBCentralManager
-    lazy var cm: CBCentralManager = CBCentralManager(delegate: self, queue:nil)
+    public lazy var cm: CBCentralManager = CBCentralManager(delegate: self, queue:nil)
     
     /// Shared instance of NokeDeviceManager
     static var sharedNokeDeviceManager: NokeDeviceManager?

@@ -50,7 +50,7 @@ public enum NokeLibraryMode : Int {
 
 
 //Defines used when interacting with the lock
-struct Constants {
+public struct Constants {
     
     static let NOKE_DEVICE_IDENTIFIER_STRING = "NOKE"
     
