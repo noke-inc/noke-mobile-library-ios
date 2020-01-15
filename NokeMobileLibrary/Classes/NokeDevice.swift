@@ -77,7 +77,7 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
     public var trackingKey: String = ""
     
     /// CBPeripheral of the Noke device used by CoreBluetooth
-    var peripheral: CBPeripheral?
+    public var peripheral: CBPeripheral?
     
     /// Delegate of the Noke device. In virtually all cases this is the NokeDeviceManager
     var delegate: NokeDeviceDelegate?
