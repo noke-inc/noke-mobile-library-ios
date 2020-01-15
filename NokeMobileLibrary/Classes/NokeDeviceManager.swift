@@ -106,6 +106,8 @@ public protocol NokeDeviceManagerDelegate
      - state: The current power state of the bluetooth manager (off, on, etc)
      */
     func bluetoothManagerDidUpdateState(state: NokeManagerBluetoothState)
+    
+    func nokeReadyForFirmwareUpdate(noke: NokeDevice)
 }
 
 public protocol NokeUploadDelegate{
@@ -158,6 +160,9 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     /// Boolean that allows SDK to discover devices that haven't been added to the array
     var allowAllNokeDevices: Bool = false
     
+    /// Boolean that should be set when scanning for devices to update firmware
+    var firmwareScanning = false
+    
     /// typealias used for handling bytes from the lock
     public typealias byteArray = UnsafeMutablePointer<UInt8>
     
@@ -190,7 +195,7 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
             self.delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeLibraryErrorNoModeSet, message: "No Library Mode has been set. Please set using the setLibraryMode method", noke: nil)
         }
         let scanOptions : [String:AnyObject] = [CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber.init(value: true as Bool)]
-        let serviceArray = [CBUUID]([NokeDevice.nokeServiceUUID()])
+        let serviceArray = [CBUUID]([NokeDevice.nokeServiceUUID(),NokeDevice.noke4iFirmwareUUID(), NokeDevice.noke2iFirmwareUUID()])
         
         //Make sure we start scan from scratch
         cm.stopScan()
@@ -241,6 +246,24 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         
         var broadcastName : String? = advertisementData[CBAdvertisementDataLocalNameKey] as? String
+        
+        
+        if firmwareScanning && (broadcastName?.contains("_FW") == true || broadcastName == "NOKE_2I") {
+            guard let name = broadcastName else { return }
+                  let mac = "00:00:00:00:00:00"
+                   removeNoke(mac: mac)
+                    if let noke = NokeDevice(name: name, mac: mac) {
+                       noke.version = "FIRMWAREUPDATE"
+                        noke.name = name == "NOKE_2I" ? "N2I_FW" : name
+                        noke.delegate = NokeDeviceManager.shared()
+                        noke.peripheral = peripheral
+                        noke.peripheral?.delegate = noke
+                        connectToNokeDevice(noke)
+                    }
+                    return
+                }
+        
+        
         if(broadcastName == nil || broadcastName?.count != 19){
             if(peripheral.name != nil){
                 broadcastName = peripheral.name
@@ -325,7 +348,11 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
         
         noke?.delegate = NokeDeviceManager.shared()
         noke?.peripheral?.delegate = noke
-        noke?.peripheral?.discoverServices([NokeDevice.nokeServiceUUID()])
+        if firmwareScanning {
+             noke?.peripheral?.discoverServices([NokeDevice.noke2iFirmwareUUID(), NokeDevice.noke4iFirmwareUUID()])
+        } else {
+             noke?.peripheral?.discoverServices([NokeDevice.nokeServiceUUID()])
+        }
     }
     
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
@@ -344,6 +371,10 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
         noke?.connectionState = .Connected
         self.delegate?.nokeDeviceDidUpdateState(to: (noke?.connectionState)!, noke: noke!)
     }
+    
+    internal func nokeReadyForFirmwareUpdate(noke: NokeDevice) {
+         self.delegate?.nokeReadyForFirmwareUpdate(noke: noke)
+    }   
     
     
     /// MARK: Noke Device Dictionary Methods

@@ -15,6 +15,8 @@ protocol NokeDeviceDelegate
 {
     /// Called after Noke device reads the session and stores it
     func didSetSession(_ mac:String)
+    /// Called after connecting to a Noke device that is in bootloader mode, ready for a firmware update
+    func nokeReadyForFirmwareUpdate(noke: NokeDevice)
 }
 
 /**
@@ -107,6 +109,18 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
     /// Session characteristic of Noke device. This is read upon connecting and used for encryption
     var sessionCharacteristic: CBCharacteristic?
     
+    /// Read characteristic of Noke 4i bootloader
+    var bootloader4iRxCharacteristic: CBCharacteristic?
+    
+    /// Write characteristic of Noke 4i bootloader
+    var bootloader4iTxCharacteristic: CBCharacteristic?
+    
+    /// Read characteristic of Noke 2i bootloader
+    var bootloader2iRxCharacteristic: CBCharacteristic?
+    
+    /// Write characteristic of Noke 2i bootloader
+    var bootloader2iTxCharacteristic: CBCharacteristic?
+    
     /// Array of commands to be sent to the Noke device
     var commandArray: Array<Data>!
     
@@ -141,6 +155,37 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
     internal static func sessionCharacteristicUUID() -> (CBUUID){
         return CBUUID.init(string: "1bc50004-0200-d29e-e511-446c609db825")
     }
+    
+    /// UUID of firmware update mode for Noke 2i
+    internal static func noke2iFirmwareUUID() -> (CBUUID) {
+        return CBUUID.init(string: "0000fe59-0000-1000-8000-00805f9b34fb")
+    }
+    
+    /// UUID of firmware update mode for Noke 4i
+    internal static func noke4iFirmwareUUID() -> (CBUUID) {
+         return CBUUID.init(string: "0000fe59-0000-1000-8000-00805f9b34fb")
+    }
+    
+    /// UUID of Noke 4i bootloader write characteristic
+    internal static func bootloader4iTxCharacteristicUUID() -> CBUUID {
+        return CBUUID(string: "8ec90001-f315-4f60-9fb8-838830daea50")
+    }
+    
+    /// UUID of Noke 4i bootloader read characteristic
+    internal static func bootloader4iRxCharacteristicUUID() -> CBUUID {
+        return CBUUID(string: "8ec90002-f315-4f60-9fb8-838830daea50")
+    }
+    
+    /// UUID of Noke 2i bootloader write characteristic
+    internal static func bootloader2iTxCharacteristicUUID() -> CBUUID {
+        return CBUUID(string: "8ec90001-f315-4f60-9fb8-838830daea50")
+    }
+    
+    /// UUID of Noke 2i bootloader read characteristic
+    internal static func bootloader2iRxCharacteristicUUID() -> CBUUID {
+        return CBUUID(string: "8ec90002-f315-4f60-9fb8-838830daea50")
+    }
+    
     
     /**
      Initializes a new Noke device with provided properties
@@ -339,11 +384,20 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
                 self.nokeService = s
                 self.peripheral?.discoverCharacteristics([NokeDevice.txCharacteristicUUID(), NokeDevice.rxCharacteristicUUID(), NokeDevice.sessionCharacteristicUUID()], for: s)
             }
+            if (s.uuid.isEqual(NokeDevice.noke2iFirmwareUUID())) {
+                self.nokeService = s
+                self.peripheral?.discoverCharacteristics([NokeDevice.bootloader2iTxCharacteristicUUID(), NokeDevice.bootloader2iRxCharacteristicUUID()], for: s)
+            }
+            if (s.uuid.isEqual(NokeDevice.noke4iFirmwareUUID())) {
+                self.nokeService = s
+                self.peripheral?.discoverCharacteristics([NokeDevice.bootloader4iRxCharacteristicUUID(), NokeDevice.bootloader4iTxCharacteristicUUID()], for: s)
+            }
         }
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         if((error) != nil){
+            print(error as Any)
             return
         }
         
@@ -359,6 +413,20 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
             else if(c.uuid.isEqual(NokeDevice.sessionCharacteristicUUID())){
                 self.sessionCharacteristic = c
                 self.readSessionCharacteristic()
+            }
+            else if c.uuid.isEqual(NokeDevice.bootloader2iRxCharacteristicUUID()) {
+                self.bootloader2iRxCharacteristic = c
+            }
+            else if (c.uuid.isEqual(NokeDevice.bootloader2iTxCharacteristicUUID())) {
+                 self.bootloader2iTxCharacteristic = c
+                 delegate?.nokeReadyForFirmwareUpdate(noke: self)
+            }
+            else if c.uuid.isEqual(NokeDevice.bootloader4iRxCharacteristicUUID()) {
+                 self.bootloader4iRxCharacteristic = c
+            }
+            else if c.uuid.isEqual(NokeDevice.bootloader2iTxCharacteristicUUID()) {
+                 self.bootloader4iTxCharacteristic = c
+                 delegate?.nokeReadyForFirmwareUpdate(noke: self)
             }
         }
     }
