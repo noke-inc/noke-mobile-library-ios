@@ -128,10 +128,10 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
     var responseArray: Array<String>!
     
     /// Unlock command used for offline unlocking
-    var unlockCmd: String = ""
+    public var unlockCmd: String = ""
     
     /// Unique key used for encrypting the unlock command for offline unlocking
-    var offlineKey: String = ""
+    public var offlineKey: String = ""
     
     /// Indicates if the lock keys need to be restored
     var isRestoring: Bool = false
@@ -593,6 +593,18 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
         let commandsArr = commands.components(separatedBy: "+")
         clearCommandArray()
         for command: String in commandsArr{
+            self.addCommandToCommandArray(self.stringToBytes(hexstring: command)!)
+        }
+        self.writeCommandArray()
+    }
+    
+    /**
+    Sends a command string from the Noke Core API to the Noke device
+    
+    - Parameter commands: A n array of commands
+    */
+    public func sendCommands(_ commands: Array<String>){
+        for command: String in commands{
             self.addCommandToCommandArray(self.stringToBytes(hexstring: command)!)
         }
         self.writeCommandArray()

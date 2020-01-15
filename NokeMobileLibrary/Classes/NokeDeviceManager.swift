@@ -32,7 +32,7 @@ import CoreBluetooth
  - Syncing: Phone is sending commands to Noke device
  - Unlocked: Noke device is unlocked
  */
-public enum NokeDeviceConnectionState : Int{
+@objc public enum NokeDeviceConnectionState : Int16{
     case Disconnected = 0
     case Discovered = 1
     case Connecting = 2
@@ -41,7 +41,7 @@ public enum NokeDeviceConnectionState : Int{
     case Unlocked = 5
 }
 
-public enum NokeManagerBluetoothState : Int{
+@objc public enum NokeManagerBluetoothState : Int16{
     case unknown
     case resetting
     case unsupported
@@ -143,7 +143,7 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     public var uploadDelegate: NokeUploadDelegate?
     
     /// Array of Noke devices managed by the NokeDeviceManager
-    var nokeDevices = [String: NokeDevice]()
+    public var nokeDevices = [String: NokeDevice]()
     
     /// Queue of responses from lock ready to be uploaded
     fileprivate var globalUploadQueue = [Dictionary<String,Any>]()
@@ -161,7 +161,7 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     var allowAllNokeDevices: Bool = false
     
     /// Boolean that should be set when scanning for devices to update firmware
-    var firmwareScanning = false
+    public var firmwareScanning = false
     
     /// typealias used for handling bytes from the lock
     public typealias byteArray = UnsafeMutablePointer<UInt8>
@@ -236,6 +236,8 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     public func setAllowAllNokeDevices(_ allow: Bool){
         allowAllNokeDevices = allow
     }
+    
+    
     
     /// MARK: Central Manager Delegate Methods
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {

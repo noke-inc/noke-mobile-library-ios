@@ -157,8 +157,8 @@ struct Constants {
     static let QCDISABLED =         0x00
     
     //Offline Key Types
-    static let OFFLINE_KEY_LENGTH =  32
-    static let OFFLINE_COMMAND_LENGTH = 40
+    public static let OFFLINE_KEY_LENGTH =  32
+    public static let OFFLINE_COMMAND_LENGTH = 40
 }
 
 struct ApiURL {
