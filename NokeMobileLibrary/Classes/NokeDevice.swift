@@ -24,7 +24,7 @@ protocol NokeDeviceDelegate
  - Unlocked: Noke device unlocked OR Device has been locked but phone never received updated status
  - Locked: Noke device locked
  */
-public enum NokeDeviceLockState : Int{
+@objc public enum NokeDeviceLockState : Int{
     @available(*, unavailable, renamed: "Unknown")
     case nokeDeviceLockStateUnknown = -100
     @available(*, unavailable, renamed: "Unlocked")
