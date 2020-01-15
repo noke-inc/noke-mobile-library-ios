@@ -32,7 +32,7 @@ import CoreBluetooth
  - Syncing: Phone is sending commands to Noke device
  - Unlocked: Noke device is unlocked
  */
-@objc public enum NokeDeviceConnectionState : Int16{
+@objc public enum NokeDeviceConnectionState : Int{
     case Disconnected = 0
     case Discovered = 1
     case Connecting = 2
@@ -41,7 +41,7 @@ import CoreBluetooth
     case Unlocked = 5
 }
 
-@objc public enum NokeManagerBluetoothState : Int16{
+@objc public enum NokeManagerBluetoothState : Int{
     case unknown
     case resetting
     case unsupported
