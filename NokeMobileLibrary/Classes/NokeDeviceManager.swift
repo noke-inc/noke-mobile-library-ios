@@ -173,6 +173,9 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     /// number of seconds the connection process will wait until return an error connection
     public let numberOfSecondsToDetectTheConnectionError: Double = 2
     
+    /// This property is filled when the connection starts
+    public var nokeDevicePendingToConnect: NokeDevice?
+    
     /**
      Initializes a new NokeDeviceManager
      - Returns: NokeDeviceManager
@@ -224,8 +227,10 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
         self.insertNokeDevice(noke)
         let connectionOptions : [String: AnyObject] = [CBConnectPeripheralOptionNotifyOnDisconnectionKey: NSNumber.init(value: true as Bool)]
         if (noke.peripheral != nil){
+            nokeDevicePendingToConnect = nil
             invalidateConnectionTimer()
             initializeConnectionTimer()
+            nokeDevicePendingToConnect = noke
             cm.connect(noke.peripheral!, options: connectionOptions)
         }
     }
@@ -237,6 +242,7 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
      */
     public func disconnectNokeDevice(_ noke:NokeDevice){
         if((noke.peripheral) != nil){
+            nokeDevicePendingToConnect = nil
             invalidateConnectionTimer()
             cm.cancelPeripheralConnection(noke.peripheral!)
         }
@@ -353,6 +359,7 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     }
     
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        nokeDevicePendingToConnect = nil
         invalidateConnectionTimer()
         let noke = self.nokeWithPeripheral(peripheral)
         if(noke == nil){
@@ -369,6 +376,7 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     }
     
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        nokeDevicePendingToConnect = nil
         invalidateConnectionTimer()
         let noke = self.nokeWithPeripheral(peripheral)
         if(noke == nil){
@@ -715,10 +723,15 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
      public func invalidateConnectionTimer() {
          connectionTimer?.invalidate()
          connectionTimer = nil
+        if let peripheralPendingToConnect = nokeDevicePendingToConnect?.peripheral {
+            cm.cancelPeripheralConnection(peripheralPendingToConnect)
+            nokeDevicePendingToConnect = nil
+        }
      }
      
     /// Once the connection time is reached it sends the delegate error
      @objc public func connectionTimeWasReached() {
+        invalidateConnectionTimer()
          self.delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceShutdownResult, message: "Connection error", noke: nil)
      }
 }
