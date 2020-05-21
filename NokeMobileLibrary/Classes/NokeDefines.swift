@@ -39,6 +39,7 @@ public enum NokeDeviceManagerError : Int {
     //Noke Mobile Library Errors
     case nokeLibraryErrorInvalidOfflineKey  = 301
     case nokeLibraryErrorNoModeSet          = 302
+    case nokeLibraryConnectionTimeout       = 317
 }
 
 public enum NokeLibraryMode : Int {

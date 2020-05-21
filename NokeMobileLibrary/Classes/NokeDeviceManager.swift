@@ -732,6 +732,6 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     /// Once the connection time is reached it sends the delegate error
      @objc public func connectionTimeWasReached() {
         invalidateConnectionTimer()
-         self.delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceShutdownResult, message: "Connection error", noke: nil)
+         self.delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeLibraryConnectionTimeout, message: "Connection error", noke: nil)
      }
 }
