@@ -21,12 +21,14 @@ The Nokē Mobile Library provides an easy-to-use and stable way to communicate w
   s.source           = { :git => 'https://github.com/noke-inc/noke-mobile-library-ios.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/nokelocks'
 
+  s.module_map = 'NokeMobileLibrary/module.modulemap'
+
   s.swift_version = '5.0'
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'NokeMobileLibrary/Classes/**/*', 'NokeMobileLibrary/Example/Pods/Target\ Support\ Files/NokeMobileLibrary/NokeMobileLibrary-umbrella.h'
-  
+  s.source_files = 'NokeMobileLibrary/NokeMobileLibrary.h', 'NokeMobileLibrary/C/TI_aes_128.c', 'NokeMobileLibrary/C/include/TI_aes_128.h', 'NokeMobileLibrary/Classes/**/*', 'NokeMobileLibrary/Example/Pods/Target\ Support\ Files/NokeMobileLibrary/NokeMobileLibrary-umbrella.h'
+
   # s.resource_bundles = {
   #   'NokeMobileLibrary' => ['NokeMobileLibrary/Assets/*.png']
   # }
