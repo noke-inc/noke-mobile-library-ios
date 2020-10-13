@@ -468,7 +468,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 0.7.7;
+				MARKETING_VERSION = 0.7.8;
 				MODULEMAP_FILE = "Target Support Files/NokeMobileLibrary/NokeMobileLibrary.modulemap";
 				PRODUCT_NAME = NokeMobileLibrary;
 				SDKROOT = iphoneos;
@@ -655,7 +655,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 0.7.7;
+				MARKETING_VERSION = 0.7.8;
 				MODULEMAP_FILE = "Target Support Files/NokeMobileLibrary/NokeMobileLibrary.modulemap";
 				PRODUCT_NAME = NokeMobileLibrary;
 				SDKROOT = iphoneos;
