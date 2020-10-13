@@ -1,0 +1,5 @@
+framework module NokeMobileLibrary {
+    header "NokeMobileLibrary.h"
+
+    private header "TI_aes_128.h"
+}
