@@ -141,6 +141,9 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
         }
     }
     
+    /// Int value to filter out devices below a certain RSSI level
+    public var rssiThreshold: Int = -127    
+    
     public var uploadDelegate: NokeUploadDelegate?
     
     /// Array of Noke devices managed by the NokeDeviceManager
@@ -262,6 +265,10 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     
     
     public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        
+        if(RSSI.intValue < rssiThreshold){
+            return
+        }
         
         var broadcastName : String? = advertisementData[CBAdvertisementDataLocalNameKey] as? String
         
