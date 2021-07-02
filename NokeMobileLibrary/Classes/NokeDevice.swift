@@ -488,6 +488,7 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
                             self.lockState = NokeDeviceLockState.Unlocked
                             self.connectionState = NokeDeviceConnectionState.Unlocked
                             NokeDeviceManager.shared().delegate?.nokeDeviceDidUpdateState(to: self.connectionState!, noke: self)
+                            NokeDeviceManager.shared().uploadData()
                         }
                     }
                     break
