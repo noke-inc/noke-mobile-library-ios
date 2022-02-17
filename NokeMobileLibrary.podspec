@@ -22,6 +22,8 @@ The Nokē Mobile Library provides an easy-to-use and stable way to communicate w
   s.social_media_url = 'https://twitter.com/nokelocks'
 
   s.module_map = 'NokeMobileLibrary/module.modulemap'
+  
+  s.watchos.deployment_target = '6.2'
 
   s.swift_version = '5.0'
 
