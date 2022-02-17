@@ -572,22 +572,7 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
         }
     }
 
-    /**
-     Makes the necessary checks and then requests the unlock commands from the server (or generates the unlock command if offline)
-     This method is also responsible for sending the command to the lock after it's received
-     Before unlocking, please check:
-     - unlock URL is set on the NokeDeviceManager
-     - unlock endpoint has been properly implemented on server
-     - Noke Device is provided with valid offline key and command (if unlocking offline)
-     - A internet connection is present (if unlocking online)
-     */
-    public func unlock(){
-        if(Reachability.isConnectedToNetwork()){
-
-        }else{
-            // TODO: Handle offline unlock
-        }
-    }
+   
 
     /**
      Sends a command string from the Noke Core API to the Noke device

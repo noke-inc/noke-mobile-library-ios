@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		021136051AEE2C5484DDCF2A0B818E12 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925ECDB8FAA7A225ABFEFA08ABBB159A /* Reachability.swift */; };
 		09A46DD6268F835500F0CEE3 /* TI_aes_128.c in Sources */ = {isa = PBXBuildFile; fileRef = 09A46DD5268F835500F0CEE3 /* TI_aes_128.c */; };
 		09A46DD8268F836000F0CEE3 /* TI_aes_128.h in Headers */ = {isa = PBXBuildFile; fileRef = 09A46DD7268F836000F0CEE3 /* TI_aes_128.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		09BFC1D72139BA62004A2F0F /* NokeLibraryApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BFC1D62139BA62004A2F0F /* NokeLibraryApiClient.swift */; };
@@ -63,7 +62,6 @@
 		72094271D85E1D79B4491BB89FD3EB2B /* Pods-NokeMobileLibrary_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-NokeMobileLibrary_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		738420F289B17BE5AC2BF7FE22071166 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		806FAAD0F2435AC4C34EF13CFFB361FD /* NokeDevice.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NokeDevice.swift; path = NokeMobileLibrary/Classes/NokeDevice.swift; sourceTree = "<group>"; };
-		925ECDB8FAA7A225ABFEFA08ABBB159A /* Reachability.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Reachability.swift; path = NokeMobileLibrary/Classes/Reachability.swift; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9674478CCB1C2FF00D17A5DECDF5A10E /* Pods-NokeMobileLibrary_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-NokeMobileLibrary_Tests.modulemap"; sourceTree = "<group>"; };
 		97F5508474330907185A6AE64DFF6A55 /* Pods-NokeMobileLibrary_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-NokeMobileLibrary_Example-umbrella.h"; sourceTree = "<group>"; };
@@ -206,7 +204,6 @@
 				806FAAD0F2435AC4C34EF13CFFB361FD /* NokeDevice.swift */,
 				578BA66ACA350C44573B8282847F0FD0 /* NokeDeviceManager.swift */,
 				09BFC1D62139BA62004A2F0F /* NokeLibraryApiClient.swift */,
-				925ECDB8FAA7A225ABFEFA08ABBB159A /* Reachability.swift */,
 				09A46DD5268F835500F0CEE3 /* TI_aes_128.c */,
 				09A46DD7268F836000F0CEE3 /* TI_aes_128.h */,
 				87DF0E54ADB58829AB3B27C07B5B4202 /* Support Files */,
@@ -352,7 +349,6 @@
 				59A4FD1F551A8B4BBB75E96FE9E21AF3 /* NokeDeviceManager.swift in Sources */,
 				09A46DD6268F835500F0CEE3 /* TI_aes_128.c in Sources */,
 				994AC2DBF5CB0B6538323098A1AD3467 /* NokeMobileLibrary-dummy.m in Sources */,
-				021136051AEE2C5484DDCF2A0B818E12 /* Reachability.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
