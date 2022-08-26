@@ -47,6 +47,7 @@ public enum NokeLibraryMode : Int {
     case PRODUCTION   = 1;
     case DEVELOP      = 2;
     case OPEN         = 3;
+    case CUSTOM       = 4;
 }
 
 
