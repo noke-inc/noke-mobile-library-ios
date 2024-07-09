@@ -494,7 +494,8 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
                     break
                 case Constants.INVALIDKEY_ResultType:
                     NokeDeviceManager.shared().delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeDeviceErrorInvalidKey, message: "Invalid Key Result", noke: self)
-                    self.moveToNext()
+                    self.clearCommandArray()
+                    //self.moveToNext()
                     //                        if(self.commandArray.count == 0){
                     //                            if(!isRestoring){
                     //                                NokeDeviceManager.shared().restoreDevice(noke: self)
@@ -510,6 +511,8 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
                     self.moveToNext()
                     break
                 case Constants.SHUTDOWN_ResultType:
+                    print("shutDown Called")
+                    self.clearCommandArray()
                     let lockStateByte = Int32(data[2])
                     var isLocked = true
                     if(lockStateByte == 0){
@@ -658,7 +661,12 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
             let timedata = Data.init([UInt8((timeStamp >> 24) & 0xFF), UInt8((timeStamp >> 16) & 0xFF), UInt8((timeStamp >> 8) & 0xFF), UInt8((timeStamp & 0xFF))])
 
             let finalCmdData = createOfflineUnlock(preSessionKey: keydata, unlockCmd: cmddata, timestamp: timedata)
-
+            print("KEY DATA: \(keydata) COMMAND DATA: \(cmddata)")
+            print("FINAL COMMAND DATA: \(finalCmdData)")
+            let finalCmdD = self.bytesToString(data: finalCmdData, start: 0, length: 20)
+            print("finalCmdD: \(finalCmdD)")
+            print("KEY DATA: \(keydata) COMMAND DATA: \(cmddata)")
+            print("FINAL COMMAND DATA: \(finalCmdData)")
             self.addCommandToCommandArray(finalCmdData)
             self.writeCommandArray()
             return String.init(timeStamp)
@@ -680,6 +688,8 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
     {
         let newCommandPacket = byteArray.allocate(capacity: 20)
         var key = self.createOfflineCombinedKey(baseKey:preSessionKey)
+        let combinek = self.bytesToString(data: key, start: 0, length: 16)
+        debugPrint("CombibeKey: \(combinek)")
         var unlockCmdBytes = [UInt8](unlockCmd)
 
         var x = 0
