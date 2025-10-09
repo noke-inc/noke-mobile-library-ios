@@ -565,13 +565,12 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
 
     /// Moves to next command in the command array in preperation to sending
     func moveToNext(){
-        guard let commandArray = self.commandArray, !commandArray.isEmpty else {
-            return
-        }
-        if self.commandArray.count > 0 {
-            self.commandArray.remove(at: 0)
-        }
-        if let commandArray = self.commandArray, !commandArray.isEmpty {
+        guard var commands = self.commandArray, !commands.isEmpty else { return }
+        
+        commands.remove(at: 0)
+        self.commandArray = commands
+        
+        if !commands.isEmpty {
             writeCommandArray()
         }
     }
