@@ -1,16 +1,16 @@
 PODS:
-  - NokeMobileLibrary (0.1.1)
+  - NokeMobileLibrary (0.9.3)
 
 DEPENDENCIES:
   - NokeMobileLibrary (from `../`)
 
 EXTERNAL SOURCES:
   NokeMobileLibrary:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
-  NokeMobileLibrary: b602688a95c69eff8dab5eaf5199fa677b2377ab
+  NokeMobileLibrary: bd4bf5e3cc0cdcf007837f6a7e9b335ee05c1ace
 
 PODFILE CHECKSUM: f4edc7d6988b7108e6aa0a5dbdbde05d5b3c8f46
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.16.2

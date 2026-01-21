@@ -35,11 +35,13 @@ public enum NokeDeviceManagerError : Int {
     case nokeDeviceBatteryDataResult        = 266 //(200 + 66) BATTERYDATA_ResultType = 0x66
     case nokeDeviceErrorInvalidResult       = 267 //(200 + FF) INVALID_ResultType = 0xFF
     case nokeDeviceErrorUnknown             = 268
+    case nokeDeviceErrorOutOfScheduleUnlock = 269
+    case nokeDeviceErrorFreeExit            = 2111 //(200 + 6F) FREEEXIT_ResultType
+    
     
     //Noke Mobile Library Errors
     case nokeLibraryErrorInvalidOfflineKey  = 301
     case nokeLibraryErrorNoModeSet          = 302
-    case nokeLibraryConnectionTimeout       = 317
 }
 
 public enum NokeLibraryMode : Int {
@@ -47,12 +49,11 @@ public enum NokeLibraryMode : Int {
     case PRODUCTION   = 1;
     case DEVELOP      = 2;
     case OPEN         = 3;
-    case CUSTOM       = 4;
 }
 
 
 //Defines used when interacting with the lock
-public struct Constants {
+struct Constants {
     
     static let NOKE_DEVICE_IDENTIFIER_STRING = "NOKE"
     
@@ -60,7 +61,9 @@ public struct Constants {
     static let NOKE_HW_TYPE_2ND_GEN_PADLOCK         = "3P";
     static let NOKE_HW_TYPE_ULOCK                   = "2U";
     static let NOKE_HW_TYPE_HD_LOCK                 = "I";
-    static let NOKE_HW_TYPE_DOOR_CONTROLLER         = "2E";
+    static let NOKE_HW_TYPE_DOOR_CONTROLLER         = "E";
+    static let NOKE_HW_TYPE_KEYPAD                  = "K";
+    static let NOKE_HW_TYPE_THUNDERGUN              = "A";
     static let NOKE_HW_TYPE_PB12                    = "1C";
     
     //KEY LENGTHS
@@ -112,8 +115,11 @@ public struct Constants {
     static let FAILEDTOLOCK_ResultType = 0x68
     static let FAILEDTOUNLOCK_ResultType = 0x69
     static let FAILEDTOUNSHACKLE_ResultType = 0x6A
+    static let OUTOFSCHEDULEUNLOCK_ResultType = 0x6D
+    static let FREEEXIT_ResultType = 0x6f
     static let INVALID_ResultType = 0xFF
     
+    static let DIAGNOSTIC_PacketType = 0x9B
     //COMMUNICATION PACKET TYPES
     //AppDataPacket Main structure for all commands from the app
     //CmdTypes
@@ -159,8 +165,41 @@ public struct Constants {
     static let QCDISABLED =         0x00
     
     //Offline Key Types
-    public static let OFFLINE_KEY_LENGTH =  32
-    public static let OFFLINE_COMMAND_LENGTH = 40
+    static let OFFLINE_KEY_LENGTH =  32
+    static let OFFLINE_COMMAND_LENGTH = 40
+    
+    //Diagnostic Packet Data
+    ///Lock States
+    static let LockStateUnlocked = 0x00
+    static let LockStateUnshackled = 0x01
+    static let LockStateLocked = 0x02
+    static let LockStateJammedWhileUnlocking = 0x03
+    static let LockStateJammedWhileLocking = 0x04
+    
+    ///LED State
+    static let RedLED = 0x02
+    static let GreenLED = 0x01
+    static let OffLED = 0x00
+    
+    ///Touch Sensor
+    static let Touched = 1
+    static let NotTouched = 0
+    
+    ///Interior Motion
+    static let InteriorMotionOn = 1
+    static let InteriorMotionOff = 0
+    
+    ///Exterior Motion
+    static let ExteriorMotionOn = 1
+    static let ExteriorMotionOff = 0
+    
+    ///Battery Charging
+    static let ChargingControlOn = 1
+    static let ChargingControlOff = 0
+    
+    ///Battery Charging Status
+    static let ChargingStatusOn = 1
+    static let ChargingStatusOff = 0
 }
 
 struct ApiURL {
@@ -169,5 +208,3 @@ struct ApiURL {
     static let developUploadURL         = "https://lock-api-dev.appspot.com/"
     static let openString               = "OPEN"
 }
-
-
