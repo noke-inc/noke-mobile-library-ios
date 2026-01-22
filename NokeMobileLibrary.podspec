@@ -18,7 +18,7 @@ The Nokē Mobile Library provides an easy-to-use and stable way to communicate w
   # s.module_map = 'NokeMobileLibrary/module.modulemap'
 
   s.swift_version = '5.0'       # Update if you can (e.g., '5.9')
-  s.ios.deployment_target = '8.0'    # Consider raising to reduce build issues
+  s.ios.deployment_target = '12.0'    # Consider raising to reduce build issues
   s.watchos.deployment_target = '6.2'
 
   # Library sources only—no Example or generated Pods paths
