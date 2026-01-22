@@ -19,7 +19,6 @@
 		7194B8860F125F8AFCD1C88152CDEDBB /* Pods-NokeMobileLibrary_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A72712BF40EDEC1D5A0BD90F792E37A /* Pods-NokeMobileLibrary_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		915ACA1BF15AB04CBDEC1595AB3AA1DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */; };
 		975F46F657E705365FDA74EFBD1F2850 /* TI_aes_128.h in Headers */ = {isa = PBXBuildFile; fileRef = 5285B12630E6FC7893B792EC68A80CA4 /* TI_aes_128.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B4B1FCB32F21A7630014637E /* SEError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B1FCB12F21A7630014637E /* SEError.swift */; };
 		B4B1FCB42F21A7630014637E /* PhoneKeyAcl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B1FCAF2F21A7630014637E /* PhoneKeyAcl.swift */; };
 		B4B1FCB52F21A7630014637E /* PhoneKeyCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B1FCB02F21A7630014637E /* PhoneKeyCommand.swift */; };
 		B4B1FCB62F21A7630014637E /* PhoneKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B1FCAE2F21A7630014637E /* PhoneKey.swift */; };
@@ -84,7 +83,6 @@
 		B4B1FCAE2F21A7630014637E /* PhoneKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneKey.swift; sourceTree = "<group>"; };
 		B4B1FCAF2F21A7630014637E /* PhoneKeyAcl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneKeyAcl.swift; sourceTree = "<group>"; };
 		B4B1FCB02F21A7630014637E /* PhoneKeyCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneKeyCommand.swift; sourceTree = "<group>"; };
-		B4B1FCB12F21A7630014637E /* SEError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEError.swift; sourceTree = "<group>"; };
 		B4B1FCBD2F21B1710014637E /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		BCA974A4FA78B63F1077A40487F51046 /* Pods-NokeMobileLibrary_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NokeMobileLibrary_Example.release.xcconfig"; sourceTree = "<group>"; };
 		E45DF4A848F3C52FE794F286CCC34A64 /* Pods-NokeMobileLibrary_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-NokeMobileLibrary_Tests-umbrella.h"; sourceTree = "<group>"; };
@@ -225,7 +223,6 @@
 				B4B1FCAE2F21A7630014637E /* PhoneKey.swift */,
 				B4B1FCAF2F21A7630014637E /* PhoneKeyAcl.swift */,
 				B4B1FCB02F21A7630014637E /* PhoneKeyCommand.swift */,
-				B4B1FCB12F21A7630014637E /* SEError.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -434,7 +431,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B4B1FCB32F21A7630014637E /* SEError.swift in Sources */,
 				B4B1FCB42F21A7630014637E /* PhoneKeyAcl.swift in Sources */,
 				B4B1FCB52F21A7630014637E /* PhoneKeyCommand.swift in Sources */,
 				B4B1FCB62F21A7630014637E /* PhoneKey.swift in Sources */,

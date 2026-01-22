@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'NokeMobileLibrary'
-  s.version          = '0.9.8'  # bump after changes
+  s.version          = '1.0.1'  # bump after changes
   s.summary          = 'A library for interacting with Noke Devices'
 
   s.description      = <<-DESC

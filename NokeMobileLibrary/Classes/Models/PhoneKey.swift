@@ -99,7 +99,7 @@ public final class PhoneKeyManager {
 
         // 2. We need to generate a new seed. Provider MUST exist.
         guard let provider = provider else {
-            throw SEError(message: "CryptoProvider not set for key generation.")
+            throw NSError(domain: "PhoneKeyManager", code: -1, userInfo: [NSLocalizedDescriptionKey: "CryptoProvider not set."])
         }
 
         // 3. Generate fresh Ed25519 seed (32 bytes)
@@ -143,12 +143,12 @@ public final class PhoneKeyManager {
         } else {
             // Swift-Sodium path: derive secretKey from seed and sign
             guard let provider = provider else {
-                throw SEError(message: "CryptoProvider not set.")
+                throw NSError(domain: "org.swift.soracom", code: -1, userInfo: nil)
             }
             do {
                 return try provider.sign(message: data, withSeed: info.seed)
             } catch {
-                throw SEError(message: "Failed to sign data with Ed25519.")
+                throw NSError(domain: "org.swift.soracom", code: -1, userInfo: nil)
             }
         }
     }
@@ -208,11 +208,11 @@ public final class PhoneKeyManager {
         } else {
             do {
                 guard let provider = provider else {
-                    throw SEError(message: "CryptoProvider not set.")
+                    throw NSError(domain: "org.swift.soracom", code: -1, userInfo: nil)
                 }
                 return try provider.derivePublicKey(fromSeed: seed)
             } catch {
-                throw SEError(message: "Failed to derive public key from seed.")
+                throw NSError(domain: "org.swift.soracom", code: -1, userInfo: nil)
             }
         }
     }
