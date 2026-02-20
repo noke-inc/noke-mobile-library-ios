@@ -30,6 +30,21 @@ The Nokē Mobile Library provides an easy-to-use and stable way to communicate w
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'NokeMobileLibrary/NokeMobileLibrary.h', 'NokeMobileLibrary/C/TI_aes_128.c', 'NokeMobileLibrary/C/include/TI_aes_128.h', 'NokeMobileLibrary/Classes/**/*', 'NokeMobileLibrary/Example/Pods/Target\ Support\ Files/NokeMobileLibrary/NokeMobileLibrary-umbrella.h'
+  
+    # ✅ Attach the XCFramework to the POD target (not the app target)
+    s.vendored_frameworks = 'Frameworks/PhoneKeyCore.xcframework'
+
+    # ✅ Binary frameworks are smoother as static in CocoaPods
+    s.static_framework = true
+
+    # Helpful defaults
+    s.pod_target_xcconfig = {
+      'CLANG_ENABLE_MODULES'           => 'YES',
+      'BUILD_LIBRARY_FOR_DISTRIBUTION' => 'YES'
+    }
+
+    # Optional: keep the folder intact
+    s.preserve_paths = 'Frameworks/PhoneKeyCore.xcframework'
 
   # s.resource_bundles = {
   #   'NokeMobileLibrary' => ['NokeMobileLibrary/Assets/*.png']
