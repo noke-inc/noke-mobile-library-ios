@@ -20,7 +20,7 @@
 
 import Foundation
 import CoreBluetooth
-
+import PhoneKeyCore
 
 /**
  Connection states of Noke Devices
@@ -155,6 +155,8 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     
     public var uploadDelegate: NokeUploadDelegate?
     
+    var hasStartedProvisioning: Bool = false
+    
     /// Array of Noke devices managed by the NokeDeviceManager
     var nokeDevices = [String: NokeDevice]()
     
@@ -198,6 +200,7 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     var targetMac: String = ""
     private var isRetryScheduled = false
     private let centralQueue = DispatchQueue.main
+    private var aclEnvelopes: [String: PhoneKeyAclEnvelope] = [:]
     var timer: Timer!
     var isUnlockInProgress: Bool {
         return devicesQueue.sync {
@@ -235,6 +238,13 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
         cm = CBCentralManager.init(delegate: self, queue: nil, options: [CBCentralManagerOptionRestoreIdentifierKey:centralManagerRestoreKey])
     }
     
+    public func addHandleSuccessClosure(noke: NokeDevice,_ closure: @escaping () -> Void) {
+        noke.handleSuccess = closure
+    }
+    
+    public func addHandleFailureClosure(noke: NokeDevice, _ closure: @escaping (NokeDeviceOperationError) -> Void) {
+        noke.handleFailure = closure
+    }
     
     private func scheduleRetryScanIfNeeded_locked(in delay: TimeInterval) {
         guard !isRetryScheduled else { return }
@@ -264,7 +274,7 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
         }
         
         let scanOptions : [String:AnyObject] = [CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber.init(value: true as Bool)]
-        let serviceArray = [CBUUID]([NokeDevice.nokeServiceUUID(), NokeDevice.noke4iFirmwareUUID(), NokeDevice.noke2iFirmwareUUID()])
+        let serviceArray = [CBUUID]([NokeDevice.nokeServiceUUID(), NokeDevice.nokeInfinityServiceUUID(), NokeDevice.noke4iFirmwareUUID(), NokeDevice.noke2iFirmwareUUID()])
         
         //Make sure we start scan from scratch
         cm.stopScan()
@@ -293,12 +303,16 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
      
      - Parameter noke: The Noke device for the connection
      */
-    public func connectToNokeDevice(_ noke:NokeDevice) {
+    public func connectToNokeDevice(_ noke:NokeDevice, onSuccess: (() -> Void)? = nil, onFailure: (() -> Void)? = nil) {
         self.insertNokeDevice(noke)
         let connectionOptions : [String: AnyObject] = [CBConnectPeripheralOptionNotifyOnDisconnectionKey: NSNumber.init(value: true as Bool)]
         if (noke.peripheral != nil){
             cm.connect(noke.peripheral!, options: connectionOptions)
         }
+    }
+    
+    public func addAclEnvelopeForNoke(mac: String, envelope: PhoneKeyAclEnvelope) {
+        aclEnvelopes[mac] = envelope
     }
     
     /**
@@ -327,7 +341,6 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     }
     
     public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-            
             if(RSSI.intValue < rssiThreshold){
                 return
             }
@@ -387,7 +400,7 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
                     }
                     
                     var noke = self.nokeWithMac(mac)
-                        if(noke == nil && self.allowAllNokeDevices){
+                    if(noke == nil && self.allowAllNokeDevices) {
                         noke = NokeDevice.init(name: broadcastName!, mac: mac)
                     }
                     
@@ -395,15 +408,12 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
                     //noke?.RSSI = RSSI
                     noke?.addRSSIArray(rssi: RSSI)
                     
-                    
                     if(noke != nil){
-                        
                         noke?.delegate = NokeDeviceManager.shared()
                         noke?.peripheral = peripheral
                         noke?.peripheral?.delegate = noke
                         
                         let broadcastData = advertisementData[CBAdvertisementDataManufacturerDataKey]
-                        
                         if(broadcastData != nil){
                             if let broadcastBytes = broadcastData as? Data{
                                 var mutableBroadcastBytes = broadcastBytes
@@ -470,6 +480,9 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
                             
                             noke?.connectionState = .Discovered
                             self.delegate?.nokeDeviceDidUpdateState(to: (noke?.connectionState)!, noke: noke!)
+                        } else {
+                            noke?.connectionState = .Discovered
+                            self.delegate?.nokeDeviceDidUpdateState(to: (noke?.connectionState)!, noke: noke!)
                         }
                     }
               }
@@ -534,7 +547,11 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
                 self.firmwareScanning = false
                  noke?.peripheral?.discoverServices([NokeDevice.noke2iFirmwareUUID()])
             } else {
-                 noke?.peripheral?.discoverServices([NokeDevice.nokeServiceUUID()])
+                 noke?.peripheral?.discoverServices([NokeDevice.nokeServiceUUID(), NokeDevice.nokeInfinityServiceUUID()])
+            }
+            
+            if let noke = noke, noke.encryptionType == .signing {
+                unlockSigningDevice(noke: noke)
             }
         }
     }
@@ -908,5 +925,11 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
         self.bootloaderName = bootloaderName
     }
     
-    
+    func unlockSigningDevice(noke: NokeDevice, withDelay delay: TimeInterval = 5) {
+        if let aclEnvelope = self.aclEnvelopes[noke.mac] {
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                noke.unlockForSigning(aclResponse: aclEnvelope)
+            }
+        }
+    }
 }

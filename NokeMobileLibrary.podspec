@@ -35,7 +35,7 @@ The Nokē Mobile Library provides an easy-to-use and stable way to communicate w
     s.vendored_frameworks = 'Frameworks/PhoneKeyCore.xcframework'
 
     # ✅ Binary frameworks are smoother as static in CocoaPods
-    s.static_framework = true
+#    s.static_framework = true
 
     # Helpful defaults
     s.pod_target_xcconfig = {
