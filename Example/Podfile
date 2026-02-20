@@ -1,6 +1,7 @@
 use_frameworks!
 
 target 'NokeMobileLibrary_Example' do
+  use_frameworks! :linkage => :static
   pod 'NokeMobileLibrary', :path => '../'
 
   target 'NokeMobileLibrary_Tests' do

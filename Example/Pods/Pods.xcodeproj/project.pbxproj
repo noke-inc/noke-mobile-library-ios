@@ -3,39 +3,36 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		0123B1BDCD660608273CDB58D31CE031 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */; };
-		0E2D61175203DA44881AF88571CA5C8C /* NokeDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBABB97FA55E6AEBE574648A4745D0F /* NokeDefines.swift */; };
-		0FA34FE4D3F50AFADCB1A0DE06046F5E /* NokeLibraryApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E61225325A21CB96C514A979FDDC2E /* NokeLibraryApiClient.swift */; };
-		1F61B34AA43B20A1753152068A0247C4 /* NokeDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546286F3395467997E9A366F0B1AA805 /* NokeDevice.swift */; };
-		2405182DCB5CEB0244A4F7CF99333D33 /* NokeDeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AB404CF8D25D14E46CE3F9482D027C /* NokeDeviceManager.swift */; };
-		2D13A02BE2F613E66D40D8D067AD2F02 /* TI_aes_128.c in Sources */ = {isa = PBXBuildFile; fileRef = AE8678BB978C4F2284624198463513CD /* TI_aes_128.c */; };
-		3A8643997FBEE7AA685008AC546A1F27 /* NokeMobileLibrary-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A4EF4F159605468C088EADAE4CE99D /* NokeMobileLibrary-dummy.m */; };
+		23A5682487F9D5F8C3569AA90FFF2540 /* TI_aes_128.h in Headers */ = {isa = PBXBuildFile; fileRef = DDE6738286F7840409B2EE4428A3FC21 /* TI_aes_128.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43507850D4BD5E5ECF6B362FA02C64B8 /* Pods-NokeMobileLibrary_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA9A6EBF5DEE70BF8001785D662E779 /* Pods-NokeMobileLibrary_Example-dummy.m */; };
-		67D3C32CEA933E14292C56D4468F5420 /* NokeMobileLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 04257FD36D2914FA394BECA32E343050 /* NokeMobileLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		47D48537B1F2BAB696710C84B898D9AF /* NokeMobileLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2E68FA29382CB1F4AF665A22998535 /* NokeMobileLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6995AF4F1ECFB4222DF7BD5BD1CA1425 /* NokeDeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2F41D3A00E2E60F6E6343463E4D837 /* NokeDeviceManager.swift */; };
 		7194B8860F125F8AFCD1C88152CDEDBB /* Pods-NokeMobileLibrary_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A72712BF40EDEC1D5A0BD90F792E37A /* Pods-NokeMobileLibrary_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		915ACA1BF15AB04CBDEC1595AB3AA1DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */; };
-		975F46F657E705365FDA74EFBD1F2850 /* TI_aes_128.h in Headers */ = {isa = PBXBuildFile; fileRef = 5285B12630E6FC7893B792EC68A80CA4 /* TI_aes_128.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B404E51D2F48D79C00A0312C /* PhoneKeyCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B404E51C2F48D79C00A0312C /* PhoneKeyCore.xcframework */; };
-		B404E51E2F48D79C00A0312C /* PhoneKeyCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B404E51C2F48D79C00A0312C /* PhoneKeyCore.xcframework */; };
-		B404E51F2F48D79C00A0312C /* PhoneKeyCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B404E51C2F48D79C00A0312C /* PhoneKeyCore.xcframework */; };
+		9E3C01A09DFA5F56F6DC91FD109BAC70 /* NokeDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FB892CE80E0BB9065B1F5B6DA94827 /* NokeDevice.swift */; };
+		A866BB4E08020CA82C48588A7F8B4904 /* NokeDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6959850342F6AD195D9E641ABB3E76B4 /* NokeDefines.swift */; };
+		B1A52BF2258FA582B51BF8B4BFFBF98F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */; };
 		C0EED2391D81B2892DA5B8EF2430498A /* Pods-NokeMobileLibrary_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E45DF4A848F3C52FE794F286CCC34A64 /* Pods-NokeMobileLibrary_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CEB82D210B002935672C453FADD9CCDB /* TI_aes_128.c in Sources */ = {isa = PBXBuildFile; fileRef = DF89FCA463F7074DD8313F8F0C2B782C /* TI_aes_128.c */; };
+		DF6656690B5172095577AEC71667E052 /* NokeLibraryApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BCAC80C951937FCE2CC03A0F134D1E /* NokeLibraryApiClient.swift */; };
+		DFF60F2637CE0A6200EC56147419B115 /* NokeMobileLibrary-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EFDBE3FDD821EC6DB542BCAFF02E80 /* NokeMobileLibrary-dummy.m */; };
 		E3AD00B2D4148E0C17FDAB54D4114530 /* Pods-NokeMobileLibrary_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0464689D9F51DFC3C5902CE39F23658A /* Pods-NokeMobileLibrary_Tests-dummy.m */; };
-		E3FBDAD70CB0E201F704A0167BF2BDAC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		B0F9AC54F1612AF4CA7D01BE2C63FCD2 /* PBXContainerItemProxy */ = {
+		2D1A0D60E43E27AA793B2FA19C0ED521 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 5368C314D14525BB8DF7D5B53B17D420;
 			remoteInfo = NokeMobileLibrary;
 		};
-		E1219F287088686976E2609A9196F1EA /* PBXContainerItemProxy */ = {
+		BE7261EAE56A7E1CE25A8A30D8ED434E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -45,45 +42,46 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		02AB404CF8D25D14E46CE3F9482D027C /* NokeDeviceManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NokeDeviceManager.swift; sourceTree = "<group>"; };
-		04257FD36D2914FA394BECA32E343050 /* NokeMobileLibrary.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NokeMobileLibrary.h; path = NokeMobileLibrary/NokeMobileLibrary.h; sourceTree = "<group>"; };
+		01EFDBE3FDD821EC6DB542BCAFF02E80 /* NokeMobileLibrary-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NokeMobileLibrary-dummy.m"; sourceTree = "<group>"; };
 		0464689D9F51DFC3C5902CE39F23658A /* Pods-NokeMobileLibrary_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-NokeMobileLibrary_Tests-dummy.m"; sourceTree = "<group>"; };
-		0A19CE477802DAFB91A6AF866EBF4D77 /* module.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; name = module.modulemap; path = NokeMobileLibrary/module.modulemap; sourceTree = "<group>"; };
-		0C11820BCE02E4D59FE5A147D11DA9BA /* NokeMobileLibrary.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = NokeMobileLibrary.modulemap; sourceTree = "<group>"; };
-		0F8F2D6CB6350B21408763F052CE5A8C /* Pods_NokeMobileLibrary_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NokeMobileLibrary_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		113B2DBE6004A7FFD81EC4D5CF2F5DCA /* NokeMobileLibrary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NokeMobileLibrary.debug.xcconfig; sourceTree = "<group>"; };
+		0F8F2D6CB6350B21408763F052CE5A8C /* Pods-NokeMobileLibrary_Tests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-NokeMobileLibrary_Tests"; path = Pods_NokeMobileLibrary_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		18BECB744F23A5F931B7ACC44F717D8F /* Pods-NokeMobileLibrary_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-NokeMobileLibrary_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		1A754C283B34DFC92B3170F41884A35D /* Pods-NokeMobileLibrary_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NokeMobileLibrary_Tests-Info.plist"; sourceTree = "<group>"; };
-		227A0082DF349961687647A6FB40A96D /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		24FD9F870257B601C0C7CA593F3308E0 /* NokeMobileLibrary-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NokeMobileLibrary-prefix.pch"; sourceTree = "<group>"; };
-		2560D8AED1064CE29B6A7172E6E149A6 /* NokeMobileLibrary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NokeMobileLibrary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2A75B7C76CD0C2C2C654652678DCDD0B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		2560D8AED1064CE29B6A7172E6E149A6 /* NokeMobileLibrary */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = NokeMobileLibrary; path = NokeMobileLibrary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		35BCAC80C951937FCE2CC03A0F134D1E /* NokeLibraryApiClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NokeLibraryApiClient.swift; sourceTree = "<group>"; };
 		384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		3FBABB97FA55E6AEBE574648A4745D0F /* NokeDefines.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NokeDefines.swift; sourceTree = "<group>"; };
+		3F862804084FF2A3F749DD8C7E4247DF /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
 		499B54519805B634C83C0F99FAF62168 /* Pods-NokeMobileLibrary_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NokeMobileLibrary_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		49B32B4F537E5425F2FD80633319BFA1 /* Pods-NokeMobileLibrary_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-NokeMobileLibrary_Tests.modulemap"; sourceTree = "<group>"; };
 		4ADD7A39C673D105FABCEFA7A79A89B7 /* Pods-NokeMobileLibrary_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NokeMobileLibrary_Example-Info.plist"; sourceTree = "<group>"; };
-		4EFECAB2A9BB175AA5E8DC84477BBC7F /* NokeMobileLibrary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NokeMobileLibrary.release.xcconfig; sourceTree = "<group>"; };
-		5285B12630E6FC7893B792EC68A80CA4 /* TI_aes_128.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TI_aes_128.h; sourceTree = "<group>"; };
-		546286F3395467997E9A366F0B1AA805 /* NokeDevice.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NokeDevice.swift; sourceTree = "<group>"; };
+		52E58927426A80C3201DF5213C81C562 /* NokeMobileLibrary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NokeMobileLibrary.release.xcconfig; sourceTree = "<group>"; };
+		547C1B1BEA87C03896397FE7B923B8CB /* NokeMobileLibrary-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "NokeMobileLibrary-Info.plist"; sourceTree = "<group>"; };
+		5C2E68FA29382CB1F4AF665A22998535 /* NokeMobileLibrary.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NokeMobileLibrary.h; path = NokeMobileLibrary/NokeMobileLibrary.h; sourceTree = "<group>"; };
+		5D0E3A64AF2D6645326DBC37F9724B53 /* NokeMobileLibrary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NokeMobileLibrary.debug.xcconfig; sourceTree = "<group>"; };
+		62FB892CE80E0BB9065B1F5B6DA94827 /* NokeDevice.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NokeDevice.swift; sourceTree = "<group>"; };
 		64324D56A800C12D343E4D642BEDBC88 /* Pods-NokeMobileLibrary_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NokeMobileLibrary_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		710BC198F032F93D4181D87C62C2A87E /* NokeMobileLibrary.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = NokeMobileLibrary.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		6959850342F6AD195D9E641ABB3E76B4 /* NokeDefines.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NokeDefines.swift; sourceTree = "<group>"; };
 		7189A6F64D3BA7FAFD6725C80A65E2D1 /* Pods-NokeMobileLibrary_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-NokeMobileLibrary_Example-frameworks.sh"; sourceTree = "<group>"; };
-		87E61225325A21CB96C514A979FDDC2E /* NokeLibraryApiClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NokeLibraryApiClient.swift; sourceTree = "<group>"; };
+		7C2F41D3A00E2E60F6E6343463E4D837 /* NokeDeviceManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NokeDeviceManager.swift; sourceTree = "<group>"; };
+		83C69A5A4BBE29858C08C4ABB5544C8F /* PhoneKeyCore.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; name = PhoneKeyCore.xcframework; path = Frameworks/PhoneKeyCore.xcframework; sourceTree = "<group>"; };
 		8A72712BF40EDEC1D5A0BD90F792E37A /* Pods-NokeMobileLibrary_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-NokeMobileLibrary_Example-umbrella.h"; sourceTree = "<group>"; };
 		8EB76524E0CC69C522C6C61902CB5F92 /* Pods-NokeMobileLibrary_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NokeMobileLibrary_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		92A4EF4F159605468C088EADAE4CE99D /* NokeMobileLibrary-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NokeMobileLibrary-dummy.m"; sourceTree = "<group>"; };
 		9BDB09A83AA7501067002BE987115CD7 /* Pods-NokeMobileLibrary_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NokeMobileLibrary_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9E151053178A1F70DBBFBB86CD7E7074 /* Pods-NokeMobileLibrary_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-NokeMobileLibrary_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		9FA4B553FED6501A06D581B4F18D7833 /* NokeMobileLibrary-xcframeworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "NokeMobileLibrary-xcframeworks.sh"; sourceTree = "<group>"; };
+		A1837CE8529EA3839E4C31F3FCBA5A84 /* NokeMobileLibrary.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = NokeMobileLibrary.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A49DC2A36693C4C8611869D6EFA43944 /* Pods-NokeMobileLibrary_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NokeMobileLibrary_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		AE8678BB978C4F2284624198463513CD /* TI_aes_128.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; path = TI_aes_128.c; sourceTree = "<group>"; };
-		B404E51C2F48D79C00A0312C /* PhoneKeyCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = PhoneKeyCore.xcframework; sourceTree = "<group>"; };
-		B4180E74ECE67381615DD3E2FE16F89B /* NokeMobileLibrary-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "NokeMobileLibrary-Info.plist"; sourceTree = "<group>"; };
+		B940386ADC249B47B4458C806B8D3506 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		BCA974A4FA78B63F1077A40487F51046 /* Pods-NokeMobileLibrary_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NokeMobileLibrary_Example.release.xcconfig"; sourceTree = "<group>"; };
+		DD6C0F1EDAB9E20E66371060E683859D /* NokeMobileLibrary.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = NokeMobileLibrary.modulemap; sourceTree = "<group>"; };
+		DDE6738286F7840409B2EE4428A3FC21 /* TI_aes_128.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TI_aes_128.h; sourceTree = "<group>"; };
+		DF89FCA463F7074DD8313F8F0C2B782C /* TI_aes_128.c */ = {isa = PBXFileReference; includeInIndex = 1; path = TI_aes_128.c; sourceTree = "<group>"; };
 		E45DF4A848F3C52FE794F286CCC34A64 /* Pods-NokeMobileLibrary_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-NokeMobileLibrary_Tests-umbrella.h"; sourceTree = "<group>"; };
 		EAA9A6EBF5DEE70BF8001785D662E779 /* Pods-NokeMobileLibrary_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-NokeMobileLibrary_Example-dummy.m"; sourceTree = "<group>"; };
-		FB9993AF115185E0A58502090CE51A5A /* Pods_NokeMobileLibrary_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NokeMobileLibrary_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBECA4D1E06E049F212856DF142E33D8 /* NokeMobileLibrary-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NokeMobileLibrary-prefix.pch"; sourceTree = "<group>"; };
+		F6F63A43B4D990E6BE0615F50A1CA190 /* module.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; name = module.modulemap; path = NokeMobileLibrary/module.modulemap; sourceTree = "<group>"; };
+		FB9993AF115185E0A58502090CE51A5A /* Pods-NokeMobileLibrary_Example */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-NokeMobileLibrary_Example"; path = Pods_NokeMobileLibrary_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC98375B768E332FBB97B7A1439827E2 /* Pods-NokeMobileLibrary_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-NokeMobileLibrary_Example.modulemap"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,16 +91,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				915ACA1BF15AB04CBDEC1595AB3AA1DA /* Foundation.framework in Frameworks */,
-				B404E51D2F48D79C00A0312C /* PhoneKeyCore.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9141B239509D2DC82A37BDB9C80DD28E /* Frameworks */ = {
+		B94013BC2ACBCDA33A2EDA7487F627B5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3FBDAD70CB0E201F704A0167BF2BDAC /* Foundation.framework in Frameworks */,
-				B404E51E2F48D79C00A0312C /* PhoneKeyCore.xcframework in Frameworks */,
+				B1A52BF2258FA582B51BF8B4BFFBF98F /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,7 +107,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0123B1BDCD660608273CDB58D31CE031 /* Foundation.framework in Frameworks */,
-				B404E51F2F48D79C00A0312C /* PhoneKeyCore.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +120,15 @@
 				6D847E2180680D267ABFCA7A1C9AA426 /* Pods-NokeMobileLibrary_Tests */,
 			);
 			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		4F6C0C7217E97205E12B8206429415AD /* include */ = {
+			isa = PBXGroup;
+			children = (
+				DDE6738286F7840409B2EE4428A3FC21 /* TI_aes_128.h */,
+			);
+			name = include;
+			path = include;
 			sourceTree = "<group>";
 		};
 		67ECC6B34B831F78B97631B91BD25131 /* Pods-NokeMobileLibrary_Example */ = {
@@ -160,79 +164,41 @@
 			path = "Target Support Files/Pods-NokeMobileLibrary_Tests";
 			sourceTree = "<group>";
 		};
-		7E6A478BCC706573C2EF40B9BA4674EA /* Pod */ = {
+		79443D6832503AA041A6F1F74772CE82 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2A75B7C76CD0C2C2C654652678DCDD0B /* LICENSE */,
-				0A19CE477802DAFB91A6AF866EBF4D77 /* module.modulemap */,
-				710BC198F032F93D4181D87C62C2A87E /* NokeMobileLibrary.podspec */,
-				227A0082DF349961687647A6FB40A96D /* README.md */,
-			);
-			name = Pod;
-			sourceTree = "<group>";
-		};
-		807FC34F45086B9EBA6D8E720483C9C7 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				0C11820BCE02E4D59FE5A147D11DA9BA /* NokeMobileLibrary.modulemap */,
-				92A4EF4F159605468C088EADAE4CE99D /* NokeMobileLibrary-dummy.m */,
-				B4180E74ECE67381615DD3E2FE16F89B /* NokeMobileLibrary-Info.plist */,
-				24FD9F870257B601C0C7CA593F3308E0 /* NokeMobileLibrary-prefix.pch */,
-				113B2DBE6004A7FFD81EC4D5CF2F5DCA /* NokeMobileLibrary.debug.xcconfig */,
-				4EFECAB2A9BB175AA5E8DC84477BBC7F /* NokeMobileLibrary.release.xcconfig */,
-			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/NokeMobileLibrary";
-			sourceTree = "<group>";
-		};
-		94EBF71E7CFD0E520B44D27BC4932D86 /* NokeMobileLibrary */ = {
-			isa = PBXGroup;
-			children = (
-				04257FD36D2914FA394BECA32E343050 /* NokeMobileLibrary.h */,
-				C73593DDD05B42A9A907CAD6C8ABF4C4 /* C */,
-				CE4B7A5D17718CAFD1E1C0169023708B /* Classes */,
-				7E6A478BCC706573C2EF40B9BA4674EA /* Pod */,
-				807FC34F45086B9EBA6D8E720483C9C7 /* Support Files */,
-			);
-			name = NokeMobileLibrary;
-			path = ../..;
-			sourceTree = "<group>";
-		};
-		9F8ACA05945EC2474AFFF578648861C2 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				2560D8AED1064CE29B6A7172E6E149A6 /* NokeMobileLibrary.framework */,
-				FB9993AF115185E0A58502090CE51A5A /* Pods_NokeMobileLibrary_Example.framework */,
-				0F8F2D6CB6350B21408763F052CE5A8C /* Pods_NokeMobileLibrary_Tests.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		A4127DDAAE4292BB7D5D04DDB2CA5F00 /* Development Pods */ = {
-			isa = PBXGroup;
-			children = (
-				94EBF71E7CFD0E520B44D27BC4932D86 /* NokeMobileLibrary */,
+				F8D71FBF6B4D5F10EE121EE442AB76BB /* NokeMobileLibrary */,
 			);
 			name = "Development Pods";
 			sourceTree = "<group>";
 		};
-		C73593DDD05B42A9A907CAD6C8ABF4C4 /* C */ = {
+		8A97A611B3D6EB82FBB0183DA51C5FA8 /* C */ = {
 			isa = PBXGroup;
 			children = (
-				AE8678BB978C4F2284624198463513CD /* TI_aes_128.c */,
-				F9DDF0F3954D5110BA99AC048372A054 /* include */,
+				DF89FCA463F7074DD8313F8F0C2B782C /* TI_aes_128.c */,
+				4F6C0C7217E97205E12B8206429415AD /* include */,
 			);
 			name = C;
 			path = NokeMobileLibrary/C;
 			sourceTree = "<group>";
 		};
-		CE4B7A5D17718CAFD1E1C0169023708B /* Classes */ = {
+		9F8ACA05945EC2474AFFF578648861C2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3FBABB97FA55E6AEBE574648A4745D0F /* NokeDefines.swift */,
-				546286F3395467997E9A366F0B1AA805 /* NokeDevice.swift */,
-				02AB404CF8D25D14E46CE3F9482D027C /* NokeDeviceManager.swift */,
-				87E61225325A21CB96C514A979FDDC2E /* NokeLibraryApiClient.swift */,
+				2560D8AED1064CE29B6A7172E6E149A6 /* NokeMobileLibrary */,
+				FB9993AF115185E0A58502090CE51A5A /* Pods-NokeMobileLibrary_Example */,
+				0F8F2D6CB6350B21408763F052CE5A8C /* Pods-NokeMobileLibrary_Tests */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BDE43D815EFDF10C4684C509F435E30C /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				6959850342F6AD195D9E641ABB3E76B4 /* NokeDefines.swift */,
+				62FB892CE80E0BB9065B1F5B6DA94827 /* NokeDevice.swift */,
+				7C2F41D3A00E2E60F6E6343463E4D837 /* NokeDeviceManager.swift */,
+				35BCAC80C951937FCE2CC03A0F134D1E /* NokeLibraryApiClient.swift */,
 			);
 			name = Classes;
 			path = NokeMobileLibrary/Classes;
@@ -242,7 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				A4127DDAAE4292BB7D5D04DDB2CA5F00 /* Development Pods */,
+				79443D6832503AA041A6F1F74772CE82 /* Development Pods */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
 				9F8ACA05945EC2474AFFF578648861C2 /* Products */,
 				2B374882C4151B84B75DE7389B5B9AA6 /* Targets Support Files */,
@@ -253,9 +219,31 @@
 			isa = PBXGroup;
 			children = (
 				E4801F62A6B08CD9B5410329F1A18FDE /* iOS */,
-				B404E51C2F48D79C00A0312C /* PhoneKeyCore.xcframework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E158C47D93C514B5965773ACC0FC5DDA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				83C69A5A4BBE29858C08C4ABB5544C8F /* PhoneKeyCore.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E22C98F65D61476C22C2792E7BB6BB73 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				DD6C0F1EDAB9E20E66371060E683859D /* NokeMobileLibrary.modulemap */,
+				01EFDBE3FDD821EC6DB542BCAFF02E80 /* NokeMobileLibrary-dummy.m */,
+				547C1B1BEA87C03896397FE7B923B8CB /* NokeMobileLibrary-Info.plist */,
+				EBECA4D1E06E049F212856DF142E33D8 /* NokeMobileLibrary-prefix.pch */,
+				9FA4B553FED6501A06D581B4F18D7833 /* NokeMobileLibrary-xcframeworks.sh */,
+				5D0E3A64AF2D6645326DBC37F9724B53 /* NokeMobileLibrary.debug.xcconfig */,
+				52E58927426A80C3201DF5213C81C562 /* NokeMobileLibrary.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/NokeMobileLibrary";
 			sourceTree = "<group>";
 		};
 		E4801F62A6B08CD9B5410329F1A18FDE /* iOS */ = {
@@ -266,23 +254,40 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		F9DDF0F3954D5110BA99AC048372A054 /* include */ = {
+		E9F4020828942FAC6E294712A6AD8BFE /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				5285B12630E6FC7893B792EC68A80CA4 /* TI_aes_128.h */,
+				3F862804084FF2A3F749DD8C7E4247DF /* LICENSE */,
+				F6F63A43B4D990E6BE0615F50A1CA190 /* module.modulemap */,
+				A1837CE8529EA3839E4C31F3FCBA5A84 /* NokeMobileLibrary.podspec */,
+				B940386ADC249B47B4458C806B8D3506 /* README.md */,
 			);
-			path = include;
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		F8D71FBF6B4D5F10EE121EE442AB76BB /* NokeMobileLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				5C2E68FA29382CB1F4AF665A22998535 /* NokeMobileLibrary.h */,
+				8A97A611B3D6EB82FBB0183DA51C5FA8 /* C */,
+				BDE43D815EFDF10C4684C509F435E30C /* Classes */,
+				E158C47D93C514B5965773ACC0FC5DDA /* Frameworks */,
+				E9F4020828942FAC6E294712A6AD8BFE /* Pod */,
+				E22C98F65D61476C22C2792E7BB6BB73 /* Support Files */,
+			);
+			name = NokeMobileLibrary;
+			path = ../..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		44E6C20935BFAE0999800739D479F004 /* Headers */ = {
+		24410EAB0862F626503E961E06785344 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				67D3C32CEA933E14292C56D4468F5420 /* NokeMobileLibrary.h in Headers */,
-				975F46F657E705365FDA74EFBD1F2850 /* TI_aes_128.h in Headers */,
+				47D48537B1F2BAB696710C84B898D9AF /* NokeMobileLibrary.h in Headers */,
+				23A5682487F9D5F8C3569AA90FFF2540 /* TI_aes_128.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,21 +322,22 @@
 			buildRules = (
 			);
 			dependencies = (
-				C375569A5D14D607AA99B9DA9FAB1794 /* PBXTargetDependency */,
+				EEE1E56B54D6C04BA853E670E3760266 /* PBXTargetDependency */,
 			);
 			name = "Pods-NokeMobileLibrary_Tests";
 			productName = Pods_NokeMobileLibrary_Tests;
-			productReference = 0F8F2D6CB6350B21408763F052CE5A8C /* Pods_NokeMobileLibrary_Tests.framework */;
+			productReference = 0F8F2D6CB6350B21408763F052CE5A8C /* Pods-NokeMobileLibrary_Tests */;
 			productType = "com.apple.product-type.framework";
 		};
 		5368C314D14525BB8DF7D5B53B17D420 /* NokeMobileLibrary */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 94D4C2F410B20E9971E447868C00164A /* Build configuration list for PBXNativeTarget "NokeMobileLibrary" */;
+			buildConfigurationList = E646EF4BD38528C4694C34FAB9BAF840 /* Build configuration list for PBXNativeTarget "NokeMobileLibrary" */;
 			buildPhases = (
-				44E6C20935BFAE0999800739D479F004 /* Headers */,
-				4104EF2B0FA112FFF8EBFDD6D21A34AA /* Sources */,
-				9141B239509D2DC82A37BDB9C80DD28E /* Frameworks */,
-				824CB1ABFB0EB990F6CDD276FEEC2DEC /* Resources */,
+				24410EAB0862F626503E961E06785344 /* Headers */,
+				0072C6FE5B0B88999C84C2070BCAF1FA /* [CP] Copy XCFrameworks */,
+				5D3BD7DAA976F9E6257609921BF081BE /* Sources */,
+				B94013BC2ACBCDA33A2EDA7487F627B5 /* Frameworks */,
+				0BC63313939C248C8FD157FF4D425AC6 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -339,7 +345,7 @@
 			);
 			name = NokeMobileLibrary;
 			productName = NokeMobileLibrary;
-			productReference = 2560D8AED1064CE29B6A7172E6E149A6 /* NokeMobileLibrary.framework */;
+			productReference = 2560D8AED1064CE29B6A7172E6E149A6 /* NokeMobileLibrary */;
 			productType = "com.apple.product-type.framework";
 		};
 		E87DAD844D91790BD9F4CC13064DF41B /* Pods-NokeMobileLibrary_Example */ = {
@@ -354,11 +360,11 @@
 			buildRules = (
 			);
 			dependencies = (
-				369FBA93023BA2E5F475852467E1633F /* PBXTargetDependency */,
+				1F7144E234CEEE76703699C79376CA20 /* PBXTargetDependency */,
 			);
 			name = "Pods-NokeMobileLibrary_Example";
 			productName = Pods_NokeMobileLibrary_Example;
-			productReference = FB9993AF115185E0A58502090CE51A5A /* Pods_NokeMobileLibrary_Example.framework */;
+			productReference = FB9993AF115185E0A58502090CE51A5A /* Pods-NokeMobileLibrary_Example */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -379,6 +385,8 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			minimizedProjectReferenceProxies = 0;
+			preferredProjectObjectVersion = 77;
 			productRefGroup = 9F8ACA05945EC2474AFFF578648861C2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -391,14 +399,14 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		5AC76B83AE729E0654AEDCEA3DC264F9 /* Resources */ = {
+		0BC63313939C248C8FD157FF4D425AC6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		824CB1ABFB0EB990F6CDD276FEEC2DEC /* Resources */ = {
+		5AC76B83AE729E0654AEDCEA3DC264F9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -414,17 +422,38 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0072C6FE5B0B88999C84C2070BCAF1FA /* [CP] Copy XCFrameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/NokeMobileLibrary/NokeMobileLibrary-xcframeworks.sh",
+				"${PODS_ROOT}/../../Frameworks/PhoneKeyCore.xcframework",
+			);
+			name = "[CP] Copy XCFrameworks";
+			outputPaths = (
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/NokeMobileLibrary/PhoneKeyCore.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/NokeMobileLibrary/NokeMobileLibrary-xcframeworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		4104EF2B0FA112FFF8EBFDD6D21A34AA /* Sources */ = {
+		5D3BD7DAA976F9E6257609921BF081BE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E2D61175203DA44881AF88571CA5C8C /* NokeDefines.swift in Sources */,
-				1F61B34AA43B20A1753152068A0247C4 /* NokeDevice.swift in Sources */,
-				2405182DCB5CEB0244A4F7CF99333D33 /* NokeDeviceManager.swift in Sources */,
-				0FA34FE4D3F50AFADCB1A0DE06046F5E /* NokeLibraryApiClient.swift in Sources */,
-				3A8643997FBEE7AA685008AC546A1F27 /* NokeMobileLibrary-dummy.m in Sources */,
-				2D13A02BE2F613E66D40D8D067AD2F02 /* TI_aes_128.c in Sources */,
+				A866BB4E08020CA82C48588A7F8B4904 /* NokeDefines.swift in Sources */,
+				9E3C01A09DFA5F56F6DC91FD109BAC70 /* NokeDevice.swift in Sources */,
+				6995AF4F1ECFB4222DF7BD5BD1CA1425 /* NokeDeviceManager.swift in Sources */,
+				DF6656690B5172095577AEC71667E052 /* NokeLibraryApiClient.swift in Sources */,
+				DFF60F2637CE0A6200EC56147419B115 /* NokeMobileLibrary-dummy.m in Sources */,
+				CEB82D210B002935672C453FADD9CCDB /* TI_aes_128.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,17 +476,17 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		369FBA93023BA2E5F475852467E1633F /* PBXTargetDependency */ = {
+		1F7144E234CEEE76703699C79376CA20 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = NokeMobileLibrary;
 			target = 5368C314D14525BB8DF7D5B53B17D420 /* NokeMobileLibrary */;
-			targetProxy = B0F9AC54F1612AF4CA7D01BE2C63FCD2 /* PBXContainerItemProxy */;
+			targetProxy = 2D1A0D60E43E27AA793B2FA19C0ED521 /* PBXContainerItemProxy */;
 		};
-		C375569A5D14D607AA99B9DA9FAB1794 /* PBXTargetDependency */ = {
+		EEE1E56B54D6C04BA853E670E3760266 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-NokeMobileLibrary_Example";
 			target = E87DAD844D91790BD9F4CC13064DF41B /* Pods-NokeMobileLibrary_Example */;
-			targetProxy = E1219F287088686976E2609A9196F1EA /* PBXContainerItemProxy */;
+			targetProxy = BE7261EAE56A7E1CE25A8A30D8ED434E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -480,11 +509,7 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-NokeMobileLibrary_Tests/Pods-NokeMobileLibrary_Tests-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-NokeMobileLibrary_Tests/Pods-NokeMobileLibrary_Tests.modulemap";
 				OTHER_LDFLAGS = "";
@@ -518,11 +543,7 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-NokeMobileLibrary_Tests/Pods-NokeMobileLibrary_Tests-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-NokeMobileLibrary_Tests/Pods-NokeMobileLibrary_Tests.modulemap";
 				OTHER_LDFLAGS = "";
@@ -619,11 +640,7 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-NokeMobileLibrary_Example/Pods-NokeMobileLibrary_Example-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-NokeMobileLibrary_Example/Pods-NokeMobileLibrary_Example.modulemap";
 				OTHER_LDFLAGS = "";
@@ -633,45 +650,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		75C64F3DB43D9C220972F7FFD2007500 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4EFECAB2A9BB175AA5E8DC84477BBC7F /* NokeMobileLibrary.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = NO;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GCC_PREFIX_HEADER = "Target Support Files/NokeMobileLibrary/NokeMobileLibrary-prefix.pch";
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "Target Support Files/NokeMobileLibrary/NokeMobileLibrary-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/NokeMobileLibrary/NokeMobileLibrary.modulemap";
-				PRODUCT_MODULE_NAME = NokeMobileLibrary;
-				PRODUCT_NAME = NokeMobileLibrary;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_INSTALL_OBJC_HEADER = YES;
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -745,9 +723,9 @@
 			};
 			name = Debug;
 		};
-		A5530AA8FCE9017BAE722DA99D9AF786 /* Debug */ = {
+		D0C3711D54357C3E92E247271B9A1A80 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 113B2DBE6004A7FFD81EC4D5CF2F5DCA /* NokeMobileLibrary.debug.xcconfig */;
+			baseConfigurationReference = 5D0E3A64AF2D6645326DBC37F9724B53 /* NokeMobileLibrary.debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -764,11 +742,8 @@
 				INFOPLIST_FILE = "Target Support Files/NokeMobileLibrary/NokeMobileLibrary-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/NokeMobileLibrary/NokeMobileLibrary.modulemap";
 				PRODUCT_MODULE_NAME = NokeMobileLibrary;
 				PRODUCT_NAME = NokeMobileLibrary;
@@ -782,6 +757,42 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
+		};
+		D857AE9AB70C86BE243F67D7A4E2C8F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 52E58927426A80C3201DF5213C81C562 /* NokeMobileLibrary.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_PREFIX_HEADER = "Target Support Files/NokeMobileLibrary/NokeMobileLibrary-prefix.pch";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Target Support Files/NokeMobileLibrary/NokeMobileLibrary-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/NokeMobileLibrary/NokeMobileLibrary.modulemap";
+				PRODUCT_MODULE_NAME = NokeMobileLibrary;
+				PRODUCT_NAME = NokeMobileLibrary;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		EA44C7DF6FB960AD7539526E8C70BD6C /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -801,11 +812,7 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-NokeMobileLibrary_Example/Pods-NokeMobileLibrary_Example-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-NokeMobileLibrary_Example/Pods-NokeMobileLibrary_Example.modulemap";
 				OTHER_LDFLAGS = "";
@@ -851,11 +858,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		94D4C2F410B20E9971E447868C00164A /* Build configuration list for PBXNativeTarget "NokeMobileLibrary" */ = {
+		E646EF4BD38528C4694C34FAB9BAF840 /* Build configuration list for PBXNativeTarget "NokeMobileLibrary" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A5530AA8FCE9017BAE722DA99D9AF786 /* Debug */,
-				75C64F3DB43D9C220972F7FFD2007500 /* Release */,
+				D0C3711D54357C3E92E247271B9A1A80 /* Debug */,
+				D857AE9AB70C86BE243F67D7A4E2C8F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

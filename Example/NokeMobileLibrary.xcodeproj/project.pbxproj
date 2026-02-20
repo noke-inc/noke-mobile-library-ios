@@ -14,8 +14,8 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
-		814390879863F5740190E4F6 /* Pods_NokeMobileLibrary_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDF5216FCD062FB6FE229DE2 /* Pods_NokeMobileLibrary_Tests.framework */; };
-		FE65838F1D58D96848183345 /* Pods_NokeMobileLibrary_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056D7EDC5458B16B12B9BA90 /* Pods_NokeMobileLibrary_Example.framework */; };
+		A4F5AB8DB250564A2443CCCA /* Pods_NokeMobileLibrary_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 718442E07EFECD6452EFFD77 /* Pods_NokeMobileLibrary_Tests.framework */; };
+		CD04880CF094E34F3D0A409F /* Pods_NokeMobileLibrary_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2861BE43A9B81B8524CE3E55 /* Pods_NokeMobileLibrary_Example.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,9 +29,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		056D7EDC5458B16B12B9BA90 /* Pods_NokeMobileLibrary_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NokeMobileLibrary_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		054C0DE3A4B86677D73CD4B7 /* Pods-NokeMobileLibrary_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NokeMobileLibrary_Tests.release.xcconfig"; path = "Target Support Files/Pods-NokeMobileLibrary_Tests/Pods-NokeMobileLibrary_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		094C62182031EFC30058DF51 /* DemoWebClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoWebClient.swift; sourceTree = "<group>"; };
+		1592B8B7EAE93EA59A4CC26F /* Pods-NokeMobileLibrary_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NokeMobileLibrary_Tests.debug.xcconfig"; path = "Target Support Files/Pods-NokeMobileLibrary_Tests/Pods-NokeMobileLibrary_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		2372624B4589F740966D8E6B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		2861BE43A9B81B8524CE3E55 /* Pods_NokeMobileLibrary_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NokeMobileLibrary_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* NokeMobileLibrary_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NokeMobileLibrary_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -42,13 +44,11 @@
 		607FACE51AFB9204008FA782 /* NokeMobileLibrary_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NokeMobileLibrary_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
-		84037EB084DE31242182650D /* Pods-NokeMobileLibrary_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NokeMobileLibrary_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NokeMobileLibrary_Tests/Pods-NokeMobileLibrary_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		9AEA273CEAF6F111501646D7 /* Pods-NokeMobileLibrary_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NokeMobileLibrary_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NokeMobileLibrary_Tests/Pods-NokeMobileLibrary_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		718442E07EFECD6452EFFD77 /* Pods_NokeMobileLibrary_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NokeMobileLibrary_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9215B6BFD0C2C98BFFE9A21B /* Pods-NokeMobileLibrary_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NokeMobileLibrary_Example.release.xcconfig"; path = "Target Support Files/Pods-NokeMobileLibrary_Example/Pods-NokeMobileLibrary_Example.release.xcconfig"; sourceTree = "<group>"; };
 		AFADD3B9DE19CB2E1FC90A91 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		CE84446706B894FCAD6E462F /* Pods-NokeMobileLibrary_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NokeMobileLibrary_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NokeMobileLibrary_Example/Pods-NokeMobileLibrary_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		C1CC711BB1C1E63DEE90179A /* Pods-NokeMobileLibrary_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NokeMobileLibrary_Example.debug.xcconfig"; path = "Target Support Files/Pods-NokeMobileLibrary_Example/Pods-NokeMobileLibrary_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		D4E08B7F2646FCD782336B4B /* NokeMobileLibrary.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = NokeMobileLibrary.podspec; path = ../NokeMobileLibrary.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		D6AB02427A06DE6E8E8E9CEF /* Pods-NokeMobileLibrary_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NokeMobileLibrary_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-NokeMobileLibrary_Example/Pods-NokeMobileLibrary_Example.release.xcconfig"; sourceTree = "<group>"; };
-		DDF5216FCD062FB6FE229DE2 /* Pods_NokeMobileLibrary_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NokeMobileLibrary_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE65838F1D58D96848183345 /* Pods_NokeMobileLibrary_Example.framework in Frameworks */,
+				CD04880CF094E34F3D0A409F /* Pods_NokeMobileLibrary_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,33 +64,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				814390879863F5740190E4F6 /* Pods_NokeMobileLibrary_Tests.framework in Frameworks */,
+				A4F5AB8DB250564A2443CCCA /* Pods_NokeMobileLibrary_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		34478FECC9CF6CD2298CBD7F /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				CE84446706B894FCAD6E462F /* Pods-NokeMobileLibrary_Example.debug.xcconfig */,
-				D6AB02427A06DE6E8E8E9CEF /* Pods-NokeMobileLibrary_Example.release.xcconfig */,
-				84037EB084DE31242182650D /* Pods-NokeMobileLibrary_Tests.debug.xcconfig */,
-				9AEA273CEAF6F111501646D7 /* Pods-NokeMobileLibrary_Tests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		4B260BE04B697BCB0148AF58 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				056D7EDC5458B16B12B9BA90 /* Pods_NokeMobileLibrary_Example.framework */,
-				DDF5216FCD062FB6FE229DE2 /* Pods_NokeMobileLibrary_Tests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
@@ -98,8 +78,8 @@
 				607FACD21AFB9204008FA782 /* Example for NokeMobileLibrary */,
 				607FACE81AFB9204008FA782 /* Tests */,
 				607FACD11AFB9204008FA782 /* Products */,
-				34478FECC9CF6CD2298CBD7F /* Pods */,
-				4B260BE04B697BCB0148AF58 /* Frameworks */,
+				D595901E1A14A2CFB3AFE336 /* Pods */,
+				E7C45E4C5AD1AC67F82DD4D1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -162,6 +142,27 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
+		D595901E1A14A2CFB3AFE336 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C1CC711BB1C1E63DEE90179A /* Pods-NokeMobileLibrary_Example.debug.xcconfig */,
+				9215B6BFD0C2C98BFFE9A21B /* Pods-NokeMobileLibrary_Example.release.xcconfig */,
+				1592B8B7EAE93EA59A4CC26F /* Pods-NokeMobileLibrary_Tests.debug.xcconfig */,
+				054C0DE3A4B86677D73CD4B7 /* Pods-NokeMobileLibrary_Tests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		E7C45E4C5AD1AC67F82DD4D1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2861BE43A9B81B8524CE3E55 /* Pods_NokeMobileLibrary_Example.framework */,
+				718442E07EFECD6452EFFD77 /* Pods_NokeMobileLibrary_Tests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -169,11 +170,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "NokeMobileLibrary_Example" */;
 			buildPhases = (
-				05F09159C5F54A5E1EF51B07 /* [CP] Check Pods Manifest.lock */,
+				78FE78609F691ED1B46C9AF9 /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
-				EEBDF5E8C5FA4984FC27FF55 /* [CP] Embed Pods Frameworks */,
+				6BDE441812B86716221CCA75 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -188,7 +189,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "NokeMobileLibrary_Tests" */;
 			buildPhases = (
-				AF1D490EE2B9D397F338DDF3 /* [CP] Check Pods Manifest.lock */,
+				363F21721699062B12C657C9 /* [CP] Check Pods Manifest.lock */,
 				607FACE11AFB9204008FA782 /* Sources */,
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
@@ -267,34 +268,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		05F09159C5F54A5E1EF51B07 /* [CP] Check Pods Manifest.lock */ = {
+		363F21721699062B12C657C9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-NokeMobileLibrary_Example-checkManifestLockResult.txt",
+			outputFileListPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AF1D490EE2B9D397F338DDF3 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-NokeMobileLibrary_Tests-checkManifestLockResult.txt",
 			);
@@ -303,22 +290,44 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EEBDF5E8C5FA4984FC27FF55 /* [CP] Embed Pods Frameworks */ = {
+		6BDE441812B86716221CCA75 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-NokeMobileLibrary_Example/Pods-NokeMobileLibrary_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/NokeMobileLibrary/NokeMobileLibrary.framework",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/NokeMobileLibrary/PhoneKeyCore.framework/PhoneKeyCore",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NokeMobileLibrary.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PhoneKeyCore.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NokeMobileLibrary_Example/Pods-NokeMobileLibrary_Example-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		78FE78609F691ED1B46C9AF9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NokeMobileLibrary_Example-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -475,7 +484,7 @@
 		};
 		607FACF01AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CE84446706B894FCAD6E462F /* Pods-NokeMobileLibrary_Example.debug.xcconfig */;
+			baseConfigurationReference = C1CC711BB1C1E63DEE90179A /* Pods-NokeMobileLibrary_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4MAG82ZFRV;
@@ -491,7 +500,7 @@
 		};
 		607FACF11AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D6AB02427A06DE6E8E8E9CEF /* Pods-NokeMobileLibrary_Example.release.xcconfig */;
+			baseConfigurationReference = 9215B6BFD0C2C98BFFE9A21B /* Pods-NokeMobileLibrary_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4MAG82ZFRV;
@@ -507,7 +516,7 @@
 		};
 		607FACF31AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 84037EB084DE31242182650D /* Pods-NokeMobileLibrary_Tests.debug.xcconfig */;
+			baseConfigurationReference = 1592B8B7EAE93EA59A4CC26F /* Pods-NokeMobileLibrary_Tests.debug.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_TEAM = 4MAG82ZFRV;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -528,7 +537,7 @@
 		};
 		607FACF41AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9AEA273CEAF6F111501646D7 /* Pods-NokeMobileLibrary_Tests.release.xcconfig */;
+			baseConfigurationReference = 054C0DE3A4B86677D73CD4B7 /* Pods-NokeMobileLibrary_Tests.release.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_TEAM = 4MAG82ZFRV;
 				FRAMEWORK_SEARCH_PATHS = (
