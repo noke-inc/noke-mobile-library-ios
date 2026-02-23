@@ -1,5 +1,6 @@
 framework module NokeMobileLibrary {
-    header "NokeMobileLibrary.h"
+  umbrella header "NokeMobileLibrary-umbrella.h"
 
-    private header "TI_aes_128.h"
+  export *
+  module * { export * }
 }
