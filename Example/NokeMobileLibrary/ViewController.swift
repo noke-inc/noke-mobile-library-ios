@@ -8,7 +8,6 @@
 
 import UIKit
 import NokeMobileLibrary
-import PhoneKeyCore
 
 class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClientDelegate {
    
