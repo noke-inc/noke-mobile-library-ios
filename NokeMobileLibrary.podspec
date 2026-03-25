@@ -29,7 +29,7 @@ The Nokē Mobile Library provides an easy-to-use and stable way to communicate w
 
   s.ios.deployment_target = '12.0'
 
-  s.source_files = 'NokeMobileLibrary/NokeMobileLibrary.h', 'NokeMobileLibrary/C/TI_aes_128.c', 'NokeMobileLibrary/C/include/TI_aes_128.h', 'NokeMobileLibrary/Classes/**/*', 'NokeMobileLibrary/Example/Pods/Target\ Support\ Files/NokeMobileLibrary/NokeMobileLibrary-umbrella.h'
+  s.source_files = 'NokeMobileLibrary/NokeMobileLibrary.h', 'NokeMobileLibrary/C/TI_aes_128.c', 'NokeMobileLibrary/C/include/TI_aes_128.h', 'NokeMobileLibrary/Classes/**/*', 'NokeMobileLibrary/Extensions/**/*', 'NokeMobileLibrary/Example/Pods/Target\ Support\ Files/NokeMobileLibrary/NokeMobileLibrary-umbrella.h'
 
   # PhoneKeyCore dependency - version 1.1.1
   s.dependency 'PhoneKeyCore', '~> 1.1.1'
