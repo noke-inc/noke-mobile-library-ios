@@ -135,12 +135,12 @@ extension NokeDevice: CBPeripheralDelegate {
             // Success: clear pending
             pendingSecuredAction = nil
             if characteristic.uuid == timeCharacteristic?.uuid {
-                readStatusCharacteristic()
+                ion2CharacteristicHandler?.readStatus()
                 guard let data = characteristic.value, let string = String(data: data, encoding: .utf8) else {
                     return
                 }
             } else if characteristic.uuid == aclCharacteristic?.uuid {
-                readStatusCharacteristic()
+                ion2CharacteristicHandler?.readStatus()
                 guard let data = characteristic.value, let string = String(data: data, encoding: .utf8) else {
                     return
                 }
@@ -149,7 +149,7 @@ extension NokeDevice: CBPeripheralDelegate {
                     print("Acl written matches what's received \(string)")
                 }
             } else if characteristic.uuid == aclSignatureCharacteristic?.uuid {
-                readStatusCharacteristic()
+                ion2CharacteristicHandler?.readStatus()
                 guard let data = characteristic.value, let string = String(data: data, encoding: .utf8) else {
                     return
                 }
@@ -165,16 +165,10 @@ extension NokeDevice: CBPeripheralDelegate {
             return
         }
         
-        if isSecurityError(error) {
-            // Pairing UI should appear; then retry
-            forceSecurityThenWrite(characteristic, data: currentAclData ?? Data())
-            handleFailure?(NokeDeviceSigningError.offlineUnlockTimeout)
-            //retryAfterShortDelay()
-        } else {
-            // Other error handling...
-            //handleFailure?(NokeDeviceSigningError.unknown)
-            readStatusCharacteristic()
+        // Security/pairing error handling
+        if error != nil {
+            print("Write error for characteristic \(characteristic.uuid): \(error.localizedDescription)")
+            handleFailure?(NokeDeviceSigningError.unknown)
         }
-
     }
 }

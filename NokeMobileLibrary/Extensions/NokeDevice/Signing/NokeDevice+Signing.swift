@@ -26,7 +26,7 @@ extension NokeDevice {
         
         // Validate requirements
         if isEmergencyUnlockRequired() {
-            handleFailure?(NokeDeviceSigningError.requiresEmergencyUnlockUnlock)
+            handleFailure?(NokeDeviceSigningError.requiresEmergencyUnlock)
             return
         }
         
@@ -45,7 +45,7 @@ extension NokeDevice {
         
         // Start unlock via coordinator
         guard let userId = userId, let deviceID = deviceID else {
-            handleFailure?(NokeDeviceSigningError.internalError(message: "Missing userId or deviceID"))
+            handleFailure?(NokeDeviceSigningError.unknown)
             return
         }
         
@@ -105,11 +105,11 @@ extension NokeDevice {
 // MARK: - NokePhoneKeyStateDelegate
 
 extension NokeDevice: NokePhoneKeyStateDelegate {
-    func didRequestAclRefetch() {
+    public func didRequestAclRefetch() {
         refetchAcl()
     }
     
-    func didUpdateAcl() {
+    public func didUpdateAcl() {
         guard let signingKeyState, let acl = signingKeyState.newAcl else {
             return
         }
