@@ -8,12 +8,6 @@
 import Foundation
 import PhoneKeyCore
 
-/// Encryption method used for unlocking
-public enum NokeEncryptionType: Int {
-    case encryption
-    case signing
-}
-
 public protocol UnlockOptionsRepresentable {
     func isEmergencyUnlockRequired() -> Bool
     func isOverrideUnlockRequired() -> Bool
