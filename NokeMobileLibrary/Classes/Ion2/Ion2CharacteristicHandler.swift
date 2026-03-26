@@ -34,6 +34,7 @@ internal final class Ion2CharacteristicHandler {
     private(set) var commandIdCharacteristic: CBCharacteristic?
     private(set) var commandWriteCharacteristic: CBCharacteristic?
     private(set) var commandSignatureCharacteristic: CBCharacteristic?
+    private(set) var didSetAllCharacteristics: (() -> Void)? = nil
     
     // MARK: - Initialization
     
@@ -72,6 +73,10 @@ internal final class Ion2CharacteristicHandler {
                commandIdCharacteristic != nil &&
                commandWriteCharacteristic != nil &&
                commandSignatureCharacteristic != nil
+    }
+    
+    func isTimeCharacteristicDiscovered() -> Bool {
+        return timeCharacteristic != nil
     }
     
     // MARK: - Write Operations

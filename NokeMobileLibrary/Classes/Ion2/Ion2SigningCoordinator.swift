@@ -175,6 +175,8 @@ internal final class Ion2SigningCoordinator {
         case .lockLocked:
             // Lock has relocked - normal end state
             break
+        case .lockAlreadyUnlocked:
+            fail(.lockAlreadyUnlocked)
         case .aclScheduleBlocked:
             fail(.outOfSchedule)
         case .unlockOverlocked:
@@ -303,6 +305,7 @@ internal final class Ion2SigningCoordinator {
     private func handleUnlockExecuted() {
         state = .completed
         successHandler?()
+        reset()
         print("[Ion2Coordinator] Unlock successful!")
     }
     

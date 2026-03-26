@@ -75,25 +75,46 @@ extension NokeDevice: CBPeripheralDelegate {
                 delegate?.nokeReadyForFirmwareUpdate(noke: self)
             } else if c.uuid.isEqual(NokeDevice.timeCharacteristicUUID()) {
                 self.timeCharacteristic = c
+                self.ion2CharacteristicHandler?.setCharacteristic(c)
                 self.peripheral!.setNotifyValue(true, for: self.timeCharacteristic!)
             } else if c.uuid.isEqual(NokeDevice.aclCharacteristicUUID()) {
                 self.aclCharacteristic = c
+                self.ion2CharacteristicHandler?.setCharacteristic(c)
                 self.peripheral!.setNotifyValue(true, for:self.aclCharacteristic!)
             } else if c.uuid.isEqual(NokeDevice.statusCharacteristicUUID()) {
                 self.statusCharacteristic = c
+                self.ion2CharacteristicHandler?.setCharacteristic(c)
                 self.peripheral!.setNotifyValue(true, for: c)
             } else if c.uuid.isEqual(NokeDevice.aclSignatureCharacteristicUUID()) {
                 self.aclSignatureCharacteristic = c
+                self.ion2CharacteristicHandler?.setCharacteristic(c)
                 self.peripheral!.setNotifyValue(true, for: c)
             } else if c.uuid.isEqual(NokeDevice.commandIdReadCharacteristicUUID()) {
                 self.commandIdCharacteristic = c
+                self.ion2CharacteristicHandler?.setCharacteristic(c)
                 self.peripheral!.setNotifyValue(true, for: c)
             } else if c.uuid.isEqual(NokeDevice.commandWriteCharacteristicUUID()) {
                 self.commandWriteCharacterstic = c
+                self.ion2CharacteristicHandler?.setCharacteristic(c)
                 self.peripheral!.setNotifyValue(true, for: c)
             } else if c.uuid.isEqual(NokeDevice.commandSignatureCharacteristicUUID()) {
                 self.commandSignatureCharacteristic = c
+                self.ion2CharacteristicHandler?.setCharacteristic(c)
                 self.peripheral!.setNotifyValue(true, for: c)
+            }
+        }
+        
+        // Check if all Ion2 characteristics are discovered and trigger pending unlock
+        if service.uuid.isEqual(NokeDevice.nokeInfinityServiceUUID()) {
+            if let handler = ion2CharacteristicHandler, handler.isTimeCharacteristicDiscovered() {
+                print("[NokeDevice] All Ion2 characteristics discovered, ready for unlock")
+                ion2CharacteristicsReady = true
+                // Execute pending unlock if one exists
+                if let pending = pendingIon2Unlock {
+                    print("[NokeDevice] Executing pending Ion2 unlock")
+                    pending()
+                    pendingIon2Unlock = nil
+                }
             }
         }
     }
@@ -121,11 +142,13 @@ extension NokeDevice: CBPeripheralDelegate {
             }
         } else if characteristic.uuid == commandIdCharacteristic?.uuid {
             guard let data = characteristic.value else {
+                handleCommandIdRead(result: .failure(NokeDeviceSigningError.invalidCommandId))
                 return
             }
             
             readCommandIdCompletion?(.success(data))
             readCommandIdCompletion = nil
+            handleCommandIdRead(result: .success(data))
         }
     }
     
@@ -156,11 +179,19 @@ extension NokeDevice: CBPeripheralDelegate {
                 
                 print("Signature sent \(string)")
             } else if characteristic.uuid == commandWriteCharacterstic?.uuid {
+                ion2CharacteristicHandler?.readStatus()
                 guard let data = characteristic.value, let string = String(data: data, encoding: .utf8) else {
                     return
                 }
                 
                 print("Command written \(string)")
+            } else if characteristic.uuid == commandSignatureCharacteristic?.uuid {
+                ion2CharacteristicHandler?.readStatus()
+                guard let data = characteristic.value, let string = String(data: data, encoding: .utf8) else {
+                    return
+                }
+                
+                print("Signature written \(string)")
             }
             return
         }
@@ -170,5 +201,6 @@ extension NokeDevice: CBPeripheralDelegate {
             print("Write error for characteristic \(characteristic.uuid): \(error.localizedDescription)")
             handleFailure?(NokeDeviceSigningError.unknown)
         }
+
     }
 }

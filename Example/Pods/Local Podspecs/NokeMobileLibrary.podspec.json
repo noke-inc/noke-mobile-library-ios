@@ -1,8 +1,8 @@
 {
   "name": "NokeMobileLibrary",
-  "version": "0.1.1",
-  "summary": "A library for interacting with Noke Devices",
-  "description": "The Nokē Mobile Library provides an easy-to-use and stable way to communicate with Nokē Devices via Bluetooth.  It must be used in conjunction with the Nokē Core API for full functionality such as unlocking locks and uploading activity. When implemented correctly, the Nokē Mobile Library along with the Nokē Core API will allow users the ability to: unlock the lock online and offline, assign and provision quick-click codes, track activity and usage, add and remove lock keys when needed, manage fobs, and sync lock data.",
+  "version": "0.10.0",
+  "summary": "A library for interacting with Noke Devices with Phone Key and ACL support",
+  "description": "The Nokē Mobile Library provides an easy-to-use and stable way to communicate with Nokē Devices via Bluetooth. It must be used in conjunction with the Nokē Core API for full functionality such as unlocking locks and uploading activity. When implemented correctly, the Nokē Mobile Library along with the Nokē Core API will allow users the ability to: unlock the lock online and offline, assign and provision quick-click codes, track activity and usage, add and remove lock keys when needed, manage fobs, and sync lock data. Version 0.10.0 adds comprehensive Phone Key provisioning and ACL generation support via PhoneKeyAccessService.",
   "homepage": "https://github.com/noke-inc/noke-mobile-library-ios",
   "license": {
     "type": "Apache-2.0",
@@ -13,12 +13,31 @@
   },
   "source": {
     "git": "https://github.com/noke-inc/noke-mobile-library-ios.git",
-    "tag": "0.1.1"
+    "tag": "0.10.0"
   },
   "social_media_url": "https://twitter.com/nokelocks",
-  "swift_version": "4.0",
+  "module_map": "NokeMobileLibrary/module.modulemap",
   "platforms": {
-    "ios": "8.0"
+    "watchos": "6.2",
+    "ios": "12.0"
   },
-  "source_files": "NokeMobileLibrary/Classes/**/*"
+  "swift_versions": "5.0",
+  "source_files": [
+    "NokeMobileLibrary/NokeMobileLibrary.h",
+    "NokeMobileLibrary/C/TI_aes_128.c",
+    "NokeMobileLibrary/C/include/TI_aes_128.h",
+    "NokeMobileLibrary/Classes/**/*",
+    "NokeMobileLibrary/Extensions/**/*",
+    "NokeMobileLibrary/Example/Pods/Target\\ Support\\ Files/NokeMobileLibrary/NokeMobileLibrary-umbrella.h"
+  ],
+  "dependencies": {
+    "PhoneKeyCore": [
+      "~> 1.1.1"
+    ]
+  },
+  "pod_target_xcconfig": {
+    "CLANG_ENABLE_MODULES": "YES",
+    "BUILD_LIBRARY_FOR_DISTRIBUTION": "YES"
+  },
+  "swift_version": "5.0"
 }

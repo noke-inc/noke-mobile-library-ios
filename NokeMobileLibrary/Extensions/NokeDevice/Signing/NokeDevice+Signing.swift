@@ -49,8 +49,26 @@ extension NokeDevice {
             return
         }
         
+        // Check if all Ion2 characteristics are discovered before starting
+        if !ion2CharacteristicsReady {
+            print("[NokeDevice] Characteristics not ready yet, queuing unlock request...")
+            // Store the unlock request to execute once characteristics are ready
+            pendingIon2Unlock = { [weak self] in
+                self?.startUnlockNow(acl: aclResponse, userId: userId, deviceID: deviceID)
+            }
+            return
+        }
+        
+        // Characteristics are ready, start unlock immediately
+        startUnlockNow(acl: aclResponse, userId: userId, deviceID: deviceID)
+    }
+    
+    /// Internal method to actually start the unlock (called either immediately or after characteristic discovery)
+    private func startUnlockNow(acl: BulkPhoneKeyAcl, userId: String, deviceID: String) {
+        print("[NokeDevice] Starting Ion2 unlock now (characteristics ready)")
+        
         ion2SigningCoordinator?.startUnlock(
-            acl: aclResponse,
+            acl: acl,
             userId: userId,
             deviceID: deviceID,
             onSuccess: { [weak self] in
