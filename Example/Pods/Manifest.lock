@@ -1,16 +1,22 @@
 PODS:
-  - NokeMobileLibrary (0.1.1)
+  - NokeMobileLibrary (0.10.0):
+    - PhoneKeyCore (~> 1.1.1)
+  - PhoneKeyCore (1.1.1)
 
 DEPENDENCIES:
   - NokeMobileLibrary (from `../`)
+  - PhoneKeyCore (from `../../PhoneKeyCore`)
 
 EXTERNAL SOURCES:
   NokeMobileLibrary:
-    :path: ../
+    :path: "../"
+  PhoneKeyCore:
+    :path: "../../PhoneKeyCore"
 
 SPEC CHECKSUMS:
-  NokeMobileLibrary: b602688a95c69eff8dab5eaf5199fa677b2377ab
+  NokeMobileLibrary: 58a904a61fea7a33580ddb157b0a47784062b48a
+  PhoneKeyCore: ae3abb8a115fed0f50a94c20979adb5223d462cb
 
-PODFILE CHECKSUM: f4edc7d6988b7108e6aa0a5dbdbde05d5b3c8f46
+PODFILE CHECKSUM: 8240814549e3cd1182a6dab7bcaf31aa50a0e3a6
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.16.2

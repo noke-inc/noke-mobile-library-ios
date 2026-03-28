@@ -118,6 +118,9 @@ public protocol NokeDeviceManagerDelegate: AnyObject
     func onNokeJammedLocking(noke: NokeDevice)
 
     func onNokeJammedUnlocking(noke: NokeDevice)
+    
+    /// Called when Ion 2 device is connected and all characteristics are discovered (ACL-based unlock ready)
+    func nokeIon2ReadyForUnlock(noke: NokeDevice)
 }
 
 public protocol NokeUploadDelegate{
@@ -574,7 +577,6 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
             if let noke = noke, noke.encryptionType == .signing {
                 noke.connectionState = .Connected
                 onConnected?()
-                self.unlockSigningDevice(noke: noke)
             }
         }
     }

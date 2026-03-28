@@ -11,45 +11,30 @@ import PhoneKeyCore
 
 /// Public façade service for all Phone Key operations in NokeMobileLibrary.
 ///
-/// **iOS 12+ Compatible** - Uses completion handlers for maximum compatibility.
-/// Async/await wrappers available for iOS 13+ via extensions.
-///
-/// ## Initialization
+/// **Setup Required:**
 /// ```swift
-/// // In AppDelegate (StorageSmartEntry)
+/// // In AppDelegate:
 /// let client = PhoneKeyCoreClientImpl()
 /// PhoneKeyAccessService.setSharedClient(client)
 /// ```
 ///
-/// ## Usage (Completion Handlers - iOS 12+)
-/// ```swift
-/// service.initialize { result in
-///     switch result {
-///     case .success(let publicKey): print("✅ \(publicKey)")
-///     case .failure(let error): print("❌ \(error)")
-///     }
-/// }
-/// ```
+/// **iOS 12+ Compatible** - Uses completion handlers for maximum compatibility.
 public class PhoneKeyAccessService {
     
     // MARK: - Singleton
     
-    /// Shared singleton instance
+    /// Shared singleton instance (must call setSharedClient before use)
     public static var shared: PhoneKeyAccessService = PhoneKeyAccessService(client: nil)
     
-    /// Set the shared client implementation
-    /// - Parameter client: The PhoneKeyCoreClient implementation (uses AnyObject to avoid exposing internal type)
-    public static func setSharedClient(_ client: AnyObject) {
-        guard let phoneKeyClient = client as? PhoneKeyCoreClient else {
-            print("[PhoneKeyAccess ERROR] Invalid client type provided")
-            return
-        }
-        shared = PhoneKeyAccessService(client: phoneKeyClient)
+    /// Set the client implementation (required - call in AppDelegate)
+    /// - Parameter client: PhoneKeyCoreClient implementation
+    public static func setSharedClient(_ client: PhoneKeyCoreClient) {
+        shared = PhoneKeyAccessService(client: client)
     }
     
     // MARK: - Properties
     
-    private var client: PhoneKeyCoreClient?
+    private let client: PhoneKeyCoreClient?
     private let completionQueue: DispatchQueue
     
     // MARK: - Initialization

@@ -254,10 +254,10 @@ extension NokeDevice {
      - unlock endpoint has been properly implemented on server
      - Noke Device is provided with valid offline key and command (if unlocking offline)
      - A internet connection is present (if unlocking online)
+     
+     NOTE: This method has been moved to NokeDevice.swift as unlock(context:onSuccess:onFailure:)
+     using the Strategy pattern. Use that method instead.
      */
-    public func unlock(){
-        
-    }
         
     public func hexEncodedString(data: Data) -> String {
         return String(data.reduce(into: "".unicodeScalars, { (result, value) in

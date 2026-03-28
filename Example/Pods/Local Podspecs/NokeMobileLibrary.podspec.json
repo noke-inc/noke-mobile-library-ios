@@ -16,19 +16,18 @@
     "tag": "0.10.0"
   },
   "social_media_url": "https://twitter.com/nokelocks",
-  "module_map": "NokeMobileLibrary/module.modulemap",
+  "module_map": "NokeMobileLibrary/NokeMobileLibrary/module.modulemap",
   "platforms": {
     "watchos": "6.2",
     "ios": "12.0"
   },
   "swift_versions": "5.0",
   "source_files": [
-    "NokeMobileLibrary/NokeMobileLibrary.h",
-    "NokeMobileLibrary/C/TI_aes_128.c",
-    "NokeMobileLibrary/C/include/TI_aes_128.h",
-    "NokeMobileLibrary/Classes/**/*",
-    "NokeMobileLibrary/Extensions/**/*",
-    "NokeMobileLibrary/Example/Pods/Target\\ Support\\ Files/NokeMobileLibrary/NokeMobileLibrary-umbrella.h"
+    "NokeMobileLibrary/NokeMobileLibrary/NokeMobileLibrary.h",
+    "NokeMobileLibrary/NokeMobileLibrary/C/TI_aes_128.c",
+    "NokeMobileLibrary/NokeMobileLibrary/C/include/TI_aes_128.h",
+    "NokeMobileLibrary/NokeMobileLibrary/Classes/**/*",
+    "NokeMobileLibrary/Extensions/**/*"
   ],
   "dependencies": {
     "PhoneKeyCore": [

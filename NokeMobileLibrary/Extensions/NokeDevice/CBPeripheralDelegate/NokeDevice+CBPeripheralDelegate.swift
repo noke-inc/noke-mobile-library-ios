@@ -21,6 +21,11 @@ extension NokeDevice: CBPeripheralDelegate {
             }
             else if (s.uuid.isEqual(NokeDevice.nokeInfinityServiceUUID())) {
                 self.nokeService = s
+                // Create Ion2CharacteristicHandler immediately when service is discovered
+                if self.ion2CharacteristicHandler == nil {
+                    self.ion2CharacteristicHandler = Ion2CharacteristicHandler(peripheral: peripheral)
+                    print("[NokeDevice] Created Ion2CharacteristicHandler")
+                }
                 self.peripheral?.discoverCharacteristics([
                     NokeDevice.timeCharacteristicUUID(),
                     NokeDevice.aclCharacteristicUUID(),
@@ -106,15 +111,18 @@ extension NokeDevice: CBPeripheralDelegate {
         
         // Check if all Ion2 characteristics are discovered and trigger pending unlock
         if service.uuid.isEqual(NokeDevice.nokeInfinityServiceUUID()) {
-            if let handler = ion2CharacteristicHandler, handler.isTimeCharacteristicDiscovered() {
+            if let handler = ion2CharacteristicHandler, handler.areAllCharacteristicsDiscovered() {
                 print("[NokeDevice] All Ion2 characteristics discovered, ready for unlock")
                 ion2CharacteristicsReady = true
+                NokeDeviceManager.shared().delegate?.nokeIon2ReadyForUnlock(noke: self)
                 // Execute pending unlock if one exists
                 if let pending = pendingIon2Unlock {
                     print("[NokeDevice] Executing pending Ion2 unlock")
                     pending()
                     pendingIon2Unlock = nil
                 }
+            } else {
+                print("Characteristic discovery incomplete, waiting...")
             }
         }
     }

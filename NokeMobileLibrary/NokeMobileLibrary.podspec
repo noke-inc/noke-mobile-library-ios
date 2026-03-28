@@ -9,10 +9,10 @@
 Pod::Spec.new do |s|
   s.name             = 'NokeMobileLibrary'
   s.version          = '0.10.0'
-  s.summary          = 'A library for interacting with Noke Devices with Phone Key and ACL support'
+  s.summary          = 'A library for interacting with Noke Devices'
 
   s.description      = <<-DESC
-The Nokē Mobile Library provides an easy-to-use and stable way to communicate with Nokē Devices via Bluetooth. It must be used in conjunction with the Nokē Core API for full functionality such as unlocking locks and uploading activity. When implemented correctly, the Nokē Mobile Library along with the Nokē Core API will allow users the ability to: unlock the lock online and offline, assign and provision quick-click codes, track activity and usage, add and remove lock keys when needed, manage fobs, and sync lock data. Version 0.10.0 adds comprehensive Phone Key provisioning and ACL generation support via PhoneKeyAccessService.
+The Nokē Mobile Library provides an easy-to-use and stable way to communicate with Nokē Devices via Bluetooth.  It must be used in conjunction with the Nokē Core API for full functionality such as unlocking locks and uploading activity. When implemented correctly, the Nokē Mobile Library along with the Nokē Core API will allow users the ability to: unlock the lock online and offline, assign and provision quick-click codes, track activity and usage, add and remove lock keys when needed, manage fobs, and sync lock data.
                        DESC
 
   s.homepage         = 'https://github.com/noke-inc/noke-mobile-library-ios'
@@ -21,7 +21,7 @@ The Nokē Mobile Library provides an easy-to-use and stable way to communicate w
   s.source           = { :git => 'https://github.com/noke-inc/noke-mobile-library-ios.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/nokelocks'
 
-  s.module_map = 'NokeMobileLibrary/NokeMobileLibrary/module.modulemap'
+  s.module_map = 'NokeMobileLibrary/module.modulemap'
   
   s.watchos.deployment_target = '6.2'
 
@@ -29,8 +29,8 @@ The Nokē Mobile Library provides an easy-to-use and stable way to communicate w
 
   s.ios.deployment_target = '12.0'
 
-  s.source_files = 'NokeMobileLibrary/NokeMobileLibrary/NokeMobileLibrary.h', 'NokeMobileLibrary/NokeMobileLibrary/C/TI_aes_128.c', 'NokeMobileLibrary/NokeMobileLibrary/C/include/TI_aes_128.h', 'NokeMobileLibrary/NokeMobileLibrary/Classes/**/*', 'NokeMobileLibrary/Extensions/**/*'
-
+  s.source_files = 'NokeMobileLibrary/NokeMobileLibrary.h', 'NokeMobileLibrary/C/TI_aes_128.c', 'NokeMobileLibrary/C/include/TI_aes_128.h', 'NokeMobileLibrary/Classes/**/*', 'Extensions/**/*'
+  
   # PhoneKeyCore dependency - version 1.1.1
   s.dependency 'PhoneKeyCore', '~> 1.1.1'
 

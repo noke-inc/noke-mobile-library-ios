@@ -34,7 +34,6 @@ internal final class Ion2CharacteristicHandler {
     private(set) var commandIdCharacteristic: CBCharacteristic?
     private(set) var commandWriteCharacteristic: CBCharacteristic?
     private(set) var commandSignatureCharacteristic: CBCharacteristic?
-    private(set) var didSetAllCharacteristics: (() -> Void)? = nil
     
     // MARK: - Initialization
     
@@ -45,23 +44,49 @@ internal final class Ion2CharacteristicHandler {
     // MARK: - Characteristic Discovery
     
     func setCharacteristic(_ characteristic: CBCharacteristic) {
+        print("[Ion2Handler] Setting characteristic: \(characteristic.uuid)")
         switch characteristic.uuid {
         case NokeDevice.timeCharacteristicUUID():
             timeCharacteristic = characteristic
+            print("[Ion2Handler] ✓ Time characteristic set")
         case NokeDevice.aclCharacteristicUUID():
             aclCharacteristic = characteristic
+            print("[Ion2Handler] ✓ ACL characteristic set")
         case NokeDevice.statusCharacteristicUUID():
             statusCharacteristic = characteristic
+            print("[Ion2Handler] ✓ Status characteristic set")
         case NokeDevice.aclSignatureCharacteristicUUID():
             aclSignatureCharacteristic = characteristic
+            print("[Ion2Handler] ✓ ACL Signature characteristic set")
         case NokeDevice.commandIdReadCharacteristicUUID():
             commandIdCharacteristic = characteristic
+            print("[Ion2Handler] ✓ Command ID characteristic set")
         case NokeDevice.commandWriteCharacteristicUUID():
             commandWriteCharacteristic = characteristic
+            print("[Ion2Handler] ✓ Command Write characteristic set")
         case NokeDevice.commandSignatureCharacteristicUUID():
             commandSignatureCharacteristic = characteristic
+            print("[Ion2Handler] ✓ Command Signature characteristic set")
         default:
+            print("[Ion2Handler] ⚠️ Unknown characteristic: \(characteristic.uuid)")
             break
+        }
+        
+        // Log current discovery status
+        let discovered = [
+            timeCharacteristic != nil ? "time" : "",
+            aclCharacteristic != nil ? "acl" : "",
+            statusCharacteristic != nil ? "status" : "",
+            aclSignatureCharacteristic != nil ? "aclSig" : "",
+            commandIdCharacteristic != nil ? "cmdId" : "",
+            commandWriteCharacteristic != nil ? "cmdWrite" : "",
+            commandSignatureCharacteristic != nil ? "cmdSig" : ""
+        ].filter { !$0.isEmpty }
+        
+        print("[Ion2Handler] Discovered (\(discovered.count)/7): \(discovered.joined(separator: ", "))")
+        
+        if areAllCharacteristicsDiscovered() {
+            print("[Ion2Handler] ✅ ALL 7 CHARACTERISTICS DISCOVERED!")
         }
     }
     
@@ -73,10 +98,6 @@ internal final class Ion2CharacteristicHandler {
                commandIdCharacteristic != nil &&
                commandWriteCharacteristic != nil &&
                commandSignatureCharacteristic != nil
-    }
-    
-    func isTimeCharacteristicDiscovered() -> Bool {
-        return timeCharacteristic != nil
     }
     
     // MARK: - Write Operations

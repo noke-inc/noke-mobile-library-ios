@@ -1,7 +1,9 @@
 use_frameworks!
+platform :ios, '12.0'
 
 target 'NokeMobileLibrary_Example' do
   pod 'NokeMobileLibrary', :path => '../'
+  pod 'PhoneKeyCore', :path => '../../PhoneKeyCore'
 
   target 'NokeMobileLibrary_Tests' do
     inherit! :search_paths

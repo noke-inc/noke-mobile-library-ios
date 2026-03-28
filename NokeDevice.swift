@@ -179,6 +179,7 @@ public enum NokeDeviceSigningError: NokeDeviceOperationError {
     case requiresOverrideUnlock
     case lockIsLocked
     case lockAlreadyUnlocked
+    
     case unknown
     
     public var description: String {
@@ -201,9 +202,9 @@ public enum NokeDeviceSigningError: NokeDeviceOperationError {
         case .requiresEmergencyUnlock: return "This operation requires an emergency unlock."
         case .requiresOverrideUnlock: return "This operation requires an override unlock."
         case .lockIsLocked: return "Your lock has no key. Please contact your administrator to get access."
+        case .lockAlreadyUnlocked: return "Your lock is already unlocked."
         case .timeOffsetError:
             return "There was something wrong with your dates. Please try again."
-        case .lockAlreadyUnlocked: return "Your lock is already unlocked."
         case .unknown: return "An unknown error occurred"
         }
     }
@@ -217,8 +218,8 @@ public enum NokeDeviceSigningError: NokeDeviceOperationError {
     
     public var shouldRefreshKeys: Bool {
         switch self {
-        case .missingCommandIdCharacteritic, .missingAcl, .invalidCommandId, .peripheralNotFound, .characteristicNotFound, .commandSignatureFailed, .offlineUnlockTimeout, .requiresEmergencyUnlock, .requiresOverrideUnlock, .aclTimeInvalid, .lockIsLocked, .lockAlreadyUnlocked, .timeOffsetError, .unknown: return false
-        case .aclRejected, .invalidAclSignature, .outOfSchedule, .overlock, .unlockDenied: return true
+        case .missingCommandIdCharacteritic, .missingAcl, .invalidCommandId, .peripheralNotFound, .characteristicNotFound, .commandSignatureFailed, .offlineUnlockTimeout, .requiresEmergencyUnlock, .requiresOverrideUnlock, .aclTimeInvalid, .lockIsLocked, .timeOffsetError, .unknown: return false
+        case .aclRejected, .invalidAclSignature, .lockAlreadyUnlocked, .outOfSchedule, .overlock, .unlockDenied: return true
         }
     }
     
@@ -231,7 +232,7 @@ public enum NokeDeviceSigningError: NokeDeviceOperationError {
     
     public var errorType: NokeDeviceOperationErrorType {
         switch self {
-        case .missingCommandIdCharacteritic, .overlock, .lockIsLocked, .invalidAclSignature, .lockAlreadyUnlocked, .missingAcl, .aclTimeInvalid, .commandSignatureFailed, .timeOffsetError, .invalidCommandId:
+        case .missingCommandIdCharacteritic, .overlock, .lockIsLocked, .lockAlreadyUnlocked, .invalidAclSignature, .missingAcl, .aclTimeInvalid, .commandSignatureFailed, .timeOffsetError, .invalidCommandId:
             return .deviceError
         case .aclRejected, .unlockDenied, .requiresEmergencyUnlock, .requiresOverrideUnlock, .unknown:
             return .noOperation
@@ -602,6 +603,55 @@ public class NokeDevice: NSObject, NSCoding {
     
     public func isRepeater() -> Bool {
         return getHardwareVersion()?.contains("1R") ?? false
+    }
+    
+    // MARK: - Unified Unlock (Strategy Pattern)
+    
+    /// Unified unlock method that routes to the appropriate strategy based on device type
+    /// - Parameters:
+    ///   - context: UnlockContext containing all necessary unlock parameters
+    ///   - onSuccess: Called when unlock succeeds
+    ///   - onFailure: Called when unlock fails with error
+    ///
+    /// **Usage:**
+    /// ```swift
+    /// // Encryption-based (legacy locks)
+    /// device.unlock(
+    ///     context: .encryption(key: "...", command: "..."),
+    ///     onSuccess: { print("Unlocked!") },
+    ///     onFailure: { error in print("Failed: \(error)") }
+    /// )
+    ///
+    /// // Signing-based (Ion 2)
+    /// device.unlock(
+    ///     context: .signing(acl: acl, userId: "...", deviceID: "..."),
+    ///     onSuccess: { print("Unlocked!") },
+    ///     onFailure: { error in print("Failed: \(error)") }
+    /// )
+    /// ```
+    public func offlineUnlock(
+        context: UnlockContext,
+        onSuccess: @escaping () -> Void,
+        onFailure: @escaping (NokeDeviceOperationError) -> Void
+    ) {
+        let strategy = getUnlockStrategy()
+        strategy.executeUnlock(
+            device: self,
+            context: context,
+            onSuccess: onSuccess,
+            onFailure: onFailure
+        )
+    }
+    
+    /// Returns the appropriate unlock strategy based on device encryption type
+    /// - Returns: NokeUnlockStrategy (EncryptionUnlockStrategy or SigningUnlockStrategy)
+    private func getUnlockStrategy() -> NokeUnlockStrategy {
+        switch encryptionType {
+        case .encryption:
+            return EncryptionUnlockStrategy()
+        case .signing:
+            return SigningUnlockStrategy()
+        }
     }
     
     /**

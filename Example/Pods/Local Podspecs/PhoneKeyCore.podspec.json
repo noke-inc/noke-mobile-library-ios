@@ -1,0 +1,53 @@
+{
+  "name": "PhoneKeyCore",
+  "version": "1.1.1",
+  "summary": "Ed25519 and ECDSA P-256 key generation, storage, and signing for iOS and watchOS.",
+  "description": "PhoneKeyCore is an iOS/watchOS SDK for cryptographic key management and signing.\nIt provides Ed25519 and ECDSA P-256 signing capabilities, ACL handling, command signing,\nand secure keychain storage for mobile authentication systems.",
+  "homepage": "https://github.com/noke-inc/PhoneKeyCore",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Noke Inc.": "support@noke.com"
+  },
+  "source": {
+    "git": "https://github.com/noke-inc/PhoneKeyCore.git",
+    "tag": "1.1.1"
+  },
+  "platforms": {
+    "ios": "12.0",
+    "watchos": "6.2"
+  },
+  "swift_versions": [
+    "5.0",
+    "5.1",
+    "5.2",
+    "5.3",
+    "5.4",
+    "5.5",
+    "5.6",
+    "5.7",
+    "5.8",
+    "5.9",
+    "5.10"
+  ],
+  "source_files": "PhoneKeyCore/**/*.{swift,h,m}",
+  "public_header_files": "PhoneKeyCore/**/*.h",
+  "resource_bundles": {
+    "PhoneKeyCore": [
+      "PhoneKeyCore/**/*.docc"
+    ]
+  },
+  "module_name": "PhoneKeyCore",
+  "requires_arc": true,
+  "frameworks": [
+    "Foundation",
+    "Security"
+  ],
+  "pod_target_xcconfig": {
+    "DEFINES_MODULE": "YES",
+    "SWIFT_VERSION": "5.0"
+  },
+  "swift_version": "5.10"
+}
