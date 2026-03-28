@@ -10,6 +10,30 @@ import UIKit
 import NokeMobileLibrary
 
 class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClientDelegate {
+    func nokeDevicefailureUpdate(message: String) {
+        
+    }
+    
+    func nokeDeviceDidSendDiagnostics(data: [String : Any], noke: NokeMobileLibrary.NokeDevice) {
+        
+    }
+    
+    func successPacketReceived(noke: NokeMobileLibrary.NokeDevice) {
+        
+    }
+    
+    func onNokeJammedLocking(noke: NokeMobileLibrary.NokeDevice) {
+        
+    }
+    
+    func onNokeJammedUnlocking(noke: NokeMobileLibrary.NokeDevice) {
+        
+    }
+    
+    func nokeIon2ReadyForUnlock(noke: NokeMobileLibrary.NokeDevice) {
+        
+    }
+    
    
     
     
@@ -58,23 +82,14 @@ class ViewController: UIViewController, NokeDeviceManagerDelegate, DemoWebClient
         case .Discovered:
             var lockState = ""
             switch(noke.lockState){
-            case .Locked:
+            case .nokeDeviceLockStateLocked:
                 lockState = "Locked"
                 break
-            case .Unlocked:
+            case .nokeDeviceLockStateUnlocked:
                 lockState = "Unlocked"
                 break
-            case .Unshackled:
+            case .nokeDeviceLockStateUnshackled:
                 lockState = "Unshackled"
-                break
-            case .Unlocking:
-                lockState = "Unlocking"
-                break
-            case .Unshackling:
-                lockState = "Unshackling"
-                break
-            case .LockedNoMagnet:
-                lockState = "Locked (No Magnet)"
                 break
             default:
                 lockState = "Unknown"
