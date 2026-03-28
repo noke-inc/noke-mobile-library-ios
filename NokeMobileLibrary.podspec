@@ -37,7 +37,13 @@ The Nokē Mobile Library provides an easy-to-use and stable way to communicate w
   # Helpful defaults
   s.pod_target_xcconfig = {
     'CLANG_ENABLE_MODULES'           => 'YES',
-    'BUILD_LIBRARY_FOR_DISTRIBUTION' => 'YES'
+    'BUILD_LIBRARY_FOR_DISTRIBUTION' => 'YES',
+    'SUPPORTS_MACCATALYST'           => 'NO'
+  }
+
+  # Prevent Mac Catalyst builds
+  s.user_target_xcconfig = {
+    'SUPPORTS_MACCATALYST' => 'NO'
   }
 
   # s.resource_bundles = {
