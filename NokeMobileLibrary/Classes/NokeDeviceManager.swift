@@ -20,7 +20,7 @@
 
 import Foundation
 import CoreBluetooth
-
+import PhoneKeyCore
 
 /**
  Connection states of Noke Devices
@@ -32,17 +32,16 @@ import CoreBluetooth
  - Syncing: Phone is sending commands to Noke device
  - Unlocked: Noke device is unlocked
  */
-@objc public enum NokeDeviceConnectionState : Int{
+public enum NokeDeviceConnectionState : Int{
     case Disconnected = 0
     case Discovered = 1
     case Connecting = 2
     case Connected = 3
     case Syncing = 4
     case Unlocked = 5
-    case Error = 6
 }
 
-@objc public enum NokeManagerBluetoothState : Int{
+public enum NokeManagerBluetoothState : Int{
     case unknown
     case resetting
     case unsupported
@@ -52,7 +51,7 @@ import CoreBluetooth
 }
 
 /// Delegate for interacting with the NokeDeviceManager
-public protocol NokeDeviceManagerDelegate
+public protocol NokeDeviceManagerDelegate: AnyObject
 {
     /**
      Called when a Noke device updates its state.  Please see the NokeDeviceConnectionState enum type for all possible states
@@ -67,7 +66,11 @@ public protocol NokeDeviceManagerDelegate
      - Unlocked
      - noke: The Noke device that was updated
      */
+    
+    func nokeDevicefailureUpdate(message: String)
     func nokeDeviceDidUpdateState(to state: NokeDeviceConnectionState, noke: NokeDevice)
+    
+    func nokeDeviceDidSendDiagnostics(data: [String:Any], noke: NokeDevice)
     
     
     /**
@@ -79,6 +82,10 @@ public protocol NokeDeviceManagerDelegate
      - didTimeout: Indicates if the lock timed out or was shutdown manually
      */
     func nokeDeviceDidShutdown(noke: NokeDevice, isLocked: Bool, didTimeout: Bool)
+
+    /// Called when a Noke 1A detects that the lock has re-secured after an unlock (~10s after unlock).
+    /// Triggered by the periodic SERVER_Dest status packet that arrives after the re-secure timeout.
+    func nokeDeviceDidRelock(noke: NokeDevice)
     
     
     /**
@@ -109,6 +116,19 @@ public protocol NokeDeviceManagerDelegate
     func bluetoothManagerDidUpdateState(state: NokeManagerBluetoothState)
     
     func nokeReadyForFirmwareUpdate(noke: NokeDevice)
+    
+    func successPacketReceived(noke: NokeDevice)
+    
+    func onNokeJammedLocking(noke: NokeDevice)
+
+    func onNokeJammedUnlocking(noke: NokeDevice)
+    
+    /// Called when Ion 2 device is connected and all characteristics are discovered (ACL-based unlock ready)
+    func nokeIon2ReadyForUnlock(noke: NokeDevice)
+}
+
+public extension NokeDeviceManagerDelegate {
+    func nokeDeviceDidRelock(noke: NokeDevice) {}
 }
 
 public protocol NokeUploadDelegate{
@@ -133,7 +153,7 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     public var unlockUrl: String = ""
     
     /// Delegate for NokeDeviceManager, calls protocol methods
-    public var delegate: NokeDeviceManagerDelegate? {
+    public weak var delegate: NokeDeviceManagerDelegate? {
         didSet{
             if let state = NokeManagerBluetoothState.init(rawValue: cm.state.rawValue) {
                 delegate?.bluetoothManagerDidUpdateState(state: state)
@@ -141,19 +161,23 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
         }
     }
     
-    /// Int value to filter out devices below a certain RSSI level
-    public var rssiThreshold: Int = -127    
+    public var rssiThreshold: Int = -127
+    public var autounlockTimeSeconds: Int = 300
     
     public var uploadDelegate: NokeUploadDelegate?
     
+    var hasStartedProvisioning: Bool = false
+    
     /// Array of Noke devices managed by the NokeDeviceManager
-    public var nokeDevices = [String: NokeDevice]()
+    var nokeDevices = [String: NokeDevice]()
     
     /// Queue of responses from lock ready to be uploaded
     fileprivate var globalUploadQueue = [Dictionary<String,Any>]()
     
     /// API Key used for upload data endpoint
     fileprivate var apiKey: String = ""
+    
+    var centralManagerRestoreKey = "nokeCentralManagerIdentifer"
     
     /// CBCentralManager
     public lazy var cm: CBCentralManager = CBCentralManager(delegate: self, queue:nil)
@@ -164,20 +188,61 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     /// Boolean that allows SDK to discover devices that haven't been added to the array
     var allowAllNokeDevices: Bool = false
     
-    /// Boolean that should be set when scanning for devices to update firmware
-    public var firmwareScanning = false
-    
     /// typealias used for handling bytes from the lock
     public typealias byteArray = UnsafeMutablePointer<UInt8>
     
-    /// property used to detect if a connection fails when a device that is not available tries to create a connection
-    public var connectionTimer: Timer?
+    /// Boolean that should be set when scanning for devices to update firmware
+    public var firmwareScanning = false
     
-    /// number of seconds the connection process will wait until return an error connection
-    public let numberOfSecondsToDetectTheConnectionError: Double = 2
+    /// Enable pre-connection for NokeOne devices to reduce unlock latency.
+    /// Driven by the server feature flag `tenant_preconnect_unlock`.
+    public var preConnectNokeOne = false
     
-    /// This property is filled when the connection starts
-    public var nokeDevicePendingToConnect: NokeDevice?
+    /// Track pre-connected devices to avoid duplicate connections
+    private var preConnectedDevices: Set<String> = []
+
+    /// Track pre-connection retry attempts per device mac
+    private var preConnectRetries: [String: Int] = [:]
+    private let maxPreConnectRetries = 2
+
+    /// Lock for thread-safe connection state management
+    private let connectionLock = NSLock()
+    private var connectingDevices: Set<String> = []
+    
+    private var devicesQueue = DispatchQueue.init(label: "noke")
+    
+    /// String value for ensuring the app only connects to the target firmware device
+    private var bootloaderName: String = ""
+
+    
+    enum NokeError: Error {
+        case NokeDeviceInvalidLockState
+        case NokeDeviceInvalidData
+        case NokeDeviceScanAlreadyRunning
+    }
+    
+    var broadcastName: String?
+    var deviceName: String = ""
+    var targetMac: String = ""
+    public var currentUserId: String?
+    public var deviceID: String?
+    public var currentDeviceOperationOptions: UnlockOptionsRepresentable?
+    private var isRetryScheduled = false
+    private let centralQueue = DispatchQueue.main
+    private var acls: [String: BulkPhoneKeyAcl] = [:]
+    public var onConnected: (() -> Void)?
+    var timer: Timer!
+    var isUnlockInProgress: Bool {
+        return devicesQueue.sync {
+            guard !nokeDevices.isEmpty else { return false }
+            let nokes = Array(nokeDevices.values)
+            let filteredUnlocksInProgress = nokes.filter {
+                guard let state = $0.connectionState else { return false }
+                return state == .Connecting || state == .Connected || state == .Syncing || state == .Unlocked
+            }
+            return filteredUnlocksInProgress.count > 0
+        }
+    }
     
     /**
      Initializes a new NokeDeviceManager
@@ -185,39 +250,87 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
      */
     override init(){
         super.init()
-        cm = CBCentralManager.init(delegate: self, queue: nil)
+        cm = CBCentralManager.init(delegate: self, queue: nil, options: [CBCentralManagerOptionRestoreIdentifierKey:centralManagerRestoreKey])
     }
-    
-    
     
     /**
      Used for getting the shared instance of NokeDeviceManager
      - Returns: Shared instance of NokeDeviceManager
      */
     public static func shared()->NokeDeviceManager{
-        if(sharedNokeDeviceManager == nil){
+        if(sharedNokeDeviceManager == nil) {
             sharedNokeDeviceManager = NokeDeviceManager.init()
         }
         return sharedNokeDeviceManager!
     }
     
-    /// Begins bluetooth scanning for Noke Devices that have been added to the device array
-    public func startScanForNokeDevices(){
-        if(uploadUrl == ""){
-            debugPrint("No Library Mode has been set. Please set using the setLibraryMode method")
-            self.delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeLibraryErrorNoModeSet, message: "No Library Mode has been set. Please set using the setLibraryMode method", noke: nil)
+    public func resetCentralManager(){
+        cm = CBCentralManager.init(delegate: self, queue: nil, options: [CBCentralManagerOptionRestoreIdentifierKey:centralManagerRestoreKey])
+    }
+    
+    public func addHandleSuccessClosure(noke: NokeDevice,_ closure: @escaping () -> Void) {
+        noke.handleSuccess = closure
+    }
+    
+    public func addHandleFailureClosure(noke: NokeDevice, _ closure: @escaping (NokeDeviceOperationError) -> Void) {
+        noke.handleFailure = closure
+    }
+    
+    public func getAcl(forMac mac: String) -> BulkPhoneKeyAcl? {
+        return devicesQueue.sync {
+            acls[mac]
         }
+    }
+    
+    private func scheduleRetryScanIfNeeded_locked(in delay: TimeInterval) {
+        guard !isRetryScheduled else { return }
+        isRetryScheduled = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
+            guard let self = self else { return }
+            self.isRetryScheduled = false
+            self.startScanForNokeDevices()
+        }
+    }
+    
+    private func _startScanForNokeDevices_locked() {
+        guard !isUnlockInProgress && cm.state == .poweredOn else {
+            scheduleRetryScanIfNeeded_locked(in: 2)
+            return
+        }
+        
+        
+        guard !uploadUrl.isEmpty else {
+            debugPrint("No Library Mode has been set. Please set using the setLibraryMode method")
+            delegate?.nokeErrorDidOccur(
+                error: NokeDeviceManagerError.nokeLibraryErrorNoModeSet,
+                message: "No Library Mode has been set. Please set using the setLibraryMode method",
+                noke: nil
+            )
+            return
+        }
+        
         let scanOptions : [String:AnyObject] = [CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber.init(value: true as Bool)]
-        let serviceArray = [CBUUID]([NokeDevice.nokeServiceUUID(),NokeDevice.noke4iFirmwareUUID(), NokeDevice.noke2iFirmwareUUID()])
+        let serviceArray = [CBUUID]([NokeDevice.nokeServiceUUID(), NokeDevice.nokeInfinityServiceUUID(), NokeDevice.noke4iFirmwareUUID(), NokeDevice.noke2iFirmwareUUID()])
         
         //Make sure we start scan from scratch
         cm.stopScan()
-        
         cm.scanForPeripherals(withServices: serviceArray, options: scanOptions)
     }
     
+    /// Begins bluetooth scanning for Noke Devices that have been added to the device array
+    public func startScanForNokeDevices() {
+        if Thread.isMainThread {
+            _startScanForNokeDevices_locked()
+        } else {
+            centralQueue.async { [weak self] in
+                guard let self = self else { return }
+                self._startScanForNokeDevices_locked( )
+            }
+        }
+    }
+    
     /// Stops bluetooth scanning
-    public func stopScan(){
+    public func stopScan() {
         cm.stopScan()
     }
     
@@ -226,16 +339,28 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
      
      - Parameter noke: The Noke device for the connection
      */
-    public func connectToNokeDevice(_ noke:NokeDevice){
+    public func connectToNokeDevice(_ noke:NokeDevice, onSuccess: (() -> Void)? = nil, onFailure: (() -> Void)? = nil) {
         self.insertNokeDevice(noke)
+        let mac = noke.mac
+        connectionLock.lock()
+        defer { connectionLock.unlock() }
+        if connectingDevices.contains(mac) || noke.connectionState == .Connected {
+            return
+        }
+        connectingDevices.insert(mac)
+        if noke.isNokeOne() {
+            let timestamp = DateFormatter.localizedString(from: Date(), dateStyle: .none, timeStyle: .medium)
+            debugPrint("🔌 [NOKE1A] [\(timestamp)] Connecting -> \(mac)")
+        }
+        noke.connectionState = .Connecting
         let connectionOptions : [String: AnyObject] = [CBConnectPeripheralOptionNotifyOnDisconnectionKey: NSNumber.init(value: true as Bool)]
         if (noke.peripheral != nil){
-            nokeDevicePendingToConnect = nil
-            invalidateConnectionTimer()
-            initializeConnectionTimer()
-            nokeDevicePendingToConnect = noke
             cm.connect(noke.peripheral!, options: connectionOptions)
         }
+    }
+    
+    public func addAclForNoke(mac: String, acl: BulkPhoneKeyAcl) {
+        acls[mac] = acl
     }
     
     /**
@@ -245,8 +370,6 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
      */
     public func disconnectNokeDevice(_ noke:NokeDevice){
         if((noke.peripheral) != nil){
-            nokeDevicePendingToConnect = nil
-            invalidateConnectionTimer()
             cm.cancelPeripheralConnection(noke.peripheral!)
         }
     }
@@ -256,154 +379,335 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
         allowAllNokeDevices = allow
     }
     
-    
-    
     /// MARK: Central Manager Delegate Methods
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         self.delegate?.bluetoothManagerDidUpdateState(state: NokeManagerBluetoothState.init(rawValue: central.state.rawValue)!)
     }
     
+    public func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
+        debugPrint("CENTRAL MANAGER WILL RESTORE STATE")
+    }
     
     public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        
-        if(RSSI.intValue < rssiThreshold){
-            return
-        }
-        
-        var broadcastName : String? = advertisementData[CBAdvertisementDataLocalNameKey] as? String
-        
-        
-        if firmwareScanning && (broadcastName?.contains("_FW") == true || broadcastName == "NOKE_2I") {
-            guard let name = broadcastName else { return }
-                  let mac = "00:00:00:00:00:00"
-                   removeNoke(mac: mac)
-                    if let noke = NokeDevice(name: name, mac: mac) {
-                       noke.version = "FIRMWAREUPDATE"
-                        noke.name = name == "NOKE_2I" ? "N2I_FW" : name
-                        noke.delegate = NokeDeviceManager.shared()
-                        noke.peripheral = peripheral
-                        noke.peripheral?.delegate = noke
-                        connectToNokeDevice(noke)
-                    }
-                    return
-                }
-        
-        
-        if(broadcastName == nil || broadcastName?.count != 19){
-            if(peripheral.name != nil){
-                broadcastName = peripheral.name
-            }else{
+            if(RSSI.intValue < rssiThreshold){
                 return
             }
-        }
-        
-        let devicename : String = broadcastName!
-        
-        var mac = ""
-        if((devicename.contains("NOKE")) && devicename.count == 19){
-            let index = devicename.index((devicename.startIndex), offsetBy: 7)
-            mac = String(devicename[index...])
-            let endindex = mac.index(mac.startIndex, offsetBy:12)
-            mac = String(mac[..<endindex])
             
-            let macWithColons = NSMutableString.init(string: mac)
-            macWithColons.insert(":", at: 2)
-            macWithColons.insert(":", at: 5)
-            macWithColons.insert(":", at: 8)
-            macWithColons.insert(":", at: 11)
-            macWithColons.insert(":", at: 14)
-            mac = macWithColons as String
-        }else{
-            mac = "??:??:??:??:??:??"
-        }
-        
-        var noke = self.nokeWithMac(mac)
-        if(noke == nil && allowAllNokeDevices){
-            noke = NokeDevice.init(name: broadcastName!, mac: mac)
-        }
-        
-        noke?.lastSeen = Date().timeIntervalSince1970
-        noke?.RSSI = RSSI
-        
-        if(noke != nil){
-            
-            noke?.delegate = NokeDeviceManager.shared()
-            noke?.peripheral = peripheral
-            noke?.peripheral?.delegate = noke
-            noke?.lockState = NokeDeviceLockState.Locked
-            
-            let broadcastData = advertisementData[CBAdvertisementDataManufacturerDataKey]
-            if(broadcastData != nil){
+            devicesQueue.sync { [weak self] in
+                guard let self = self else { return }
+                var broadcastName : String? = advertisementData[CBAdvertisementDataLocalNameKey] as? String
                 
-                var broadcastBytes = broadcastData as! Data
-                noke?.setVersion(data: broadcastBytes, deviceName: broadcastName ?? "Invalid Device")
-                
-                if(noke?.getHardwareVersion().contains(Constants.NOKE_HW_TYPE_HD_LOCK) ?? false){
-                    broadcastBytes.withUnsafeMutableBytes{(bytes: UnsafeMutablePointer<UInt8>)->Void in
-                        let lockStateBroadcast = (bytes[2] >> 5) & 0x01
-                        let lockStateBroadcast2 = (bytes[2] >> 6) & 0x01
-                        let lockStateBroadcast3 = (bytes[2] >> 7) & 0x01
-                        let lockStateString = "\(lockStateBroadcast3)\(lockStateBroadcast2)\(lockStateBroadcast)"
-                        let lockState = Int.init(lockStateString, radix: 2)
-                        noke?.lockState = NokeDeviceLockState(rawValue: lockState ?? -1) ?? NokeDeviceLockState.Unknown
+                if self.firmwareScanning && (broadcastName?.contains("_FW") == true || broadcastName == "NOKE_2I") {
+                guard let name = broadcastName else { return }
+                    guard name == bootloaderName else {
+                        print("Bootloader name: \(bootloaderName) did not match target device name: \(name). Ignoring broadcast")
+                        return
                     }
-                }else if(noke?.getHardwareVersion().contains(Constants.NOKE_HW_TYPE_ULOCK) ?? false){
-                    broadcastBytes.withUnsafeMutableBytes{(bytes: UnsafeMutablePointer<UInt8>)->Void in
-                    let lockStateBroadcast = (bytes[2] >> 5) & 0x01
-                    let lockStateBroadcast2 = (bytes[2] >> 6) & 0x01
-                    let lockState = lockStateBroadcast + lockStateBroadcast2
-                        if(lockState == 0){
-                            noke?.lockState = NokeDeviceLockState.Unlocked
-                        }else{
-                            noke?.lockState = NokeDeviceLockState.Locked
+                      let mac = "00:00:00:00:00:00"
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self = self else { return }
+                        self.removeNoke(mac: mac)
+                        if let noke = NokeDevice(name: name, mac: mac) {
+                            self.stopScan()
+                            noke.version = "FIRMWAREUPDATE"
+                            noke.name = name == "NOKE_2I" ? "N2I_FW" : name
+                            noke.delegate = NokeDeviceManager.shared()
+                            noke.peripheral = peripheral
+                            noke.peripheral?.delegate = noke
+                            self.connectToNokeDevice(noke)
                         }
+                        return
                     }
                 }
-            }
-            noke?.connectionState = .Discovered
-            self.delegate?.nokeDeviceDidUpdateState(to: (noke?.connectionState)!, noke: noke!)
+                
+                if(broadcastName == nil || broadcastName?.count != 19){
+                    if(peripheral.name != nil){
+                        broadcastName = peripheral.name
+                    }else{
+                        return
+                    }
+                }
+            
+                if let devicename = broadcastName {
+                    var mac = ""
+                    if((devicename.contains("NOKE")) && devicename.count == 19){
+                        let index = devicename.index((devicename.startIndex), offsetBy: 7)
+                        mac = String(devicename[index...])
+                        let endindex = mac.index(mac.startIndex, offsetBy:12)
+                        mac = String(mac[..<endindex])
+                        
+                        let macWithColons = NSMutableString.init(string: mac)
+                        macWithColons.insert(":", at: 2)
+                        macWithColons.insert(":", at: 5)
+                        macWithColons.insert(":", at: 8)
+                        macWithColons.insert(":", at: 11)
+                        macWithColons.insert(":", at: 14)
+                        mac = macWithColons as String
+                    }else{
+                        mac = "??:??:??:??:??:??"
+                    }
+                    
+                    var noke = self.nokeWithMac(mac)
+                    if(noke == nil && self.allowAllNokeDevices) {
+                        noke = NokeDevice.init(name: broadcastName!, mac: mac)
+                    }
+                    
+                    noke?.lastSeen = Date().timeIntervalSince1970
+                    //noke?.RSSI = RSSI
+                    noke?.addRSSIArray(rssi: RSSI)
+                    
+                    if(noke != nil){
+                        noke?.delegate = NokeDeviceManager.shared()
+                        noke?.peripheral = peripheral
+                        noke?.peripheral?.delegate = noke
+                        
+                        let broadcastData = advertisementData[CBAdvertisementDataManufacturerDataKey]
+                        if(broadcastData != nil){
+                            if let broadcastBytes = broadcastData as? Data{
+                                var mutableBroadcastBytes = broadcastBytes
+                                noke?.setVersion(data: broadcastBytes, deviceName: broadcastName ?? "Invalid Device")
+                                
+                                if(noke?.getHardwareVersion()?.contains(Constants.NOKE_HW_TYPE_HD_LOCK) ?? false){
+                                    mutableBroadcastBytes.withUnsafeMutableBytes{(bytes: UnsafeMutablePointer<UInt8>)->Void in
+                                        let lockStateBroadcast = (bytes[2] >> 5) & 0x01
+                                        let lockStateBroadcast2 = (bytes[2] >> 6) & 0x01
+                                        let lockState = lockStateBroadcast + lockStateBroadcast2
+                                        noke?.lockState = NokeDeviceLockState(rawValue: Int(lockState))!
+                                    }
+                                }else if(self.isDoorController(noke: noke)){
+                                    mutableBroadcastBytes.withUnsafeMutableBytes{(bytes: UnsafeMutablePointer<UInt8>)->Void in
+                                        if noke != nil {
+                                           if noke!.version.contains("4E") {
+                                               let tmpLockState = Int((bytes[2] >> 5))
+                                               //debugPrint("NokeDeviceManager -> centralManager -> didDiscover -> mac -> \(mac)");
+                                               //debugPrint("NokeDeviceManager -> centralManager -> didDiscover -> tmpLockState -> \(tmpLockState)");
+                                               if (tmpLockState == NokeDeviceLockState.nokeDeviceLockStateJammedLocking.rawValue) {
+                                                   //debugPrint("NokeDeviceManager -> centralManager -> didDiscover -> onNokeJammedLocking");
+                                                   noke?.lockState = NokeDeviceLockState.nokeDeviceLockStateUnlocked
+                                                   self.delegate?.onNokeJammedLocking(noke: noke!)
+                                               } else if (tmpLockState == NokeDeviceLockState.nokeDeviceLockStateJammedUnlocking.rawValue) {
+                                                   //debugPrint("NokeDeviceManager -> centralManager -> didDiscover -> onNokeJammedUnlocking");
+                                                   noke?.lockState = NokeDeviceLockState.nokeDeviceLockStateUnlocked
+                                                   self.delegate?.onNokeJammedUnlocking(noke: noke!)
+                                               }
+                                           }
+                                        }
+                                        let lockStateBroadcast = (bytes[2] >> 5) & 0x01
+                                        let lockStateBroadcast2 = (bytes[2] >> 6) & 0x01
+                                        
+                                        if let bData = broadcastData as? Data {
+                                            noke?.canAutoUnlock = self.canAutoUnlock(manufacturerData: bData)
+                                        } else {
+                                            noke?.canAutoUnlock = false
+                                        }
+                                        
+                                        let lockState = lockStateBroadcast + lockStateBroadcast2
+                                        //debugPrint("NokeDeviceManager -> centralManager -> didDiscover -> lockStateBroadcast + lockStateBroadcast2 -> \(lockState)");
+                                        if(lockState == 0){
+                                            noke?.lockState = NokeDeviceLockState.nokeDeviceLockStateUnlocked
+                                        }else{
+                                            noke?.lockState = NokeDeviceLockState.nokeDeviceLockStateLocked
+                                        }
+                                    }
+                                }
+                                else if(noke?.getHardwareVersion()?.contains(Constants.NOKE_HW_TYPE_ULOCK) ?? false){
+                                    mutableBroadcastBytes.withUnsafeMutableBytes{(bytes: UnsafeMutablePointer<UInt8>)->Void in
+                                        let lockStateBroadcast = (bytes[2] >> 5) & 0x01
+                                        let lockStateBroadcast2 = (bytes[2] >> 6) & 0x01
+                                        let lockState = lockStateBroadcast + lockStateBroadcast2
+                                        if(lockState == 0){
+                                            noke?.lockState = NokeDeviceLockState.nokeDeviceLockStateUnlocked
+                                        }else{
+                                            noke?.lockState = NokeDeviceLockState.nokeDeviceLockStateLocked
+                                        }
+                                    }
+                                }else{
+                                    noke?.lockState = NokeDeviceLockState.nokeDeviceLockStateLocked
+                                }
+                            }
+                            
+                            if noke?.isNokeOne() == true {
+                                let currentState = noke?.connectionState
+                                let isActiveState = currentState == .Connecting || currentState == .Connected || currentState == .Unlocked
+                                if !isActiveState {
+                                    noke?.connectionState = .Discovered
+                                }
+                                self.delegate?.nokeDeviceDidUpdateState(to: .Discovered, noke: noke!)
+                            } else {
+                                noke?.connectionState = .Discovered
+                                self.delegate?.nokeDeviceDidUpdateState(to: .Discovered, noke: noke!)
+                            }
+                            if self.preConnectNokeOne && noke?.isNokeOne() == true {
+                                self.handleNokeOnePreConnection(noke: noke, rssi: RSSI)
+                            }
+                        } else {
+                            noke?.connectionState = .Discovered
+                            self.delegate?.nokeDeviceDidUpdateState(to: (noke?.connectionState)!, noke: noke!)
+                        }
+                    }
+              }
+           }
+        }
+    
+    private func isDoorController(noke: NokeDevice?) -> Bool{
+        return (noke?.getHardwareVersion()?.contains(Constants.NOKE_HW_TYPE_DOOR_CONTROLLER) ?? false || noke?.getHardwareVersion()?.contains(Constants.NOKE_HW_TYPE_THUNDERGUN) ?? false || noke?.getHardwareVersion()?.contains(Constants.NOKE_HW_TYPE_KEYPAD) ?? false)
+    }
+    
+    private func didDisconnectAfterDelay(noke: NokeDevice, delay: TimeInterval = 0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            noke.connectionState = .Disconnected
+            // Reset Ion2 discovery state on disconnect
+            noke.ion2CharacteristicsReady = false
+            noke.pendingIon2Unlock = nil
+            self.delegate?.nokeDeviceDidUpdateState(to: (noke.connectionState)!, noke: noke)
         }
     }
     
-    public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        nokeDevicePendingToConnect = nil
-        invalidateConnectionTimer()
-        let noke = self.nokeWithPeripheral(peripheral)
-        if(noke == nil){
-            return
+    private func canAutoUnlock(manufacturerData: Data) -> Bool{
+        if(manufacturerData.count >= 7){
+            let timeByte1 = manufacturerData[5]
+            let timeByte2 = manufacturerData[6]
+            
+            let timeHexString = String(format:"%02X%02X", timeByte1, timeByte2)
+            if(timeHexString == "0000"){
+                return false
+            }
+            
+            if(timeHexString == "0001"){
+                return true
+            }
+            
+            
+            guard let lockTime = UInt64(timeHexString, radix: 16) else {return false}
+            let currentUnitTime = NSDate().timeIntervalSince1970
+            let currentUnitTimeHex = String(Int(currentUnitTime), radix: 16)
+
+            let start = currentUnitTimeHex.index(currentUnitTimeHex.startIndex, offsetBy: 4)
+            let end = currentUnitTimeHex.index(currentUnitTimeHex.startIndex, offsetBy: 8)
+            let range = start..<end
+            let currentTwoBytes = String(currentUnitTimeHex[range])
+
+            guard let currentTime = UInt64(currentTwoBytes, radix: 16) else {return false}
+            
+            if(currentTime > lockTime){
+                let diff = currentTime - lockTime
+                if (diff > autounlockTimeSeconds){
+                    return true
+                }
+            }
         }
-        
-        noke?.delegate = NokeDeviceManager.shared()
-        noke?.peripheral?.delegate = noke
-        if firmwareScanning {
-             noke?.peripheral?.discoverServices([NokeDevice.noke2iFirmwareUUID(), NokeDevice.noke4iFirmwareUUID()])
-        } else {
-             noke?.peripheral?.discoverServices([NokeDevice.nokeServiceUUID()])
+      return false
+    }
+    
+    public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: (any Error)?) {
+        print("failed to connect \(error)")
+        guard let noke = nokeWithPeripheral(peripheral) else { return }
+        let mac = noke.mac
+
+        connectionLock.lock()
+        connectingDevices.remove(mac)
+        connectionLock.unlock()
+        clearPreConnectedDevice(mac: mac)
+
+        if noke.connectionState == .Connecting {
+            noke.connectionState = .Discovered
+        }
+
+        if noke.isNokeOne() {
+            let retryCount = preConnectRetries[mac, default: 0]
+            if retryCount < maxPreConnectRetries {
+                preConnectRetries[mac] = retryCount + 1
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+                    guard let self = self,
+                          let currentNoke = self.nokeWithMac(mac),
+                          currentNoke.connectionState == .Discovered else { return }
+                    self.handleNokeOnePreConnection(noke: currentNoke, rssi: NSNumber(value: currentNoke.currentRSSI))
+                }
+            }
+        }
+
+        delegate?.nokeDeviceDidUpdateState(to: .Disconnected, noke: noke)
+    }
+    
+    public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            let noke = self.nokeWithPeripheral(peripheral)
+            if(noke == nil){
+                return
+            }
+            
+            if noke?.isNokeOne() == true {
+                let timestamp = DateFormatter.localizedString(from: Date(), dateStyle: .none, timeStyle: .medium)
+                debugPrint("🔌 [NOKE1A] [\(timestamp)] BLE Connected -> \(noke?.mac ?? "unknown")")
+            }
+            
+            // Clear from connecting tracking once connected
+            if let mac = noke?.mac {
+                self.connectionLock.lock()
+                self.connectingDevices.remove(mac)
+                self.connectionLock.unlock()
+                self.preConnectRetries.removeValue(forKey: mac)
+            }
+            
+            noke?.delegate = NokeDeviceManager.shared()
+            noke?.peripheral?.delegate = noke
+            if self.firmwareScanning {
+                self.firmwareScanning = false
+                 noke?.peripheral?.discoverServices([NokeDevice.noke2iFirmwareUUID()])
+            } else {
+                 noke?.peripheral?.discoverServices([NokeDevice.nokeServiceUUID(), NokeDevice.nokeInfinityServiceUUID()])
+            }
+            
+            if let noke = noke, noke.encryptionType == .signing {
+                noke.connectionState = .Connected
+                onConnected?()
+            }
         }
     }
     
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        nokeDevicePendingToConnect = nil
-        invalidateConnectionTimer()
-        let noke = self.nokeWithPeripheral(peripheral)
-        if(noke == nil){
-            return
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self, let noke = self.nokeWithPeripheral(peripheral) else { return }
+            
+            if noke.isNokeOne() {
+                let timestamp = DateFormatter.localizedString(from: Date(), dateStyle: .none, timeStyle: .medium)
+                debugPrint("🔌 [NOKE1A] [\(timestamp)] BLE Disconnected -> \(noke.mac)")
+            }
+            
+            // Clear from connecting tracking
+            self.connectionLock.lock()
+            self.connectingDevices.remove(noke.mac)
+            self.connectionLock.unlock()
+            
+            noke.invalidateSession()
+            self.clearPreConnectedDevice(mac: noke.mac)
+            
+            noke.isDisconnectedDuringUnlock = true
+            var delay: TimeInterval = 0
+            if noke.encryptionType == .signing && noke.connectionState == .Connected {
+                delay = 2
+            }
+            didDisconnectAfterDelay(noke: noke, delay: delay)
+            self.uploadData()
+            print("Did disconnect from \(noke.name)")
         }
-        noke!.connectionState = .Disconnected
-        delegate?.nokeDeviceDidUpdateState(to: (noke?.connectionState)!, noke: noke!)
-        self.uploadData()
     }
     
     /// MARK: Noke Device Delegate Methods
     internal func didSetSession(_ mac: String) {
-        let noke = self.nokeWithMac(mac)
-        noke?.connectionState = .Connected
-        self.delegate?.nokeDeviceDidUpdateState(to: (noke?.connectionState)!, noke: noke!)
+        devicesQueue.sync { [weak self] in
+            guard let self = self else { return }
+            let noke = self.nokeWithMac(mac)
+            
+            noke?.connectionState = .Connected
+            self.delegate?.nokeDeviceDidUpdateState(to: (noke?.connectionState)!, noke: noke!)
+        }
     }
     
     internal func nokeReadyForFirmwareUpdate(noke: NokeDevice) {
          self.delegate?.nokeReadyForFirmwareUpdate(noke: noke)
-    }   
+    }
     
     
     /// MARK: Noke Device Dictionary Methods
@@ -423,9 +727,11 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
      - Parameter noke: The noke device to be added
      */
     fileprivate func insertNokeDevice(_ noke:NokeDevice){
-        let newnoke = self.nokeWithMac(noke.mac)
-        if(newnoke == nil){
-            nokeDevices[noke.mac] = noke
+        devicesQueue.sync {
+            let newnoke = self.nokeWithMac(noke.mac)
+            if(newnoke == nil){
+                nokeDevices[noke.mac] = noke
+            }
         }
     }
     
@@ -435,7 +741,9 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
      - Parameter noke: The noke device to be removed
      */
     public func removeNoke(noke: NokeDevice){
-        nokeDevices.removeValue(forKey: noke.mac)
+        _ = devicesQueue.sync {
+            self.nokeDevices.removeValue(forKey: noke.mac)
+        }
     }
     
     /**
@@ -444,12 +752,17 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
      - Parameter mac: The mac address of the noke device to be removed
      */
     public func removeNoke(mac: String){
-        nokeDevices.removeValue(forKey: mac)
+        print("REMOVING NOKE")
+        _ = devicesQueue.sync {
+            nokeDevices.removeValue(forKey: mac)
+        }
     }
     
     //Removes all devices from nokeDevices dictionary
     public func removeAllNoke(){
-        nokeDevices.removeAll()
+        devicesQueue.sync {
+            nokeDevices.removeAll()
+        }
     }
     
     /**
@@ -458,7 +771,10 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
      - Returns: Count of devices as Int
      */
     public func getNokeCount()->Int{
-        return nokeDevices.count
+        devicesQueue.sync {
+            return nokeDevices.count
+        }
+        
     }
     
     /**
@@ -467,7 +783,9 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
      - Returns: Array of NokeDevice objects
      */
     public func getAllNoke()->Dictionary<String,NokeDevice>{
-        return nokeDevices
+        devicesQueue.sync {
+            return nokeDevices
+        }
     }
     
     /**
@@ -478,14 +796,16 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
      - Returns: Noke device with requested UUID
      */
     public func nokeWithUUID(_ uuid: String)->NokeDevice?{
-        
-        let nokeArray = Array(nokeDevices.values)
-        for noke: NokeDevice in nokeArray{
-            if(noke.uuid == uuid){
-                return noke
+        devicesQueue.sync {
+            let nokeArray = Array(nokeDevices.values)
+            for noke: NokeDevice in nokeArray{
+                if(noke.uuid == uuid){
+                    return noke
+                }
             }
+            return nil
         }
-        return nil
+        
     }
     
     /**
@@ -496,7 +816,11 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
      - Returns: Noke device with requested MAC address
      */
     public func nokeWithMac(_ mac: String)->NokeDevice?{
-        return nokeDevices[mac]
+        if(!self.nokeDevices.isEmpty){
+            return self.nokeDevices[mac]
+        }else{
+            return nil
+        }
     }
     
     /**
@@ -507,14 +831,15 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
      - Returns: Noke device with requested peripheral
      */
     public func nokeWithPeripheral(_ peripheral:CBPeripheral)->NokeDevice?{
-        
-        let nokeArray = Array(nokeDevices.values)
-        for noke:NokeDevice in nokeArray{
-            if(noke.peripheral == peripheral){
-                return noke
+        devicesQueue.sync {
+            let nokeArray = Array(nokeDevices.values)
+            for noke:NokeDevice in nokeArray{
+                if(noke.peripheral == peripheral){
+                    return noke
+                }
             }
+            return nil
         }
-        return nil
     }
     
     /// Sets Mobile API Key for uploading logs to the Core API
@@ -527,7 +852,7 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
     }
     
     /// Sets Upload URL for uploading Noke device responses to the Core API
-    public func setLibraryMode(_ mode: NokeLibraryMode, customURL: String = ""){
+    public func setLibraryMode(_ mode: NokeLibraryMode){
         switch mode {
         case NokeLibraryMode.SANDBOX:
             self.uploadUrl = ApiURL.sandboxUploadURL
@@ -539,13 +864,9 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
             self.uploadUrl = ApiURL.developUploadURL
         case NokeLibraryMode.OPEN:
             self.uploadUrl = ApiURL.openString
-        case NokeLibraryMode.CUSTOM:
-            self.uploadUrl = customURL
             break
         }
     }
-    
-    
     
     /// Saves upload packets to user defaults to ensure they're cached before uploading
     public func cacheUploadQueue(){
@@ -603,7 +924,8 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
                 
                 if(JSONSerialization.isValidJSONObject(jsonBody)){
                     guard let jsonData = try? JSONSerialization.data(withJSONObject: jsonBody, options: JSONSerialization.WritingOptions.prettyPrinted) else{return}
-                    NokeLibraryApiClient().doRequest(url: self.uploadUrl + API.UPLOAD, jsonData: jsonData) { (data) in
+                    NokeLibraryApiClient().doRequest(url: self.uploadUrl + API.UPLOAD, jsonData: jsonData) { [weak self] (data) in
+                        guard let self = self else { return }
                         self.didReceiveUploadResponse(data: (data)!)
                     }
                 }
@@ -653,7 +975,8 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
         
         if(JSONSerialization.isValidJSONObject(jsonBody)){
             guard let jsonData = try? JSONSerialization.data(withJSONObject: jsonBody, options: JSONSerialization.WritingOptions.prettyPrinted) else{return}
-            NokeLibraryApiClient().doRequest(url: self.uploadUrl + API.RESTORE, jsonData: jsonData) { (data) in
+            NokeLibraryApiClient().doRequest(url: self.uploadUrl + API.RESTORE, jsonData: jsonData) { [weak self] (data) in
+                guard let self = self else { return }
                 self.didReceiveRestoreResponse(data: (data)!, noke: noke)
             }
         }
@@ -696,7 +1019,8 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
         
         if(JSONSerialization.isValidJSONObject(jsonBody)){
             guard let jsonData = try? JSONSerialization.data(withJSONObject: jsonBody, options: JSONSerialization.WritingOptions.prettyPrinted) else{return}
-            NokeLibraryApiClient().doRequest(url: self.uploadUrl + API.CONFIRM_RESTORE, jsonData: jsonData) { (data) in
+            NokeLibraryApiClient().doRequest(url: self.uploadUrl + API.CONFIRM_RESTORE, jsonData: jsonData) { [weak self] (data) in
+                guard let self = self else { return }
                 self.didReceiveConfirmResponse(data: (data)!, noke: noke)
             }
         }
@@ -725,24 +1049,65 @@ public class NokeDeviceManager: NSObject, CBCentralManagerDelegate, NokeDeviceDe
         }
     }
     
-    /// Initializes the connection timer property
-    public func initializeConnectionTimer() {
-         connectionTimer = Timer.scheduledTimer(timeInterval: numberOfSecondsToDetectTheConnectionError, target: self, selector: #selector(connectionTimeWasReached), userInfo: nil, repeats: false)
-     }
+    public func setTargetFirmwareDevice(bootloaderName: String) {
+        self.bootloaderName = bootloaderName
+    }
     
-    /// Invalidates the connection timer property
-     public func invalidateConnectionTimer() {
-         connectionTimer?.invalidate()
-         connectionTimer = nil
-        if let peripheralPendingToConnect = nokeDevicePendingToConnect?.peripheral {
-            cm.cancelPeripheralConnection(peripheralPendingToConnect)
-            nokeDevicePendingToConnect = nil
+    public func unlockSigningDevice(noke: NokeDevice, withDelay delay: TimeInterval = 0.25) {
+        if let aclEnvelope = self.acls[noke.mac] {
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
+                guard let self else { return }
+                noke.unlockForSigning(aclResponse: aclEnvelope, userId: currentUserId, deviceID: deviceID, options: currentDeviceOperationOptions)
+            }
         }
-     }
-     
-    /// Once the connection time is reached it sends the delegate error
-     @objc public func connectionTimeWasReached() {
-        invalidateConnectionTimer()
-         self.delegate?.nokeErrorDidOccur(error: NokeDeviceManagerError.nokeLibraryConnectionTimeout, message: "Connection error", noke: nil)
-     }
+    }
+
+    private func handleNokeOnePreConnection(noke: NokeDevice?, rssi: NSNumber) {
+        guard let noke = noke else { return }
+        let mac = noke.mac
+        if noke.hasValidSession() {
+            debugPrint("NokeDeviceManager -> handleNokeOnePreConnection -> mac: \(mac) -> Already has valid session, skipping pre-connect")
+            return
+        }
+        if preConnectedDevices.contains(mac) {
+            debugPrint("NokeDeviceManager -> handleNokeOnePreConnection -> mac: \(mac) -> Already in pre-connect list, skipping")
+            return
+        }
+        let rssiThreshold = -75
+        guard rssi.intValue > rssiThreshold else {
+            debugPrint("NokeDeviceManager -> handleNokeOnePreConnection -> mac: \(mac) -> RSSI too low (\(rssi.intValue) < \(rssiThreshold)), skipping")
+            return
+        }
+        guard noke.connectionState == .Discovered else {
+            debugPrint("NokeDeviceManager -> handleNokeOnePreConnection -> mac: \(mac) -> Not in Discovered state (\(String(describing: noke.connectionState))), skipping")
+            return
+        }
+        preConnectedDevices.insert(mac)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            guard let self = self else { return }
+            guard let currentNoke = self.nokeWithMac(mac) else {
+                self.preConnectedDevices.remove(mac)
+                return
+            }
+            if currentNoke.hasValidSession() {
+                self.preConnectedDevices.remove(mac)
+                return
+            }
+            guard currentNoke.connectionState == .Discovered else {
+                self.preConnectedDevices.remove(mac)
+                return
+            }
+            let timeSinceLastSeen = Date().timeIntervalSince1970 - currentNoke.lastSeen
+            guard timeSinceLastSeen < 2.0 else {
+                self.preConnectedDevices.remove(mac)
+                return
+            }
+            self.connectToNokeDevice(currentNoke)
+        }
+    }
+
+    internal func clearPreConnectedDevice(mac: String) {
+        preConnectedDevices.remove(mac)
+        preConnectRetries.removeValue(forKey: mac)
+    }
 }
