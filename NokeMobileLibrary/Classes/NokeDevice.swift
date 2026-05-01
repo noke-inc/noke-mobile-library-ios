@@ -636,7 +636,10 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
             var keydata = Data(capacity: offlineKey.count/2)
             let regex = try! NSRegularExpression(pattern: "[0-9a-f]{1,2}", options: .caseInsensitive)
             regex.enumerateMatches(in: offlineKey, options: [], range: NSMakeRange(0, offlineKey.count)) { match, flags, stop in
-                let byteString = (offlineKey as NSString).substring(with: match!.range)
+                guard let range = Range(match!.range, in: offlineKey) else {
+                    return
+                }
+                let byteString = String(offlineKey[range])
                 var num = UInt8(byteString, radix: 16)!
                 keydata.append(&num, count: 1)
             }
@@ -755,7 +758,10 @@ public class NokeDevice: NSObject, NSCoding, CBPeripheralDelegate{
         var data = Data(capacity: hexstring.count / 2)
         let regex = try! NSRegularExpression(pattern: "[0-9a-f]{1,2}", options: .caseInsensitive)
         regex.enumerateMatches(in: hexstring, range: NSMakeRange(0, hexstring.utf16.count)) { match, flags, stop in
-            let byteString = (hexstring as NSString).substring(with: match!.range)
+            guard let range = Range(match!.range, in: offlineKey) else {
+                return
+            }
+            let byteString = String(offlineKey[range])
             var num = UInt8(byteString, radix: 16)!
             data.append(&num, count: 1)
         }
