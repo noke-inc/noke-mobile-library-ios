@@ -2,6 +2,9 @@ use_frameworks!
 
 target 'NokeMobileLibrary_Example' do
   pod 'NokeMobileLibrary', :path => '../'
+  pod 'PhoneKeyCore',
+      :git => 'https://github.com/noke-inc/PhoneKeyCore.git',
+      :tag => 'v1.1.1'
 
   target 'NokeMobileLibrary_Tests' do
     inherit! :search_paths
