@@ -231,12 +231,7 @@ extension NokeDevice {
             let timedata = Data.init([UInt8((timeStamp >> 24) & 0xFF), UInt8((timeStamp >> 16) & 0xFF), UInt8((timeStamp >> 8) & 0xFF), UInt8((timeStamp & 0xFF))])
             
             let finalCmdData = createOfflineUnlock(preSessionKey: keydata, unlockCmd: cmddata, timestamp: timedata)
-            print("KEY DATA: \(keydata) COMMAND DATA: \(cmddata)")
-            print("FINAL COMMAND DATA: \(finalCmdData)")
             let finalCmdD = self.bytesToString(data: finalCmdData, start: 0, length: 20)
-            print("finalCmdD: \(finalCmdD)")
-            print("KEY DATA: \(keydata) COMMAND DATA: \(cmddata)")
-            print("FINAL COMMAND DATA: \(finalCmdData)")
             self.addCommandToCommandArray(finalCmdData)
             self.writeCommandArray()
             return String.init(timeStamp)
