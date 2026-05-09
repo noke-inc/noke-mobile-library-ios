@@ -1,0 +1,6 @@
+framework module PhoneKeyCore {
+  umbrella header "PhoneKeyCore-umbrella.h"
+
+  export *
+  module * { export * }
+}
