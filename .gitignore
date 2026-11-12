@@ -37,3 +37,6 @@ Carthage/Build
 # Pods/
 
 .build
+
+# SwiftPM (library package: do not commit resolved pins)
+Package.resolved
