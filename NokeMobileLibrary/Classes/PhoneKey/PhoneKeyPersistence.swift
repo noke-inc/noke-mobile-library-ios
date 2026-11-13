@@ -81,7 +81,7 @@ public final class DefaultPhoneKeyPersistence: PhoneKeyPersistence {
     }
     
     public func saveACL(userId: String, lockMac: String, acl: BulkPhoneKeyAcl) throws {
-        if let existingACL = try? getACL(userId: userId, lockMac: lockMac) {
+        if (try? getACL(userId: userId, lockMac: lockMac)) != nil {
             return
         }
         try phoneKeyManager.saveBulkACL(userId: userId, mac: lockMac, acl)

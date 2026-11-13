@@ -7,6 +7,9 @@
 
 import Foundation
 import CoreBluetooth
+#if canImport(NokeMobileLibraryC)
+import NokeMobileLibraryC
+#endif
 
 extension NokeDevice {
     /**
