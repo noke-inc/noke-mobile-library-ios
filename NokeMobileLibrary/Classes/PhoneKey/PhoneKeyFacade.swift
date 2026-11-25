@@ -156,7 +156,7 @@ public final class PhoneKeyFacade {
     ///   - lockMac: Lock MAC address
     ///   - acl: ACL to save
     public func deleteACL(userId: String, lockMac: String, acl: BulkPhoneKeyAcl) throws {
-        try persistence.deleteACL(userId: userId, lockMac: lockMac, acl: acl)
+        try persistence.deleteACL(userId: userId, lockMac: lockMac)
         print("[PhoneKeyManager] ACL: \(acl)")
         print("[PhoneKeyManager] ACL deleted for lock: \(lockMac)")
     }
