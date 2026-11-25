@@ -42,25 +42,17 @@ func nokeIon2ReadyForUnlock(noke: NokeDevice) { }   // ION 2 only
 
 ## 3. Adding ION 2 support
 
-### 3.1 Implement `PhoneKeyCoreClient` (your backend calls)
-The library does not talk to the backend itself; you provide a client that calls your API, then register it once at startup:
+### 3.1 Register a `PhoneKeyCoreClient`
+The library ships `DefaultPhoneKeyClient`, which manages the key pair and calls the Noke phone key backend. You only provide the base URL and how to authenticate each request, then register it once at startup:
 
 ```swift
-final class MyPhoneKeyClient: PhoneKeyCoreClient {
-    var isInitialized: Bool { /* true after initialize succeeds */ }
-    func initialize(completion: @escaping (Result<String, Error>) -> Void) { /* ensure key pair, return public key */ }
-    func provisionPhoneKey(userId: String, deviceId: String, publicKey: String,
-                           completion: @escaping (Result<PhoneKeyInfoResponse, Error>) -> Void) { /* POST to your API */ }
-    func generateAcl(userId: Int, lockMac: String, phoneKeyId: Int,
-                     completion: @escaping (Result<BulkPhoneKeyAcl, Error>) -> Void) { /* ACL for one lock */ }
-    func generateBulkAcls(phoneKeyId: Int,
-                          completion: @escaping (Result<BulkPhoneKeyAclRoot, Error>) -> Void) { /* ACLs for all the user's locks */ }
-    func validateCurrentKey() -> String? { /* public key if a valid key exists */ }
+let client = DefaultPhoneKeyClient(baseURL: apiBaseURL) { request in
+    request.setValue("ApiKey \(apiKey)", forHTTPHeaderField: "Authorization")   // add whatever headers your API needs
 }
-
-PhoneKeyAccessService.setSharedClient(MyPhoneKeyClient())   // e.g. in AppDelegate / App init
+client.setIdentity(userId: userId, deviceId: deviceId)   // after sign-in; call again if the user changes
+PhoneKeyAccessService.setSharedClient(client)
 ```
-See `PhoneKeyServiceClient.swift` in this demo for a complete implementation.
+Pass `endpoints:` only if your deployment uses different paths. If your backend is entirely different, implement the `PhoneKeyCoreClient` protocol yourself (`initialize`, `isInitialized`, `provisionPhoneKey`, `generateAcl`, `generateBulkAcls`, `validateCurrentKey`).
 
 ### 3.2 Choose a stable `deviceId`
 Pick one identifier for the device (for example a UUID stored in the keychain) and use **the same value** for provisioning and for every unlock. It is part of what the phone signs; if it changes, the existing key stops working. See `Ion2AccessProvider.stableDeviceId` in the demo.
@@ -130,7 +122,7 @@ Unlock options (emergency/override) can be passed with `UnlockContext.signing(..
 - [ ] Deployment target is iOS 12 or later; PhoneKeyCore resolves.
 - [ ] Delegate implements the new required methods and is retained by your app.
 - [ ] Removed uses of `.CUSTOM`, `customURL`, `.Error`, `nokeLibraryConnectionTimeout`, `nokeDevices`.
-- [ ] `PhoneKeyCoreClient` implemented and registered with `PhoneKeyAccessService.setSharedClient`.
+- [ ] `DefaultPhoneKeyClient` (or your own `PhoneKeyCoreClient`) registered with `PhoneKeyAccessService.setSharedClient`.
 - [ ] Stable `deviceId` stored and used for provisioning and every unlock.
 - [ ] Phone key provisioned and its `keyId` cached per user.
 - [ ] ACLs fetched, cached, checked for expiry; cache cleared on user change.

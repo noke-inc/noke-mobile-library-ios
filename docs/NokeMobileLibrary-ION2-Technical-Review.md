@@ -93,7 +93,7 @@ Today the demo needs roughly 300 lines of glue (`Ion2AccessProvider`, `PhoneKeyS
 2. **No mandatory delegate methods.** Six new required methods break every client's build, even those not using ION 2. Give them empty defaults (as already done for `nokeDeviceDidRelock`); make `nokeIon2ReadyForUnlock` internal or a closure.
 3. **ACL retry inside the library.** Register the ACL provider once; the library calls it on `ACL_TIME_EXPIRED` / `ACLSIG_VERIFY_FAIL`. Today the client must implement `PhoneKeyHandling` and `NokePhoneKeyStateDelegate` and wire `signingKeyState`.
 4. **Provisioning and `deviceId` inside the library.** Generate and keychain-store a stable `deviceId`; expose one `PhoneKey.prepare(userId:)` that provisions and leaves ACLs ready.
-5. **Easier `PhoneKeyCoreClient`.** The client implements 5 completion-handler methods plus its own HTTP. Ship a default implementation needing only `baseURL` and a token, or an `async` variant.
+5. **Easier `PhoneKeyCoreClient`.** Done: `DefaultPhoneKeyClient` needs only a base URL and a request-authorization closure. An `async` variant is still open.
 6. **Backwards compatibility.** Deprecate instead of removing: `setLibraryMode(_:customURL:)`, `.CUSTOM`, `nokeDevices`, `Constants`; keep `@objc` if Objective-C clients exist.
 7. **Configurable logger** (`NokeLogger.level = .off`) that never prints sensitive data.
 8. **Actionable errors.** A public `NokeUnlockFailure` with a suggested action (`.retry`, `.refreshAcl`, `.contactAdmin`, `.fallbackOnline`) instead of combining `isValid`, `shouldRefreshKeys`, `willUseFallback` and `errorType`.
