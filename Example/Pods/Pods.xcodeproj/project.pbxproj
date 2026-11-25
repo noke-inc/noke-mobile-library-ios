@@ -7,190 +7,190 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		154036C4EDC48A8864B05F77EF05F809 /* SigningUnlockStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421E25A9C9779DCBB6DB0DBE61EFEB49 /* SigningUnlockStrategy.swift */; };
-		1798497882BDC7F39BF3E211DA4EFA36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F29E5F7EEDB83D0B063DAD0B5196072 /* Foundation.framework */; };
-		19EE1A408518D11AFDFDA960B3152B80 /* PhoneKeyBulkAclRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84040877AAEAEDB2E1381D237B565E51 /* PhoneKeyBulkAclRequest.swift */; };
-		1B21D8F433A7181FD70B67BBC612B7A1 /* TI_aes_128.c in Sources */ = {isa = PBXBuildFile; fileRef = 09CE7F050FDDC35C43CF692C503A6BC9 /* TI_aes_128.c */; };
-		1EA5BA7B4C4C94EC818DBAEA0C89DEAF /* PhoneKeyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C7E66D7F967643A9610146438D0BA2 /* PhoneKeyModels.swift */; };
-		25D6DB78223DF15A32FC5C03AD71588A /* Ion2SigningCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB5ECB02AEA54480ED850BE92DFBE5F /* Ion2SigningCoordinator.swift */; };
-		364783A55A9FE3EE7EB964A461906B52 /* PhoneKeyKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BDA4A1CE5229D8AAF3984722458505A /* PhoneKeyKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		381054B5F5C8E38C80287ECFE08FF9F4 /* NokeLibraryApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E482914C97846C71C75223C31BD53C56 /* NokeLibraryApiClient.swift */; };
-		395114D7894E5517D8D81C13D94A0430 /* PhoneKeyInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2F22EBD084B06261F4559A2B543A9A /* PhoneKeyInfoResponse.swift */; };
-		3DE19C48A6BBC593BE1EC5A246871BD0 /* PhoneKeyInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456AECD2C9C58F64201B5A63638BCBAC /* PhoneKeyInfoRequest.swift */; };
+		000BC0BDBACB2EAD7BB792ABD7293272 /* PhoneKeyAcl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701AF96C887166F8F4119410D74EBDFF /* PhoneKeyAcl.swift */; };
+		002E1D9390652FD7F72678625A3C3AC2 /* NokeDevice+Encryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4588D726B25EDC4F9B3B5854C947E8 /* NokeDevice+Encryption.swift */; };
+		06F247072E84A609A72D1236256ADBB7 /* PhoneKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95251DB7DF7C49D003C7A18D5EDB745 /* PhoneKey.swift */; };
+		0F2F386901367B68613F8B233542E558 /* PhoneKeyKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BDA4A1CE5229D8AAF3984722458505A /* PhoneKeyKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		144997BCE4EB2483F9DA1F82180FCAD6 /* NokeMobileLibrary-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EF42BC45CEC1BE9AAA368C0F8E02D35A /* NokeMobileLibrary-dummy.m */; };
+		1D190613685E299015E84F5BF81BE059 /* NokeProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1AEA67BFBF461BCDCE75DE9A6B3685 /* NokeProtocols.swift */; };
+		1F5643A0F1562700EDFD6B377CE5BD83 /* PhoneKeyCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B6A813363E2546A42A81D5493A7FAC /* PhoneKeyCore.swift */; };
+		230C878D7F80DD312BED5C5521D91114 /* Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06959474ADD7998358AA9ED4FF6C2774 /* Encodable.swift */; };
+		24A3C71362E1039C36690D4E8BD77386 /* NokeDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FF69BD9B7B6FBC056E57F70F0F0C31 /* NokeDevice.swift */; };
+		2694F6A454652BAF113DC9CED0BB9B2B /* Ion2CharacteristicHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C82CB78DE542EDE62ACD46FE1AEE2F /* Ion2CharacteristicHandler.swift */; };
+		286D6939D35514A17FFFE42D1EA4E434 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C330BC62C9ACD3F9E7AF138812EF298C /* Security.framework */; };
+		32892F78D550BAEDBD1FE9D8BCC4C516 /* PhoneKeyCore-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E91AE0CBA97CA7E3D0CA90238144678 /* PhoneKeyCore-dummy.m */; };
 		3DFC27A430D70AE8AEFB39DF29E96778 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F29E5F7EEDB83D0B063DAD0B5196072 /* Foundation.framework */; };
-		43FE743908CD53EE96EFCF3F32883627 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C330BC62C9ACD3F9E7AF138812EF298C /* Security.framework */; };
-		459441E3AA09DB83CEAE5BFD0FE5738B /* SEError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B469A8B339ABEF7EF62B8CD642DC1F5C /* SEError.swift */; };
-		4E83C90F2186A06200E1360E1A44C140 /* NokeDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6FE4A192B417DA35B360C3F1E384FE /* NokeDefines.swift */; };
-		52D732CA211E8EC77A72CA1970BF13D5 /* Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06959474ADD7998358AA9ED4FF6C2774 /* Encodable.swift */; };
-		551BE00761FD994BF5C98B27A89E7022 /* NokeDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BE34CBC9D5270FA4F75A0D6BAC504D /* NokeDevice.swift */; };
-		6792A1DA711796D0B170BB13107E171E /* PhoneKeyCore.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 28F1CA6FC4107250EB066B741105FC88 /* PhoneKeyCore.bundle */; };
-		6BDC225355882DB4FBC6E9750CA435F0 /* PhoneKeyCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B6A813363E2546A42A81D5493A7FAC /* PhoneKeyCore.swift */; };
+		485C98A70940490463EC04591EB2F2F7 /* EncryptionUnlockStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B9C21F737E2626926AA6BD2F7F0AE2 /* EncryptionUnlockStrategy.swift */; };
+		5548832F9B373BFB1E108D56AFD1F1D3 /* PhoneKeyCoreClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25935053F50A09D7323A39C5A29A223F /* PhoneKeyCoreClient.swift */; };
+		55DBDAFF461B3DABD0FB786665EC3AE7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F29E5F7EEDB83D0B063DAD0B5196072 /* Foundation.framework */; };
+		55E1ABD736134455E0BFF06C57A51FBF /* NokeMobileLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DB8F59AF8BFD710596719F296E4E9B3 /* NokeMobileLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		59D7E8571B2810AAA41F71BA56509DAE /* TI_aes_128.c in Sources */ = {isa = PBXBuildFile; fileRef = 40B49E7311048A1BBD5B18763A3953B5 /* TI_aes_128.c */; };
+		5FE989CBDD1A9BCF337A0067D619715C /* PhoneKeyCommandSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC20259938A83B70E2C5C0432E02599 /* PhoneKeyCommandSigner.swift */; };
+		61C164DAD87E45E1253D72269CAEAA4B /* PhoneKeyAccessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C357B0EA069CCE8F69BB89F95450E1 /* PhoneKeyAccessService.swift */; };
 		70325472B42A8191641975B28B62ABC9 /* Pods-NokeMobileLibrary_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A72712BF40EDEC1D5A0BD90F792E37A /* Pods-NokeMobileLibrary_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7726E57F55E0598A12775FD96DAF3025 /* PhoneKeyCore-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EB8972BF67F2AE75C601B9E4B7736AE /* PhoneKeyCore-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7B2B3F8B30EDDCD6628AB64B1425BAB5 /* PhoneKeyCoreClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7666D1CD42E10023097AC86516E60E08 /* PhoneKeyCoreClient.swift */; };
-		7BDA182898BC23C76D691EECC2829310 /* PhoneKeyCommandSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0E650E7A01BF7E001D56D458E343FD /* PhoneKeyCommandSigner.swift */; };
-		7ED15659161D9A3358C80C548DE89BD3 /* NokeDeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD71BE61BDF2DABDD62B19EED8BA99FA /* NokeDeviceManager.swift */; };
-		7FF37537608238F70190EA4AC2F57F12 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F29E5F7EEDB83D0B063DAD0B5196072 /* Foundation.framework */; };
-		85C145271BE526DAE7889A65AA336CD5 /* EncryptionUnlockStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9FCD8C7C9BD0B9B2F087F727937603 /* EncryptionUnlockStrategy.swift */; };
-		8640BCE3E2AFB30BB722D651DF415E89 /* PhoneKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95251DB7DF7C49D003C7A18D5EDB745 /* PhoneKey.swift */; };
+		70DC9A247562B9361E155B6DEA605CB8 /* NokeDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90C27DFC5C8DA68640901E709DA549D /* NokeDefines.swift */; };
+		715CE7DBF46639322F6E910988906932 /* Ion2SigningCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED75CE53E7EC80866E5869F62B60FE61 /* Ion2SigningCoordinator.swift */; };
+		7DAB0E5B06A3CB13E59328E0582BC8B2 /* PhoneKeyInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2F22EBD084B06261F4559A2B543A9A /* PhoneKeyInfoResponse.swift */; };
+		7F9887D1E649A8B0BB540BA8BFD148C1 /* PhoneKeyBulkAclRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84040877AAEAEDB2E1381D237B565E51 /* PhoneKeyBulkAclRequest.swift */; };
+		811517DC4782EBB4836711D08F0311BD /* SigningUnlockStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652D733FE34B880098B9044789CFB9AF /* SigningUnlockStrategy.swift */; };
+		827F96291C69DE72E2AC4B4BF15FEC27 /* TI_aes_128.h in Headers */ = {isa = PBXBuildFile; fileRef = 2FEC5AAC72C51B43A3D18B921D5A7936 /* TI_aes_128.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8439CA8CBF95B986BE7130E08C04F3DA /* NokeDeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0255ED8EB3D0993C33F9E20614B2A7F9 /* NokeDeviceManager.swift */; };
+		863D21FB31C1D1610BBB50231ADA5FD1 /* PhoneKeyInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456AECD2C9C58F64201B5A63638BCBAC /* PhoneKeyInfoRequest.swift */; };
 		90E26DD80B35FFEED5DF7E4E53D34688 /* Pods-NokeMobileLibrary_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA9A6EBF5DEE70BF8001785D662E779 /* Pods-NokeMobileLibrary_Example-dummy.m */; };
+		90EB990B66528CEFB7013711B13178B9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F29E5F7EEDB83D0B063DAD0B5196072 /* Foundation.framework */; };
 		915ACA1BF15AB04CBDEC1595AB3AA1DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F29E5F7EEDB83D0B063DAD0B5196072 /* Foundation.framework */; };
-		9D12CBEC30DD5E8F078BDA05A96F3ECA /* NokeUnlockStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE38F85EF98FEB721FC7D581672AC9F2 /* NokeUnlockStrategy.swift */; };
-		A608D1251D71EA24121575272BE5E7DA /* TI_aes_128.h in Headers */ = {isa = PBXBuildFile; fileRef = 13F471FDF733C278CE049EC2DEF3B2EF /* TI_aes_128.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A8A4809222D3E77C30E72E2885F2DB10 /* NokeMobileLibraryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CF1A844E3C9DD1E99B51011A0E5630 /* NokeMobileLibraryError.swift */; };
-		AC06B6C4319ED4B091C088676D07292B /* NokeMobileLibrary-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A7CB4EC23E64D8CC6E1D1CA4413C40F /* NokeMobileLibrary-dummy.m */; };
-		ACE297CC68B7C833AF67EA1204B10F9A /* PhoneKeyCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376656360278B52E68368ADFDC1D99C4 /* PhoneKeyCommand.swift */; };
-		AD344AA058BB494E0E669E28067967E1 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7BBAB107D0517204C50F395A29E006 /* KeychainHelper.swift */; };
-		B40F70F32FA524D300E9A44E /* NokePhoneKeyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40F70ED2FA524D300E9A44E /* NokePhoneKeyState.swift */; };
-		B40F70F42FA524D300E9A44E /* NokeDevice+Encryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40F70EB2FA524D300E9A44E /* NokeDevice+Encryption.swift */; };
-		B40F70F52FA524D300E9A44E /* NokeDevice+CBPeripheralDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40F70E92FA524D300E9A44E /* NokeDevice+CBPeripheralDelegate.swift */; };
-		B40F70F62FA524D300E9A44E /* NokeDevice+Signing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40F70EF2FA524D300E9A44E /* NokeDevice+Signing.swift */; };
+		9D7629347BA1CB443D33FCCD125DDB9B /* PhoneKeyCore-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EB8972BF67F2AE75C601B9E4B7736AE /* PhoneKeyCore-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A213C1A8901B7E6FBD7C3414C9424BE1 /* PhoneKeyAclRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7194349A9E107C9A90C62A9DB29E11B0 /* PhoneKeyAclRequest.swift */; };
+		A4ADCFC025DA2D264BD926A04D46CC32 /* PhoneKeyPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D4AB0ACCDA49BBF1E7F363AF928A19 /* PhoneKeyPersistence.swift */; };
+		AD9578807BC4918B257E5591739862EC /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7BBAB107D0517204C50F395A29E006 /* KeychainHelper.swift */; };
+		B24DA60E3243467CFD73C68CD3329397 /* PhoneKeyCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376656360278B52E68368ADFDC1D99C4 /* PhoneKeyCommand.swift */; };
+		B7BC7E61B3671C0F363F8439BB0B2468 /* NokeMobileLibraryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA8BC8A7E26D9624C3EE475BFAA6085 /* NokeMobileLibraryError.swift */; };
+		BD422FB1CA0B9A6CC856DFEF6427BBDC /* NokePhoneKeyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCF47DF127BE6D179691EBE662A18C4 /* NokePhoneKeyState.swift */; };
 		C0EED2391D81B2892DA5B8EF2430498A /* Pods-NokeMobileLibrary_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E45DF4A848F3C52FE794F286CCC34A64 /* Pods-NokeMobileLibrary_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C463D1EB6625C4543976E43D01C96077 /* PhoneKeyAcl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701AF96C887166F8F4119410D74EBDFF /* PhoneKeyAcl.swift */; };
-		CDE75E47D328E16FC76067DD4E5507C7 /* NokeMobileLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = DDBF7D91E98A75FDF110E9767254E54C /* NokeMobileLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CEE04E99461643FDB9C5113B49CA3FB6 /* PhoneKeyFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = E535AA030BCDB92A705254815A019BB3 /* PhoneKeyFacade.swift */; };
-		D7E044039EFC2D67DA01826E6B080EB3 /* PhoneKeyCore-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E91AE0CBA97CA7E3D0CA90238144678 /* PhoneKeyCore-dummy.m */; };
-		E0E633F52697BB3E0F6429EF5FA24A57 /* PhoneKeyAccessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCE98D09564BEA3CF3B2747D75FE9A7 /* PhoneKeyAccessService.swift */; };
+		C89E77E7D312124FB3EACAD78047358A /* NokeDevice+Signing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675321940E59B513DD5892CAD22BCAAB /* NokeDevice+Signing.swift */; };
+		CD01254032AD8DB83D04D013F7862740 /* PhoneKeyFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A339F77B054AE88ABBCD4ABE5F588AF /* PhoneKeyFacade.swift */; };
+		E32A7C324E6575402D4E63AD4F3F35C5 /* NokeLibraryApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFE8EA22CCA440B6590FFF9F8F7435 /* NokeLibraryApiClient.swift */; };
+		E36C0301E7A68509A86AAE20E85FDCEB /* PhoneKeyCore-PhoneKeyCore in Resources */ = {isa = PBXBuildFile; fileRef = 28F1CA6FC4107250EB066B741105FC88 /* PhoneKeyCore-PhoneKeyCore */; };
 		E3AD00B2D4148E0C17FDAB54D4114530 /* Pods-NokeMobileLibrary_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0464689D9F51DFC3C5902CE39F23658A /* Pods-NokeMobileLibrary_Tests-dummy.m */; };
-		E4411C8693E6BE36756AEF0EFDB9704B /* NokeProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CD7C88C6B614D343C5F5727CE5FB09 /* NokeProtocols.swift */; };
-		F5F8FA729B081123DAF10B7D2A2DE601 /* PhoneKeyAclRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7194349A9E107C9A90C62A9DB29E11B0 /* PhoneKeyAclRequest.swift */; };
-		F79630E7614D2F8B64B8FA7A58F79B48 /* Ion2CharacteristicHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E35FB44D928C7D3074205EA15E55DE /* Ion2CharacteristicHandler.swift */; };
-		FB257683019CF6A8A2C5B8EC63A191B9 /* PhoneKeyPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201AED7535FC48C9CC4D7E55BD134B5 /* PhoneKeyPersistence.swift */; };
+		F17241C6EFB15CA46F7DFB8CEDD7FDF6 /* NokeUnlockStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBBF5A368FD74F103EDF17FA19A291B /* NokeUnlockStrategy.swift */; };
+		F4A1DAAA31B5E93B53F3D2C8D79A71B9 /* PhoneKeyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32892714694C16FE9BA09FE782C4550 /* PhoneKeyModels.swift */; };
+		F6C285F646B6D3F1BEDE757AC51A610C /* NokeDevice+CBPeripheralDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F04A964367CD6EE404D02D85FA2A /* NokeDevice+CBPeripheralDelegate.swift */; };
+		FAB0A5765112014C895E87F2BF171651 /* SEError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B469A8B339ABEF7EF62B8CD642DC1F5C /* SEError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		7868B1282850748AF36606BC57179BCF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E87DAD844D91790BD9F4CC13064DF41B;
-			remoteInfo = "Pods-NokeMobileLibrary_Example";
-		};
-		796CB2BC34DABCA13F35DB4A32861968 /* PBXContainerItemProxy */ = {
+		442AFF272B49FD4317CC90B41F00A483 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 74C225F820BC2DA4D75303BCA002940C;
 			remoteInfo = PhoneKeyCore;
 		};
-		9DAD5C5D6C9CDF8C0E795664EC0F7567 /* PBXContainerItemProxy */ = {
+		4A0517E30E6B0B203A1D4A3C463B3674 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 74C225F820BC2DA4D75303BCA002940C;
 			remoteInfo = PhoneKeyCore;
 		};
-		A7C221202C71C3D1CB1126BD7C075A99 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = EB54DE6543B91371775BF8FBC346F8FD;
-			remoteInfo = "PhoneKeyCore-PhoneKeyCore";
-		};
-		ED202C2DD82AEFD5D24736F7FBB7F198 /* PBXContainerItemProxy */ = {
+		7D5F3053518D96FADE504A79F60A3EDA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 5368C314D14525BB8DF7D5B53B17D420;
 			remoteInfo = NokeMobileLibrary;
 		};
+		DBCBAD6419AEA490F2251736CA616D7B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EB54DE6543B91371775BF8FBC346F8FD;
+			remoteInfo = "PhoneKeyCore-PhoneKeyCore";
+		};
+		EB42D2AFCFFE68EDA449880A61847BFF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E87DAD844D91790BD9F4CC13064DF41B;
+			remoteInfo = "Pods-NokeMobileLibrary_Example";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		03CD7C88C6B614D343C5F5727CE5FB09 /* NokeProtocols.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NokeProtocols.swift; sourceTree = "<group>"; };
+		0255ED8EB3D0993C33F9E20614B2A7F9 /* NokeDeviceManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NokeDeviceManager.swift; sourceTree = "<group>"; };
+		03C357B0EA069CCE8F69BB89F95450E1 /* PhoneKeyAccessService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneKeyAccessService.swift; sourceTree = "<group>"; };
 		0464689D9F51DFC3C5902CE39F23658A /* Pods-NokeMobileLibrary_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-NokeMobileLibrary_Tests-dummy.m"; sourceTree = "<group>"; };
 		06959474ADD7998358AA9ED4FF6C2774 /* Encodable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Encodable.swift; path = PhoneKeyCore/Extensions/Encodable.swift; sourceTree = "<group>"; };
-		09CE7F050FDDC35C43CF692C503A6BC9 /* TI_aes_128.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; path = TI_aes_128.c; sourceTree = "<group>"; };
-		0AB5ECB02AEA54480ED850BE92DFBE5F /* Ion2SigningCoordinator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Ion2SigningCoordinator.swift; sourceTree = "<group>"; };
-		0D418F0737EB9665D032FEA8EBFD623E /* NokeMobileLibrary.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = NokeMobileLibrary.modulemap; sourceTree = "<group>"; };
-		0F8F2D6CB6350B21408763F052CE5A8C /* Pods_NokeMobileLibrary_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NokeMobileLibrary_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1201AED7535FC48C9CC4D7E55BD134B5 /* PhoneKeyPersistence.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneKeyPersistence.swift; sourceTree = "<group>"; };
-		13F471FDF733C278CE049EC2DEF3B2EF /* TI_aes_128.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TI_aes_128.h; sourceTree = "<group>"; };
+		0F8F2D6CB6350B21408763F052CE5A8C /* Pods-NokeMobileLibrary_Tests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-NokeMobileLibrary_Tests"; path = Pods_NokeMobileLibrary_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		18BECB744F23A5F931B7ACC44F717D8F /* Pods-NokeMobileLibrary_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-NokeMobileLibrary_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		19B9C21F737E2626926AA6BD2F7F0AE2 /* EncryptionUnlockStrategy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EncryptionUnlockStrategy.swift; sourceTree = "<group>"; };
 		1A754C283B34DFC92B3170F41884A35D /* Pods-NokeMobileLibrary_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NokeMobileLibrary_Tests-Info.plist"; sourceTree = "<group>"; };
 		1BDA4A1CE5229D8AAF3984722458505A /* PhoneKeyKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PhoneKeyKit.h; path = PhoneKeyCore/PhoneKeyKit.h; sourceTree = "<group>"; };
+		1CBBF5A368FD74F103EDF17FA19A291B /* NokeUnlockStrategy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NokeUnlockStrategy.swift; sourceTree = "<group>"; };
 		1EB8972BF67F2AE75C601B9E4B7736AE /* PhoneKeyCore-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PhoneKeyCore-umbrella.h"; sourceTree = "<group>"; };
 		2351DE3B412A04741DBC3F24A701315F /* PhoneKeyCore-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "PhoneKeyCore-Info.plist"; sourceTree = "<group>"; };
-		2560D8AED1064CE29B6A7172E6E149A6 /* NokeMobileLibrary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NokeMobileLibrary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2756B952595A0442DF69CA17C3DEC3B2 /* NokeMobileLibrary-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NokeMobileLibrary-prefix.pch"; sourceTree = "<group>"; };
-		28F1CA6FC4107250EB066B741105FC88 /* PhoneKeyCore.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhoneKeyCore.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		2560D8AED1064CE29B6A7172E6E149A6 /* NokeMobileLibrary */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = NokeMobileLibrary; path = NokeMobileLibrary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		25935053F50A09D7323A39C5A29A223F /* PhoneKeyCoreClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneKeyCoreClient.swift; sourceTree = "<group>"; };
+		28F1CA6FC4107250EB066B741105FC88 /* PhoneKeyCore-PhoneKeyCore */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "PhoneKeyCore-PhoneKeyCore"; path = PhoneKeyCore.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B2F22EBD084B06261F4559A2B543A9A /* PhoneKeyInfoResponse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PhoneKeyInfoResponse.swift; path = PhoneKeyCore/Models/Response/PhoneKeyInfoResponse.swift; sourceTree = "<group>"; };
+		2BB8F9C6D938B429516688A0EBA4E443 /* NokeMobileLibrary.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = NokeMobileLibrary.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		2E7BBAB107D0517204C50F395A29E006 /* KeychainHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeychainHelper.swift; path = PhoneKeyCore/Utils/KeychainHelper.swift; sourceTree = "<group>"; };
 		2F29E5F7EEDB83D0B063DAD0B5196072 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		2FEC5AAC72C51B43A3D18B921D5A7936 /* TI_aes_128.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TI_aes_128.h; sourceTree = "<group>"; };
 		376656360278B52E68368ADFDC1D99C4 /* PhoneKeyCommand.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PhoneKeyCommand.swift; path = PhoneKeyCore/Models/PhoneKeyCommand.swift; sourceTree = "<group>"; };
-		3DCE98D09564BEA3CF3B2747D75FE9A7 /* PhoneKeyAccessService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneKeyAccessService.swift; sourceTree = "<group>"; };
-		421E25A9C9779DCBB6DB0DBE61EFEB49 /* SigningUnlockStrategy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SigningUnlockStrategy.swift; sourceTree = "<group>"; };
+		40B49E7311048A1BBD5B18763A3953B5 /* TI_aes_128.c */ = {isa = PBXFileReference; includeInIndex = 1; path = TI_aes_128.c; sourceTree = "<group>"; };
 		456AECD2C9C58F64201B5A63638BCBAC /* PhoneKeyInfoRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PhoneKeyInfoRequest.swift; path = PhoneKeyCore/Models/Request/PhoneKeyInfoRequest.swift; sourceTree = "<group>"; };
 		499B54519805B634C83C0F99FAF62168 /* Pods-NokeMobileLibrary_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NokeMobileLibrary_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		49B32B4F537E5425F2FD80633319BFA1 /* Pods-NokeMobileLibrary_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-NokeMobileLibrary_Tests.modulemap"; sourceTree = "<group>"; };
+		4AC20259938A83B70E2C5C0432E02599 /* PhoneKeyCommandSigner.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneKeyCommandSigner.swift; sourceTree = "<group>"; };
 		4ADD7A39C673D105FABCEFA7A79A89B7 /* Pods-NokeMobileLibrary_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NokeMobileLibrary_Example-Info.plist"; sourceTree = "<group>"; };
-		4B9FCD8C7C9BD0B9B2F087F727937603 /* EncryptionUnlockStrategy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EncryptionUnlockStrategy.swift; sourceTree = "<group>"; };
-		5344C2DC1170FF1AEE7D82277B97C6FC /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		5A0E650E7A01BF7E001D56D458E343FD /* PhoneKeyCommandSigner.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneKeyCommandSigner.swift; sourceTree = "<group>"; };
+		58FF69BD9B7B6FBC056E57F70F0F0C31 /* NokeDevice.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NokeDevice.swift; sourceTree = "<group>"; };
+		5B4588D726B25EDC4F9B3B5854C947E8 /* NokeDevice+Encryption.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "NokeDevice+Encryption.swift"; sourceTree = "<group>"; };
+		5DC4537DC215FD01E953274C082B65B5 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		64324D56A800C12D343E4D642BEDBC88 /* Pods-NokeMobileLibrary_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NokeMobileLibrary_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		6536C962461F90B921677BDDD0B21BBE /* NokeMobileLibrary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NokeMobileLibrary.debug.xcconfig; sourceTree = "<group>"; };
-		65E35FB44D928C7D3074205EA15E55DE /* Ion2CharacteristicHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Ion2CharacteristicHandler.swift; sourceTree = "<group>"; };
+		652D733FE34B880098B9044789CFB9AF /* SigningUnlockStrategy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SigningUnlockStrategy.swift; sourceTree = "<group>"; };
+		66AA34D7C404F6C45E87B3CAF9C5D298 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		675321940E59B513DD5892CAD22BCAAB /* NokeDevice+Signing.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "NokeDevice+Signing.swift"; sourceTree = "<group>"; };
 		67B6A813363E2546A42A81D5493A7FAC /* PhoneKeyCore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PhoneKeyCore.swift; path = PhoneKeyCore/PhoneKeyCore.swift; sourceTree = "<group>"; };
+		68D4AB0ACCDA49BBF1E7F363AF928A19 /* PhoneKeyPersistence.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneKeyPersistence.swift; sourceTree = "<group>"; };
+		6A339F77B054AE88ABBCD4ABE5F588AF /* PhoneKeyFacade.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneKeyFacade.swift; sourceTree = "<group>"; };
 		6C98E1B5566263BDCFC938CC952F1BF7 /* PhoneKeyCore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PhoneKeyCore.debug.xcconfig; sourceTree = "<group>"; };
+		6D64386659E0ADEC2E34A224FD268AD7 /* NokeMobileLibrary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NokeMobileLibrary.debug.xcconfig; sourceTree = "<group>"; };
 		6E91AE0CBA97CA7E3D0CA90238144678 /* PhoneKeyCore-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PhoneKeyCore-dummy.m"; sourceTree = "<group>"; };
 		701AF96C887166F8F4119410D74EBDFF /* PhoneKeyAcl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PhoneKeyAcl.swift; path = PhoneKeyCore/Models/Response/PhoneKeyAcl.swift; sourceTree = "<group>"; };
 		7189A6F64D3BA7FAFD6725C80A65E2D1 /* Pods-NokeMobileLibrary_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-NokeMobileLibrary_Example-frameworks.sh"; sourceTree = "<group>"; };
 		7194349A9E107C9A90C62A9DB29E11B0 /* PhoneKeyAclRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PhoneKeyAclRequest.swift; path = PhoneKeyCore/Models/Request/PhoneKeyAclRequest.swift; sourceTree = "<group>"; };
-		7666D1CD42E10023097AC86516E60E08 /* PhoneKeyCoreClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneKeyCoreClient.swift; sourceTree = "<group>"; };
-		77AD4748D1EAF8886206AC47F30F8D91 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		84040877AAEAEDB2E1381D237B565E51 /* PhoneKeyBulkAclRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PhoneKeyBulkAclRequest.swift; path = PhoneKeyCore/Models/Request/PhoneKeyBulkAclRequest.swift; sourceTree = "<group>"; };
-		87CF1A844E3C9DD1E99B51011A0E5630 /* NokeMobileLibraryError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NokeMobileLibraryError.swift; sourceTree = "<group>"; };
 		8A72712BF40EDEC1D5A0BD90F792E37A /* Pods-NokeMobileLibrary_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-NokeMobileLibrary_Example-umbrella.h"; sourceTree = "<group>"; };
-		8A889AA3EA65A7982382583D46CC8AB9 /* NokeMobileLibrary-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "NokeMobileLibrary-Info.plist"; sourceTree = "<group>"; };
+		8DB8F59AF8BFD710596719F296E4E9B3 /* NokeMobileLibrary.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = NokeMobileLibrary.h; sourceTree = "<group>"; };
 		8EB76524E0CC69C522C6C61902CB5F92 /* Pods-NokeMobileLibrary_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NokeMobileLibrary_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		8EE0BD7F5BB6E9B63D9E1968D920B954 /* PhoneKeyCore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PhoneKeyCore.release.xcconfig; sourceTree = "<group>"; };
 		988014EE7313C3B2631EFE553DFC7121 /* PhoneKeyCore.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = PhoneKeyCore.modulemap; sourceTree = "<group>"; };
-		9A7CB4EC23E64D8CC6E1D1CA4413C40F /* NokeMobileLibrary-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NokeMobileLibrary-dummy.m"; sourceTree = "<group>"; };
+		9914BB6E3BF41F5EA94A53F89F6DB9CA /* module.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; name = module.modulemap; path = NokeMobileLibrary/module.modulemap; sourceTree = "<group>"; };
 		9BDB09A83AA7501067002BE987115CD7 /* Pods-NokeMobileLibrary_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NokeMobileLibrary_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9E151053178A1F70DBBFBB86CD7E7074 /* Pods-NokeMobileLibrary_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-NokeMobileLibrary_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		A265B5683120A736BA47B0505C66C1D3 /* PhoneKeyCore-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PhoneKeyCore-prefix.pch"; sourceTree = "<group>"; };
 		A49DC2A36693C4C8611869D6EFA43944 /* Pods-NokeMobileLibrary_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NokeMobileLibrary_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		B40F70E92FA524D300E9A44E /* NokeDevice+CBPeripheralDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NokeDevice+CBPeripheralDelegate.swift"; sourceTree = "<group>"; };
-		B40F70EB2FA524D300E9A44E /* NokeDevice+Encryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NokeDevice+Encryption.swift"; sourceTree = "<group>"; };
-		B40F70ED2FA524D300E9A44E /* NokePhoneKeyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NokePhoneKeyState.swift; sourceTree = "<group>"; };
-		B40F70EF2FA524D300E9A44E /* NokeDevice+Signing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NokeDevice+Signing.swift"; sourceTree = "<group>"; };
+		A90C27DFC5C8DA68640901E709DA549D /* NokeDefines.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NokeDefines.swift; sourceTree = "<group>"; };
+		AABCDAA9256F0BB80F8A41A32456BEC4 /* NokeMobileLibrary-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "NokeMobileLibrary-Info.plist"; sourceTree = "<group>"; };
+		AFA82BC68876A98FE0F9FF885186EBF7 /* NokeMobileLibrary-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NokeMobileLibrary-prefix.pch"; sourceTree = "<group>"; };
+		B32892714694C16FE9BA09FE782C4550 /* PhoneKeyModels.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneKeyModels.swift; sourceTree = "<group>"; };
 		B469A8B339ABEF7EF62B8CD642DC1F5C /* SEError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SEError.swift; path = PhoneKeyCore/Models/SEError.swift; sourceTree = "<group>"; };
-		B704DE978CA8DA7910E9E9401781B000 /* NokeMobileLibrary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NokeMobileLibrary.release.xcconfig; sourceTree = "<group>"; };
 		BCA974A4FA78B63F1077A40487F51046 /* Pods-NokeMobileLibrary_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NokeMobileLibrary_Example.release.xcconfig"; sourceTree = "<group>"; };
-		BE38F85EF98FEB721FC7D581672AC9F2 /* NokeUnlockStrategy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NokeUnlockStrategy.swift; sourceTree = "<group>"; };
+		C2A52580138C1047E70485D816402295 /* NokeMobileLibrary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NokeMobileLibrary.release.xcconfig; sourceTree = "<group>"; };
 		C330BC62C9ACD3F9E7AF138812EF298C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
+		C7CFE8EA22CCA440B6590FFF9F8F7435 /* NokeLibraryApiClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NokeLibraryApiClient.swift; sourceTree = "<group>"; };
 		C95251DB7DF7C49D003C7A18D5EDB745 /* PhoneKey.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PhoneKey.swift; path = PhoneKeyCore/Models/PhoneKey.swift; sourceTree = "<group>"; };
-		CBBBD605AAFC60E9F3D993FD766D6DAF /* NokeMobileLibrary.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = NokeMobileLibrary.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		CD71BE61BDF2DABDD62B19EED8BA99FA /* NokeDeviceManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NokeDeviceManager.swift; sourceTree = "<group>"; };
-		D7C7E66D7F967643A9610146438D0BA2 /* PhoneKeyModels.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneKeyModels.swift; sourceTree = "<group>"; };
-		D9BE34CBC9D5270FA4F75A0D6BAC504D /* NokeDevice.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NokeDevice.swift; sourceTree = "<group>"; };
-		DDBF7D91E98A75FDF110E9767254E54C /* NokeMobileLibrary.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NokeMobileLibrary.h; path = NokeMobileLibrary/NokeMobileLibrary.h; sourceTree = "<group>"; };
+		CFA8BC8A7E26D9624C3EE475BFAA6085 /* NokeMobileLibraryError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NokeMobileLibraryError.swift; sourceTree = "<group>"; };
+		CFCF47DF127BE6D179691EBE662A18C4 /* NokePhoneKeyState.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NokePhoneKeyState.swift; sourceTree = "<group>"; };
+		DE1AEA67BFBF461BCDCE75DE9A6B3685 /* NokeProtocols.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NokeProtocols.swift; sourceTree = "<group>"; };
 		DE9FC3416CEDA2C2E9518DE42740C820 /* ResourceBundle-PhoneKeyCore-PhoneKeyCore-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-PhoneKeyCore-PhoneKeyCore-Info.plist"; sourceTree = "<group>"; };
 		E45DF4A848F3C52FE794F286CCC34A64 /* Pods-NokeMobileLibrary_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-NokeMobileLibrary_Tests-umbrella.h"; sourceTree = "<group>"; };
-		E482914C97846C71C75223C31BD53C56 /* NokeLibraryApiClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NokeLibraryApiClient.swift; sourceTree = "<group>"; };
-		E535AA030BCDB92A705254815A019BB3 /* PhoneKeyFacade.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneKeyFacade.swift; sourceTree = "<group>"; };
+		EA48F04A964367CD6EE404D02D85FA2A /* NokeDevice+CBPeripheralDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "NokeDevice+CBPeripheralDelegate.swift"; sourceTree = "<group>"; };
 		EAA9A6EBF5DEE70BF8001785D662E779 /* Pods-NokeMobileLibrary_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-NokeMobileLibrary_Example-dummy.m"; sourceTree = "<group>"; };
-		EB6FE4A192B417DA35B360C3F1E384FE /* NokeDefines.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NokeDefines.swift; sourceTree = "<group>"; };
-		EC90D58D3A1F44882423B9942D170392 /* module.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; name = module.modulemap; path = NokeMobileLibrary/module.modulemap; sourceTree = "<group>"; };
-		FB9993AF115185E0A58502090CE51A5A /* Pods_NokeMobileLibrary_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NokeMobileLibrary_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED75CE53E7EC80866E5869F62B60FE61 /* Ion2SigningCoordinator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Ion2SigningCoordinator.swift; sourceTree = "<group>"; };
+		EF42BC45CEC1BE9AAA368C0F8E02D35A /* NokeMobileLibrary-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NokeMobileLibrary-dummy.m"; sourceTree = "<group>"; };
+		F0C82CB78DE542EDE62ACD46FE1AEE2F /* Ion2CharacteristicHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Ion2CharacteristicHandler.swift; sourceTree = "<group>"; };
+		FB9993AF115185E0A58502090CE51A5A /* Pods-NokeMobileLibrary_Example */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-NokeMobileLibrary_Example"; path = Pods_NokeMobileLibrary_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC98375B768E332FBB97B7A1439827E2 /* Pods-NokeMobileLibrary_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-NokeMobileLibrary_Example.modulemap"; sourceTree = "<group>"; };
-		FCE235816B18A33344F021C11677639A /* PhoneKeyCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PhoneKeyCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCE235816B18A33344F021C11677639A /* PhoneKeyCore */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = PhoneKeyCore; path = PhoneKeyCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD38EFD290C4B0409D4BC406AB3B0166 /* NokeMobileLibrary.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = NokeMobileLibrary.modulemap; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		1E30397A8DD3CC7BFB1DDEE86FB6CF5F /* Frameworks */ = {
+		1E1C9B403D047D682CAC210576DB60C9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		23B08F36379F86A19AF1BC7E8F9F71AD /* Frameworks */ = {
+		51204EC640E3E8E93CD9AA70E95289DE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7FF37537608238F70190EA4AC2F57F12 /* Foundation.framework in Frameworks */,
+				55DBDAFF461B3DABD0FB786665EC3AE7 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,53 +210,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D852A422A674F2D39FA510690DB0E3C6 /* Frameworks */ = {
+		B28874DBE6A0BE20A2C0BA73BED4CB3C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1798497882BDC7F39BF3E211DA4EFA36 /* Foundation.framework in Frameworks */,
-				43FE743908CD53EE96EFCF3F32883627 /* Security.framework in Frameworks */,
+				90EB990B66528CEFB7013711B13178B9 /* Foundation.framework in Frameworks */,
+				286D6939D35514A17FFFE42D1EA4E434 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		09C71D3855AD89EA0CECBBCA2E3DE9F6 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				03CD7C88C6B614D343C5F5727CE5FB09 /* NokeProtocols.swift */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
-		0E47C7D781863AADBF67A96C2536F8F8 /* C */ = {
-			isa = PBXGroup;
-			children = (
-				09CE7F050FDDC35C43CF692C503A6BC9 /* TI_aes_128.c */,
-				71825BA2FF9853D548C026DBD8C19985 /* include */,
-			);
-			name = C;
-			path = NokeMobileLibrary/C;
-			sourceTree = "<group>";
-		};
-		101C8A92105FB97C59069A06086E11DA /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				EB6FE4A192B417DA35B360C3F1E384FE /* NokeDefines.swift */,
-				D9BE34CBC9D5270FA4F75A0D6BAC504D /* NokeDevice.swift */,
-				CD71BE61BDF2DABDD62B19EED8BA99FA /* NokeDeviceManager.swift */,
-				E482914C97846C71C75223C31BD53C56 /* NokeLibraryApiClient.swift */,
-				5A0E650E7A01BF7E001D56D458E343FD /* PhoneKeyCommandSigner.swift */,
-				587ECB55283BA985B42E8B5313E564DF /* Ion2 */,
-				214A33D96DABE1102C59CAF36270CAFE /* PhoneKey */,
-				09C71D3855AD89EA0CECBBCA2E3DE9F6 /* Protocols */,
-				54129E1386BA65B5EA6A35084762D84B /* UnlockStrategy */,
-			);
-			name = Classes;
-			path = NokeMobileLibrary/Classes;
-			sourceTree = "<group>";
-		};
 		1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -265,16 +230,40 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		214A33D96DABE1102C59CAF36270CAFE /* PhoneKey */ = {
+		1E2AD7AD00D505CF9DC7005544DBA667 /* Encryption */ = {
 			isa = PBXGroup;
 			children = (
-				87CF1A844E3C9DD1E99B51011A0E5630 /* NokeMobileLibraryError.swift */,
-				3DCE98D09564BEA3CF3B2747D75FE9A7 /* PhoneKeyAccessService.swift */,
-				7666D1CD42E10023097AC86516E60E08 /* PhoneKeyCoreClient.swift */,
-				E535AA030BCDB92A705254815A019BB3 /* PhoneKeyFacade.swift */,
-				D7C7E66D7F967643A9610146438D0BA2 /* PhoneKeyModels.swift */,
-				1201AED7535FC48C9CC4D7E55BD134B5 /* PhoneKeyPersistence.swift */,
+				5B4588D726B25EDC4F9B3B5854C947E8 /* NokeDevice+Encryption.swift */,
 			);
+			name = Encryption;
+			path = Encryption;
+			sourceTree = "<group>";
+		};
+		24A454F8D5D1EDEA8E3A4C3BBF4C3DFD /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				FD38EFD290C4B0409D4BC406AB3B0166 /* NokeMobileLibrary.modulemap */,
+				EF42BC45CEC1BE9AAA368C0F8E02D35A /* NokeMobileLibrary-dummy.m */,
+				AABCDAA9256F0BB80F8A41A32456BEC4 /* NokeMobileLibrary-Info.plist */,
+				AFA82BC68876A98FE0F9FF885186EBF7 /* NokeMobileLibrary-prefix.pch */,
+				6D64386659E0ADEC2E34A224FD268AD7 /* NokeMobileLibrary.debug.xcconfig */,
+				C2A52580138C1047E70485D816402295 /* NokeMobileLibrary.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/NokeMobileLibrary";
+			sourceTree = "<group>";
+		};
+		2A04FB02CD46830FB8CCCBF01523488E /* PhoneKey */ = {
+			isa = PBXGroup;
+			children = (
+				CFA8BC8A7E26D9624C3EE475BFAA6085 /* NokeMobileLibraryError.swift */,
+				03C357B0EA069CCE8F69BB89F95450E1 /* PhoneKeyAccessService.swift */,
+				25935053F50A09D7323A39C5A29A223F /* PhoneKeyCoreClient.swift */,
+				6A339F77B054AE88ABBCD4ABE5F588AF /* PhoneKeyFacade.swift */,
+				B32892714694C16FE9BA09FE782C4550 /* PhoneKeyModels.swift */,
+				68D4AB0ACCDA49BBF1E7F363AF928A19 /* PhoneKeyPersistence.swift */,
+			);
+			name = PhoneKey;
 			path = PhoneKey;
 			sourceTree = "<group>";
 		};
@@ -303,23 +292,25 @@
 			path = "../Target Support Files/PhoneKeyCore";
 			sourceTree = "<group>";
 		};
-		54129E1386BA65B5EA6A35084762D84B /* UnlockStrategy */ = {
+		633887F0065D44B5AB86DF52C052B322 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				4B9FCD8C7C9BD0B9B2F087F727937603 /* EncryptionUnlockStrategy.swift */,
-				BE38F85EF98FEB721FC7D581672AC9F2 /* NokeUnlockStrategy.swift */,
-				421E25A9C9779DCBB6DB0DBE61EFEB49 /* SigningUnlockStrategy.swift */,
+				DE1AEA67BFBF461BCDCE75DE9A6B3685 /* NokeProtocols.swift */,
 			);
-			path = UnlockStrategy;
+			name = Protocols;
+			path = Protocols;
 			sourceTree = "<group>";
 		};
-		587ECB55283BA985B42E8B5313E564DF /* Ion2 */ = {
+		63F7B286551ED45D087625F313A4C4A4 /* NokeDevice */ = {
 			isa = PBXGroup;
 			children = (
-				65E35FB44D928C7D3074205EA15E55DE /* Ion2CharacteristicHandler.swift */,
-				0AB5ECB02AEA54480ED850BE92DFBE5F /* Ion2SigningCoordinator.swift */,
+				C090A6D4187088BECB1EE4311C6F34CF /* CBPeripheralDelegate */,
+				1E2AD7AD00D505CF9DC7005544DBA667 /* Encryption */,
+				844C5ED66FEC0BE59DD20F028EE5085A /* NokePhoneKeyStateDelegate */,
+				687D3E79929478B630CC6EF7BE535306 /* Signing */,
 			);
-			path = Ion2;
+			name = NokeDevice;
+			path = NokeDevice;
 			sourceTree = "<group>";
 		};
 		67ECC6B34B831F78B97631B91BD25131 /* Pods-NokeMobileLibrary_Example */ = {
@@ -337,6 +328,15 @@
 			);
 			name = "Pods-NokeMobileLibrary_Example";
 			path = "Target Support Files/Pods-NokeMobileLibrary_Example";
+			sourceTree = "<group>";
+		};
+		687D3E79929478B630CC6EF7BE535306 /* Signing */ = {
+			isa = PBXGroup;
+			children = (
+				675321940E59B513DD5892CAD22BCAAB /* NokeDevice+Signing.swift */,
+			);
+			name = Signing;
+			path = Signing;
 			sourceTree = "<group>";
 		};
 		6D847E2180680D267ABFCA7A1C9AA426 /* Pods-NokeMobileLibrary_Tests */ = {
@@ -364,12 +364,24 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		71825BA2FF9853D548C026DBD8C19985 /* include */ = {
+		7B1989CB6DE929724CE2BD9E5626FD87 /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				13F471FDF733C278CE049EC2DEF3B2EF /* TI_aes_128.h */,
+				66AA34D7C404F6C45E87B3CAF9C5D298 /* LICENSE */,
+				9914BB6E3BF41F5EA94A53F89F6DB9CA /* module.modulemap */,
+				2BB8F9C6D938B429516688A0EBA4E443 /* NokeMobileLibrary.podspec */,
+				5DC4537DC215FD01E953274C082B65B5 /* README.md */,
 			);
-			path = include;
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		844C5ED66FEC0BE59DD20F028EE5085A /* NokePhoneKeyStateDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				CFCF47DF127BE6D179691EBE662A18C4 /* NokePhoneKeyState.swift */,
+			);
+			name = NokePhoneKeyStateDelegate;
+			path = NokePhoneKeyStateDelegate;
 			sourceTree = "<group>";
 		};
 		8887CE8EDB5E9FD567159E334E13DD0C /* PhoneKeyCore */ = {
@@ -389,17 +401,18 @@
 				B469A8B339ABEF7EF62B8CD642DC1F5C /* SEError.swift */,
 				3DF018CD64112342A532FD429594DDBE /* Support Files */,
 			);
+			name = PhoneKeyCore;
 			path = PhoneKeyCore;
 			sourceTree = "<group>";
 		};
 		8C034A7B704EED3C791F56362A32C416 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2560D8AED1064CE29B6A7172E6E149A6 /* NokeMobileLibrary.framework */,
-				FCE235816B18A33344F021C11677639A /* PhoneKeyCore.framework */,
-				28F1CA6FC4107250EB066B741105FC88 /* PhoneKeyCore.bundle */,
-				FB9993AF115185E0A58502090CE51A5A /* Pods_NokeMobileLibrary_Example.framework */,
-				0F8F2D6CB6350B21408763F052CE5A8C /* Pods_NokeMobileLibrary_Tests.framework */,
+				2560D8AED1064CE29B6A7172E6E149A6 /* NokeMobileLibrary */,
+				FCE235816B18A33344F021C11677639A /* PhoneKeyCore */,
+				28F1CA6FC4107250EB066B741105FC88 /* PhoneKeyCore-PhoneKeyCore */,
+				FB9993AF115185E0A58502090CE51A5A /* Pods-NokeMobileLibrary_Example */,
+				0F8F2D6CB6350B21408763F052CE5A8C /* Pods-NokeMobileLibrary_Tests */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -412,84 +425,73 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		A4127DDAAE4292BB7D5D04DDB2CA5F00 /* Development Pods */ = {
+		93832E9737A0E5DD19FC4A2E8BA57888 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				DD1ED48B1D7F2720CB4923831FBFCED5 /* NokeMobileLibrary */,
+				63F7B286551ED45D087625F313A4C4A4 /* NokeDevice */,
 			);
-			name = "Development Pods";
+			name = Extensions;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
-		AA2AF0B1CF87090E3761733FF481C695 /* Support Files */ = {
+		951FF751DBFA2E2D2C648D0F107F4537 /* Ion2 */ = {
 			isa = PBXGroup;
 			children = (
-				0D418F0737EB9665D032FEA8EBFD623E /* NokeMobileLibrary.modulemap */,
-				9A7CB4EC23E64D8CC6E1D1CA4413C40F /* NokeMobileLibrary-dummy.m */,
-				8A889AA3EA65A7982382583D46CC8AB9 /* NokeMobileLibrary-Info.plist */,
-				2756B952595A0442DF69CA17C3DEC3B2 /* NokeMobileLibrary-prefix.pch */,
-				6536C962461F90B921677BDDD0B21BBE /* NokeMobileLibrary.debug.xcconfig */,
-				B704DE978CA8DA7910E9E9401781B000 /* NokeMobileLibrary.release.xcconfig */,
+				F0C82CB78DE542EDE62ACD46FE1AEE2F /* Ion2CharacteristicHandler.swift */,
+				ED75CE53E7EC80866E5869F62B60FE61 /* Ion2SigningCoordinator.swift */,
 			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/NokeMobileLibrary";
+			name = Ion2;
+			path = Ion2;
 			sourceTree = "<group>";
 		};
-		B40F70EA2FA524D300E9A44E /* CBPeripheralDelegate */ = {
+		9644FCF965E085B05CD6E6A1E432368C /* NokeMobileLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				B40F70E92FA524D300E9A44E /* NokeDevice+CBPeripheralDelegate.swift */,
+				8DB8F59AF8BFD710596719F296E4E9B3 /* NokeMobileLibrary.h */,
+				F10C8F95BE39F69EEF1D2A2FCFCBE869 /* C */,
+				DCD3D2E78A34B9C807EA47A7DDC8C418 /* Classes */,
 			);
+			name = NokeMobileLibrary;
+			path = NokeMobileLibrary;
+			sourceTree = "<group>";
+		};
+		9AA194C00EE799961698C3DE6699B1DF /* UnlockStrategy */ = {
+			isa = PBXGroup;
+			children = (
+				19B9C21F737E2626926AA6BD2F7F0AE2 /* EncryptionUnlockStrategy.swift */,
+				1CBBF5A368FD74F103EDF17FA19A291B /* NokeUnlockStrategy.swift */,
+				652D733FE34B880098B9044789CFB9AF /* SigningUnlockStrategy.swift */,
+			);
+			name = UnlockStrategy;
+			path = UnlockStrategy;
+			sourceTree = "<group>";
+		};
+		C090A6D4187088BECB1EE4311C6F34CF /* CBPeripheralDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				EA48F04A964367CD6EE404D02D85FA2A /* NokeDevice+CBPeripheralDelegate.swift */,
+			);
+			name = CBPeripheralDelegate;
 			path = CBPeripheralDelegate;
 			sourceTree = "<group>";
 		};
-		B40F70EC2FA524D300E9A44E /* Encryption */ = {
+		CE182C96A3D351C9D9F4467D846BF8DE /* NokeMobileLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				B40F70EB2FA524D300E9A44E /* NokeDevice+Encryption.swift */,
+				93832E9737A0E5DD19FC4A2E8BA57888 /* Extensions */,
+				9644FCF965E085B05CD6E6A1E432368C /* NokeMobileLibrary */,
+				7B1989CB6DE929724CE2BD9E5626FD87 /* Pod */,
+				24A454F8D5D1EDEA8E3A4C3BBF4C3DFD /* Support Files */,
 			);
-			path = Encryption;
-			sourceTree = "<group>";
-		};
-		B40F70EE2FA524D300E9A44E /* NokePhoneKeyStateDelegate */ = {
-			isa = PBXGroup;
-			children = (
-				B40F70ED2FA524D300E9A44E /* NokePhoneKeyState.swift */,
-			);
-			path = NokePhoneKeyStateDelegate;
-			sourceTree = "<group>";
-		};
-		B40F70F02FA524D300E9A44E /* Signing */ = {
-			isa = PBXGroup;
-			children = (
-				B40F70EF2FA524D300E9A44E /* NokeDevice+Signing.swift */,
-			);
-			path = Signing;
-			sourceTree = "<group>";
-		};
-		B40F70F12FA524D300E9A44E /* NokeDevice */ = {
-			isa = PBXGroup;
-			children = (
-				B40F70EA2FA524D300E9A44E /* CBPeripheralDelegate */,
-				B40F70EC2FA524D300E9A44E /* Encryption */,
-				B40F70EE2FA524D300E9A44E /* NokePhoneKeyStateDelegate */,
-				B40F70F02FA524D300E9A44E /* Signing */,
-			);
-			path = NokeDevice;
-			sourceTree = "<group>";
-		};
-		B40F70F22FA524D300E9A44E /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				B40F70F12FA524D300E9A44E /* NokeDevice */,
-			);
-			path = Extensions;
+			name = NokeMobileLibrary;
+			path = ../..;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				A4127DDAAE4292BB7D5D04DDB2CA5F00 /* Development Pods */,
+				D43FFC6EB42FDAA6561868896B13D372 /* Development Pods */,
 				1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */,
 				8FAC171994E047C7D91BEFF4DAB02224 /* Pods */,
 				8C034A7B704EED3C791F56362A32C416 /* Products */,
@@ -497,49 +499,59 @@
 			);
 			sourceTree = "<group>";
 		};
-		DD1ED48B1D7F2720CB4923831FBFCED5 /* NokeMobileLibrary */ = {
+		D43FFC6EB42FDAA6561868896B13D372 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B40F70F22FA524D300E9A44E /* Extensions */,
-				DDBF7D91E98A75FDF110E9767254E54C /* NokeMobileLibrary.h */,
-				0E47C7D781863AADBF67A96C2536F8F8 /* C */,
-				101C8A92105FB97C59069A06086E11DA /* Classes */,
-				E6F957A75725626D8B33659F7168226B /* Pod */,
-				AA2AF0B1CF87090E3761733FF481C695 /* Support Files */,
+				CE182C96A3D351C9D9F4467D846BF8DE /* NokeMobileLibrary */,
 			);
-			name = NokeMobileLibrary;
-			path = ../..;
+			name = "Development Pods";
 			sourceTree = "<group>";
 		};
-		E6F957A75725626D8B33659F7168226B /* Pod */ = {
+		D7059F5EA9AF4F2603E0D99508E053FC /* include */ = {
 			isa = PBXGroup;
 			children = (
-				5344C2DC1170FF1AEE7D82277B97C6FC /* LICENSE */,
-				EC90D58D3A1F44882423B9942D170392 /* module.modulemap */,
-				CBBBD605AAFC60E9F3D993FD766D6DAF /* NokeMobileLibrary.podspec */,
-				77AD4748D1EAF8886206AC47F30F8D91 /* README.md */,
+				2FEC5AAC72C51B43A3D18B921D5A7936 /* TI_aes_128.h */,
 			);
-			name = Pod;
+			name = include;
+			path = include;
+			sourceTree = "<group>";
+		};
+		DCD3D2E78A34B9C807EA47A7DDC8C418 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				A90C27DFC5C8DA68640901E709DA549D /* NokeDefines.swift */,
+				58FF69BD9B7B6FBC056E57F70F0F0C31 /* NokeDevice.swift */,
+				0255ED8EB3D0993C33F9E20614B2A7F9 /* NokeDeviceManager.swift */,
+				C7CFE8EA22CCA440B6590FFF9F8F7435 /* NokeLibraryApiClient.swift */,
+				4AC20259938A83B70E2C5C0432E02599 /* PhoneKeyCommandSigner.swift */,
+				951FF751DBFA2E2D2C648D0F107F4537 /* Ion2 */,
+				2A04FB02CD46830FB8CCCBF01523488E /* PhoneKey */,
+				633887F0065D44B5AB86DF52C052B322 /* Protocols */,
+				9AA194C00EE799961698C3DE6699B1DF /* UnlockStrategy */,
+			);
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		F10C8F95BE39F69EEF1D2A2FCFCBE869 /* C */ = {
+			isa = PBXGroup;
+			children = (
+				40B49E7311048A1BBD5B18763A3953B5 /* TI_aes_128.c */,
+				D7059F5EA9AF4F2603E0D99508E053FC /* include */,
+			);
+			name = C;
+			path = C;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		15F98E0CF9FB3910C55932A8D9A8B349 /* Headers */ = {
+		4B245409C6D4631220B86B02126DA0CD /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDE75E47D328E16FC76067DD4E5507C7 /* NokeMobileLibrary.h in Headers */,
-				A608D1251D71EA24121575272BE5E7DA /* TI_aes_128.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1DD45AEF387BFC59C11131C7584102B2 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7726E57F55E0598A12775FD96DAF3025 /* PhoneKeyCore-umbrella.h in Headers */,
-				364783A55A9FE3EE7EB964A461906B52 /* PhoneKeyKit.h in Headers */,
+				55E1ABD736134455E0BFF06C57A51FBF /* NokeMobileLibrary.h in Headers */,
+				827F96291C69DE72E2AC4B4BF15FEC27 /* TI_aes_128.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -548,6 +560,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				70325472B42A8191641975B28B62ABC9 /* Pods-NokeMobileLibrary_Example-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9D5E509E139E7D5A6599FBC651D1436D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9D7629347BA1CB443D33FCCD125DDB9B /* PhoneKeyCore-umbrella.h in Headers */,
+				0F2F386901367B68613F8B233542E558 /* PhoneKeyKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,49 +595,49 @@
 			buildRules = (
 			);
 			dependencies = (
-				D9F2D33464EC0BDE63F602F79F2364FC /* PBXTargetDependency */,
+				823B43BFBB4DDE3F6C7FB3D8732830ED /* PBXTargetDependency */,
 			);
 			name = "Pods-NokeMobileLibrary_Tests";
 			productName = Pods_NokeMobileLibrary_Tests;
-			productReference = 0F8F2D6CB6350B21408763F052CE5A8C /* Pods_NokeMobileLibrary_Tests.framework */;
+			productReference = 0F8F2D6CB6350B21408763F052CE5A8C /* Pods-NokeMobileLibrary_Tests */;
 			productType = "com.apple.product-type.framework";
 		};
 		5368C314D14525BB8DF7D5B53B17D420 /* NokeMobileLibrary */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2BE868B76CAEEFE3E9BCCAF3C74AB02E /* Build configuration list for PBXNativeTarget "NokeMobileLibrary" */;
+			buildConfigurationList = AAD56114F75047520D19099E802BAB2F /* Build configuration list for PBXNativeTarget "NokeMobileLibrary" */;
 			buildPhases = (
-				15F98E0CF9FB3910C55932A8D9A8B349 /* Headers */,
-				A170ADF222236577A8391D8164E4A142 /* Sources */,
-				23B08F36379F86A19AF1BC7E8F9F71AD /* Frameworks */,
-				3FF1B3B5E0A6A8B985579E18E3B42DE1 /* Resources */,
+				4B245409C6D4631220B86B02126DA0CD /* Headers */,
+				8ED02AA5CD5344363FFEF47DD6A02D12 /* Sources */,
+				51204EC640E3E8E93CD9AA70E95289DE /* Frameworks */,
+				0F86AEB6E5A80B0543EEFD79340069C1 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				0EA6C7C05EC80E96476A60A0A14E2273 /* PBXTargetDependency */,
+				2042F087A5AE6C3F85DDFC5563B878D5 /* PBXTargetDependency */,
 			);
 			name = NokeMobileLibrary;
 			productName = NokeMobileLibrary;
-			productReference = 2560D8AED1064CE29B6A7172E6E149A6 /* NokeMobileLibrary.framework */;
+			productReference = 2560D8AED1064CE29B6A7172E6E149A6 /* NokeMobileLibrary */;
 			productType = "com.apple.product-type.framework";
 		};
 		74C225F820BC2DA4D75303BCA002940C /* PhoneKeyCore */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2C5D4B3A5237052D428A6AF025D05F7E /* Build configuration list for PBXNativeTarget "PhoneKeyCore" */;
+			buildConfigurationList = 5EE6E1F7D2F06D5692766D6BE208B301 /* Build configuration list for PBXNativeTarget "PhoneKeyCore" */;
 			buildPhases = (
-				1DD45AEF387BFC59C11131C7584102B2 /* Headers */,
-				DD5C60CAA5B61EF680C9C87A4EEB1647 /* Sources */,
-				D852A422A674F2D39FA510690DB0E3C6 /* Frameworks */,
-				3C8E16C1FC6ED6AB851288232126E2F7 /* Resources */,
+				9D5E509E139E7D5A6599FBC651D1436D /* Headers */,
+				C4D052C3840E5A87B46132BD09F4EA6C /* Sources */,
+				B28874DBE6A0BE20A2C0BA73BED4CB3C /* Frameworks */,
+				5C01F3A6A1346637E1AD37F9BE7026B3 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				7C4C4BB5CBACB000396C085D30D80782 /* PBXTargetDependency */,
+				B0697A37738DD0C83E706D6016F5ED9D /* PBXTargetDependency */,
 			);
 			name = PhoneKeyCore;
 			productName = PhoneKeyCore;
-			productReference = FCE235816B18A33344F021C11677639A /* PhoneKeyCore.framework */;
+			productReference = FCE235816B18A33344F021C11677639A /* PhoneKeyCore */;
 			productType = "com.apple.product-type.framework";
 		};
 		E87DAD844D91790BD9F4CC13064DF41B /* Pods-NokeMobileLibrary_Example */ = {
@@ -631,21 +652,21 @@
 			buildRules = (
 			);
 			dependencies = (
-				76B7A12C8D142724CF5C1432504601AE /* PBXTargetDependency */,
-				7F13379C66A2EE2E69587A468CDCA382 /* PBXTargetDependency */,
+				AA7CF897F83E6390DD49FC0184C82FF0 /* PBXTargetDependency */,
+				36362E4FF6CA613F1AC3FB7F5A802E67 /* PBXTargetDependency */,
 			);
 			name = "Pods-NokeMobileLibrary_Example";
 			productName = Pods_NokeMobileLibrary_Example;
-			productReference = FB9993AF115185E0A58502090CE51A5A /* Pods_NokeMobileLibrary_Example.framework */;
+			productReference = FB9993AF115185E0A58502090CE51A5A /* Pods-NokeMobileLibrary_Example */;
 			productType = "com.apple.product-type.framework";
 		};
 		EB54DE6543B91371775BF8FBC346F8FD /* PhoneKeyCore-PhoneKeyCore */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 277F850E360162F5C8F4D52F45E24999 /* Build configuration list for PBXNativeTarget "PhoneKeyCore-PhoneKeyCore" */;
+			buildConfigurationList = 92A0F550B96D20E6076ED551656BD562 /* Build configuration list for PBXNativeTarget "PhoneKeyCore-PhoneKeyCore" */;
 			buildPhases = (
-				F572B4BAA1415FAD8804E1B8C7CF724D /* Sources */,
-				1E30397A8DD3CC7BFB1DDEE86FB6CF5F /* Frameworks */,
-				96050106DB14F67831EC754C35A478FE /* Resources */,
+				FDBDBFE99DF37850AD3949321E30E97E /* Sources */,
+				1E1C9B403D047D682CAC210576DB60C9 /* Frameworks */,
+				38709A897A993C861578E7343C780365 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -653,7 +674,7 @@
 			);
 			name = "PhoneKeyCore-PhoneKeyCore";
 			productName = PhoneKeyCore;
-			productReference = 28F1CA6FC4107250EB066B741105FC88 /* PhoneKeyCore.bundle */;
+			productReference = 28F1CA6FC4107250EB066B741105FC88 /* PhoneKeyCore-PhoneKeyCore */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -674,6 +695,8 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			minimizedProjectReferenceProxies = 0;
+			preferredProjectObjectVersion = 77;
 			productRefGroup = 8C034A7B704EED3C791F56362A32C416 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -688,15 +711,14 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		3C8E16C1FC6ED6AB851288232126E2F7 /* Resources */ = {
+		0F86AEB6E5A80B0543EEFD79340069C1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6792A1DA711796D0B170BB13107E171E /* PhoneKeyCore.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3FF1B3B5E0A6A8B985579E18E3B42DE1 /* Resources */ = {
+		38709A897A993C861578E7343C780365 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -710,10 +732,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		96050106DB14F67831EC754C35A478FE /* Resources */ = {
+		5C01F3A6A1346637E1AD37F9BE7026B3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E36C0301E7A68509A86AAE20E85FDCEB /* PhoneKeyCore-PhoneKeyCore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -735,33 +758,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A170ADF222236577A8391D8164E4A142 /* Sources */ = {
+		8ED02AA5CD5344363FFEF47DD6A02D12 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85C145271BE526DAE7889A65AA336CD5 /* EncryptionUnlockStrategy.swift in Sources */,
-				F79630E7614D2F8B64B8FA7A58F79B48 /* Ion2CharacteristicHandler.swift in Sources */,
-				25D6DB78223DF15A32FC5C03AD71588A /* Ion2SigningCoordinator.swift in Sources */,
-				4E83C90F2186A06200E1360E1A44C140 /* NokeDefines.swift in Sources */,
-				551BE00761FD994BF5C98B27A89E7022 /* NokeDevice.swift in Sources */,
-				7ED15659161D9A3358C80C548DE89BD3 /* NokeDeviceManager.swift in Sources */,
-				B40F70F32FA524D300E9A44E /* NokePhoneKeyState.swift in Sources */,
-				B40F70F42FA524D300E9A44E /* NokeDevice+Encryption.swift in Sources */,
-				B40F70F52FA524D300E9A44E /* NokeDevice+CBPeripheralDelegate.swift in Sources */,
-				B40F70F62FA524D300E9A44E /* NokeDevice+Signing.swift in Sources */,
-				381054B5F5C8E38C80287ECFE08FF9F4 /* NokeLibraryApiClient.swift in Sources */,
-				AC06B6C4319ED4B091C088676D07292B /* NokeMobileLibrary-dummy.m in Sources */,
-				A8A4809222D3E77C30E72E2885F2DB10 /* NokeMobileLibraryError.swift in Sources */,
-				E4411C8693E6BE36756AEF0EFDB9704B /* NokeProtocols.swift in Sources */,
-				9D12CBEC30DD5E8F078BDA05A96F3ECA /* NokeUnlockStrategy.swift in Sources */,
-				E0E633F52697BB3E0F6429EF5FA24A57 /* PhoneKeyAccessService.swift in Sources */,
-				7BDA182898BC23C76D691EECC2829310 /* PhoneKeyCommandSigner.swift in Sources */,
-				7B2B3F8B30EDDCD6628AB64B1425BAB5 /* PhoneKeyCoreClient.swift in Sources */,
-				CEE04E99461643FDB9C5113B49CA3FB6 /* PhoneKeyFacade.swift in Sources */,
-				1EA5BA7B4C4C94EC818DBAEA0C89DEAF /* PhoneKeyModels.swift in Sources */,
-				FB257683019CF6A8A2C5B8EC63A191B9 /* PhoneKeyPersistence.swift in Sources */,
-				154036C4EDC48A8864B05F77EF05F809 /* SigningUnlockStrategy.swift in Sources */,
-				1B21D8F433A7181FD70B67BBC612B7A1 /* TI_aes_128.c in Sources */,
+				485C98A70940490463EC04591EB2F2F7 /* EncryptionUnlockStrategy.swift in Sources */,
+				2694F6A454652BAF113DC9CED0BB9B2B /* Ion2CharacteristicHandler.swift in Sources */,
+				715CE7DBF46639322F6E910988906932 /* Ion2SigningCoordinator.swift in Sources */,
+				70DC9A247562B9361E155B6DEA605CB8 /* NokeDefines.swift in Sources */,
+				24A3C71362E1039C36690D4E8BD77386 /* NokeDevice.swift in Sources */,
+				F6C285F646B6D3F1BEDE757AC51A610C /* NokeDevice+CBPeripheralDelegate.swift in Sources */,
+				002E1D9390652FD7F72678625A3C3AC2 /* NokeDevice+Encryption.swift in Sources */,
+				C89E77E7D312124FB3EACAD78047358A /* NokeDevice+Signing.swift in Sources */,
+				8439CA8CBF95B986BE7130E08C04F3DA /* NokeDeviceManager.swift in Sources */,
+				E32A7C324E6575402D4E63AD4F3F35C5 /* NokeLibraryApiClient.swift in Sources */,
+				144997BCE4EB2483F9DA1F82180FCAD6 /* NokeMobileLibrary-dummy.m in Sources */,
+				B7BC7E61B3671C0F363F8439BB0B2468 /* NokeMobileLibraryError.swift in Sources */,
+				BD422FB1CA0B9A6CC856DFEF6427BBDC /* NokePhoneKeyState.swift in Sources */,
+				1D190613685E299015E84F5BF81BE059 /* NokeProtocols.swift in Sources */,
+				F17241C6EFB15CA46F7DFB8CEDD7FDF6 /* NokeUnlockStrategy.swift in Sources */,
+				61C164DAD87E45E1253D72269CAEAA4B /* PhoneKeyAccessService.swift in Sources */,
+				5FE989CBDD1A9BCF337A0067D619715C /* PhoneKeyCommandSigner.swift in Sources */,
+				5548832F9B373BFB1E108D56AFD1F1D3 /* PhoneKeyCoreClient.swift in Sources */,
+				CD01254032AD8DB83D04D013F7862740 /* PhoneKeyFacade.swift in Sources */,
+				F4A1DAAA31B5E93B53F3D2C8D79A71B9 /* PhoneKeyModels.swift in Sources */,
+				A4ADCFC025DA2D264BD926A04D46CC32 /* PhoneKeyPersistence.swift in Sources */,
+				811517DC4782EBB4836711D08F0311BD /* SigningUnlockStrategy.swift in Sources */,
+				59D7E8571B2810AAA41F71BA56509DAE /* TI_aes_128.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -773,26 +796,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DD5C60CAA5B61EF680C9C87A4EEB1647 /* Sources */ = {
+		C4D052C3840E5A87B46132BD09F4EA6C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D732CA211E8EC77A72CA1970BF13D5 /* Encodable.swift in Sources */,
-				AD344AA058BB494E0E669E28067967E1 /* KeychainHelper.swift in Sources */,
-				8640BCE3E2AFB30BB722D651DF415E89 /* PhoneKey.swift in Sources */,
-				C463D1EB6625C4543976E43D01C96077 /* PhoneKeyAcl.swift in Sources */,
-				F5F8FA729B081123DAF10B7D2A2DE601 /* PhoneKeyAclRequest.swift in Sources */,
-				19EE1A408518D11AFDFDA960B3152B80 /* PhoneKeyBulkAclRequest.swift in Sources */,
-				ACE297CC68B7C833AF67EA1204B10F9A /* PhoneKeyCommand.swift in Sources */,
-				6BDC225355882DB4FBC6E9750CA435F0 /* PhoneKeyCore.swift in Sources */,
-				D7E044039EFC2D67DA01826E6B080EB3 /* PhoneKeyCore-dummy.m in Sources */,
-				3DE19C48A6BBC593BE1EC5A246871BD0 /* PhoneKeyInfoRequest.swift in Sources */,
-				395114D7894E5517D8D81C13D94A0430 /* PhoneKeyInfoResponse.swift in Sources */,
-				459441E3AA09DB83CEAE5BFD0FE5738B /* SEError.swift in Sources */,
+				230C878D7F80DD312BED5C5521D91114 /* Encodable.swift in Sources */,
+				AD9578807BC4918B257E5591739862EC /* KeychainHelper.swift in Sources */,
+				06F247072E84A609A72D1236256ADBB7 /* PhoneKey.swift in Sources */,
+				000BC0BDBACB2EAD7BB792ABD7293272 /* PhoneKeyAcl.swift in Sources */,
+				A213C1A8901B7E6FBD7C3414C9424BE1 /* PhoneKeyAclRequest.swift in Sources */,
+				7F9887D1E649A8B0BB540BA8BFD148C1 /* PhoneKeyBulkAclRequest.swift in Sources */,
+				B24DA60E3243467CFD73C68CD3329397 /* PhoneKeyCommand.swift in Sources */,
+				1F5643A0F1562700EDFD6B377CE5BD83 /* PhoneKeyCore.swift in Sources */,
+				32892F78D550BAEDBD1FE9D8BCC4C516 /* PhoneKeyCore-dummy.m in Sources */,
+				863D21FB31C1D1610BBB50231ADA5FD1 /* PhoneKeyInfoRequest.swift in Sources */,
+				7DAB0E5B06A3CB13E59328E0582BC8B2 /* PhoneKeyInfoResponse.swift in Sources */,
+				FAB0A5765112014C895E87F2BF171651 /* SEError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F572B4BAA1415FAD8804E1B8C7CF724D /* Sources */ = {
+		FDBDBFE99DF37850AD3949321E30E97E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -802,42 +825,42 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0EA6C7C05EC80E96476A60A0A14E2273 /* PBXTargetDependency */ = {
+		2042F087A5AE6C3F85DDFC5563B878D5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = PhoneKeyCore;
 			target = 74C225F820BC2DA4D75303BCA002940C /* PhoneKeyCore */;
-			targetProxy = 796CB2BC34DABCA13F35DB4A32861968 /* PBXContainerItemProxy */;
+			targetProxy = 442AFF272B49FD4317CC90B41F00A483 /* PBXContainerItemProxy */;
 		};
-		76B7A12C8D142724CF5C1432504601AE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = NokeMobileLibrary;
-			target = 5368C314D14525BB8DF7D5B53B17D420 /* NokeMobileLibrary */;
-			targetProxy = ED202C2DD82AEFD5D24736F7FBB7F198 /* PBXContainerItemProxy */;
-		};
-		7C4C4BB5CBACB000396C085D30D80782 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "PhoneKeyCore-PhoneKeyCore";
-			target = EB54DE6543B91371775BF8FBC346F8FD /* PhoneKeyCore-PhoneKeyCore */;
-			targetProxy = A7C221202C71C3D1CB1126BD7C075A99 /* PBXContainerItemProxy */;
-		};
-		7F13379C66A2EE2E69587A468CDCA382 /* PBXTargetDependency */ = {
+		36362E4FF6CA613F1AC3FB7F5A802E67 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = PhoneKeyCore;
 			target = 74C225F820BC2DA4D75303BCA002940C /* PhoneKeyCore */;
-			targetProxy = 9DAD5C5D6C9CDF8C0E795664EC0F7567 /* PBXContainerItemProxy */;
+			targetProxy = 4A0517E30E6B0B203A1D4A3C463B3674 /* PBXContainerItemProxy */;
 		};
-		D9F2D33464EC0BDE63F602F79F2364FC /* PBXTargetDependency */ = {
+		823B43BFBB4DDE3F6C7FB3D8732830ED /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-NokeMobileLibrary_Example";
 			target = E87DAD844D91790BD9F4CC13064DF41B /* Pods-NokeMobileLibrary_Example */;
-			targetProxy = 7868B1282850748AF36606BC57179BCF /* PBXContainerItemProxy */;
+			targetProxy = EB42D2AFCFFE68EDA449880A61847BFF /* PBXContainerItemProxy */;
+		};
+		AA7CF897F83E6390DD49FC0184C82FF0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NokeMobileLibrary;
+			target = 5368C314D14525BB8DF7D5B53B17D420 /* NokeMobileLibrary */;
+			targetProxy = 7D5F3053518D96FADE504A79F60A3EDA /* PBXContainerItemProxy */;
+		};
+		B0697A37738DD0C83E706D6016F5ED9D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "PhoneKeyCore-PhoneKeyCore";
+			target = EB54DE6543B91371775BF8FBC346F8FD /* PhoneKeyCore-PhoneKeyCore */;
+			targetProxy = DBCBAD6419AEA490F2251736CA616D7B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		1B24AF9FC4F48C8C8938606375BCE25E /* Debug */ = {
+		026256E05E7D484A6211CA85F20BE5A7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6536C962461F90B921677BDDD0B21BBE /* NokeMobileLibrary.debug.xcconfig */;
+			baseConfigurationReference = 6C98E1B5566263BDCFC938CC952F1BF7 /* PhoneKeyCore.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -845,26 +868,24 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_MODULE_VERIFIER = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GCC_PREFIX_HEADER = "Target Support Files/NokeMobileLibrary/NokeMobileLibrary-prefix.pch";
+				GCC_PREFIX_HEADER = "Target Support Files/PhoneKeyCore/PhoneKeyCore-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "Target Support Files/NokeMobileLibrary/NokeMobileLibrary-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/PhoneKeyCore/PhoneKeyCore-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/NokeMobileLibrary/NokeMobileLibrary.modulemap";
-				PRODUCT_MODULE_NAME = NokeMobileLibrary;
-				PRODUCT_NAME = NokeMobileLibrary;
+				MODULEMAP_FILE = "Target Support Files/PhoneKeyCore/PhoneKeyCore.modulemap";
+				PRODUCT_MODULE_NAME = PhoneKeyCore;
+				PRODUCT_NAME = PhoneKeyCore;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -962,15 +983,16 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;
 		};
-		52E875F2DA1224F500784ACD1310E326 /* Release */ = {
+		65D01C549D6D8FBFAFB576FB904EC2A7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B704DE978CA8DA7910E9E9401781B000 /* NokeMobileLibrary.release.xcconfig */;
+			baseConfigurationReference = C2A52580138C1047E70485D816402295 /* NokeMobileLibrary.release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -988,7 +1010,7 @@
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = "Target Support Files/NokeMobileLibrary/NokeMobileLibrary-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/NokeMobileLibrary/NokeMobileLibrary.modulemap";
 				PRODUCT_MODULE_NAME = NokeMobileLibrary;
@@ -998,6 +1020,41 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		76A3903118597DE1A24379490E594861 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8EE0BD7F5BB6E9B63D9E1968D920B954 /* PhoneKeyCore.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_PREFIX_HEADER = "Target Support Files/PhoneKeyCore/PhoneKeyCore-prefix.pch";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Target Support Files/PhoneKeyCore/PhoneKeyCore-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/PhoneKeyCore/PhoneKeyCore.modulemap";
+				PRODUCT_MODULE_NAME = PhoneKeyCore;
+				PRODUCT_NAME = PhoneKeyCore;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1041,9 +1098,9 @@
 			};
 			name = Debug;
 		};
-		9FB8046D10BFE366B3D41B3882DDBB0C /* Release */ = {
+		8C6A9EA736264F153A1A493C12AB042B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8EE0BD7F5BB6E9B63D9E1968D920B954 /* PhoneKeyCore.release.xcconfig */;
+			baseConfigurationReference = 6D64386659E0ADEC2E34A224FD268AD7 /* NokeMobileLibrary.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -1051,28 +1108,46 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_MODULE_VERIFIER = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GCC_PREFIX_HEADER = "Target Support Files/PhoneKeyCore/PhoneKeyCore-prefix.pch";
+				GCC_PREFIX_HEADER = "Target Support Files/NokeMobileLibrary/NokeMobileLibrary-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "Target Support Files/PhoneKeyCore/PhoneKeyCore-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/NokeMobileLibrary/NokeMobileLibrary-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/PhoneKeyCore/PhoneKeyCore.modulemap";
-				PRODUCT_MODULE_NAME = PhoneKeyCore;
-				PRODUCT_NAME = PhoneKeyCore;
+				MODULEMAP_FILE = "Target Support Files/NokeMobileLibrary/NokeMobileLibrary.modulemap";
+				PRODUCT_MODULE_NAME = NokeMobileLibrary;
+				PRODUCT_NAME = NokeMobileLibrary;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		948700C528A351D923125BB0B8A4C4CC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8EE0BD7F5BB6E9B63D9E1968D920B954 /* PhoneKeyCore.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/PhoneKeyCore";
+				IBSC_MODULE = PhoneKeyCore;
+				INFOPLIST_FILE = "Target Support Files/PhoneKeyCore/ResourceBundle-PhoneKeyCore-PhoneKeyCore-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_NAME = PhoneKeyCore;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
 		};
@@ -1142,40 +1217,6 @@
 			};
 			name = Debug;
 		};
-		A31F02D0AA332100897752C46D9D9A97 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6C98E1B5566263BDCFC938CC952F1BF7 /* PhoneKeyCore.debug.xcconfig */;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = NO;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GCC_PREFIX_HEADER = "Target Support Files/PhoneKeyCore/PhoneKeyCore-prefix.pch";
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "Target Support Files/PhoneKeyCore/PhoneKeyCore-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/PhoneKeyCore/PhoneKeyCore.modulemap";
-				PRODUCT_MODULE_NAME = PhoneKeyCore;
-				PRODUCT_NAME = PhoneKeyCore;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_INSTALL_OBJC_HEADER = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		B8F130C1DA1AABB3AFA07E5E38A15383 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BCA974A4FA78B63F1077A40487F51046 /* Pods-NokeMobileLibrary_Example.release.xcconfig */;
@@ -1213,24 +1254,7 @@
 			};
 			name = Release;
 		};
-		CA5766094790BAEA66F353BBB05ABFC0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8EE0BD7F5BB6E9B63D9E1968D920B954 /* PhoneKeyCore.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGNING_ALLOWED = NO;
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/PhoneKeyCore";
-				IBSC_MODULE = PhoneKeyCore;
-				INFOPLIST_FILE = "Target Support Files/PhoneKeyCore/ResourceBundle-PhoneKeyCore-PhoneKeyCore-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				PRODUCT_NAME = PhoneKeyCore;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
-		F037D0C16257B1EDB981F8CE94C9E6C7 /* Debug */ = {
+		D6292633EE0505998A9DE97066FCAB2E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6C98E1B5566263BDCFC938CC952F1BF7 /* PhoneKeyCore.debug.xcconfig */;
 			buildSettings = {
@@ -1238,7 +1262,7 @@
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/PhoneKeyCore";
 				IBSC_MODULE = PhoneKeyCore;
 				INFOPLIST_FILE = "Target Support Files/PhoneKeyCore/ResourceBundle-PhoneKeyCore-PhoneKeyCore-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				PRODUCT_NAME = PhoneKeyCore;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1287,33 +1311,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		277F850E360162F5C8F4D52F45E24999 /* Build configuration list for PBXNativeTarget "PhoneKeyCore-PhoneKeyCore" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F037D0C16257B1EDB981F8CE94C9E6C7 /* Debug */,
-				CA5766094790BAEA66F353BBB05ABFC0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2BE868B76CAEEFE3E9BCCAF3C74AB02E /* Build configuration list for PBXNativeTarget "NokeMobileLibrary" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1B24AF9FC4F48C8C8938606375BCE25E /* Debug */,
-				52E875F2DA1224F500784ACD1310E326 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2C5D4B3A5237052D428A6AF025D05F7E /* Build configuration list for PBXNativeTarget "PhoneKeyCore" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A31F02D0AA332100897752C46D9D9A97 /* Debug */,
-				9FB8046D10BFE366B3D41B3882DDBB0C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1332,11 +1329,38 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		5EE6E1F7D2F06D5692766D6BE208B301 /* Build configuration list for PBXNativeTarget "PhoneKeyCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				026256E05E7D484A6211CA85F20BE5A7 /* Debug */,
+				76A3903118597DE1A24379490E594861 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		73AE2E57B45868DD41F6E6FB83825384 /* Build configuration list for PBXNativeTarget "Pods-NokeMobileLibrary_Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7D84EEFE26F446C9BCC8F009877A2BE8 /* Debug */,
 				FE4D59D2A865CB9134D7A9125BAC32BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		92A0F550B96D20E6076ED551656BD562 /* Build configuration list for PBXNativeTarget "PhoneKeyCore-PhoneKeyCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D6292633EE0505998A9DE97066FCAB2E /* Debug */,
+				948700C528A351D923125BB0B8A4C4CC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AAD56114F75047520D19099E802BAB2F /* Build configuration list for PBXNativeTarget "NokeMobileLibrary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8C6A9EA736264F153A1A493C12AB042B /* Debug */,
+				65D01C549D6D8FBFAFB576FB904EC2A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

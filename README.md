@@ -26,7 +26,7 @@ The Nokē Mobile Library provides an easy-to-use and stable way to communicate w
 
 ## Requirements
 
-This library is compatible with iOS devices that support Bluetooth Low Energy (BLE) and are running iOS 8 or higher
+This library is compatible with iOS devices that support Bluetooth Low Energy (BLE) and are running iOS 12.0 or higher (watchOS 6.2 or higher when installed with CocoaPods)
 
 ## Installation
 - Create/Update your **Podfile** with the following contents
@@ -176,9 +176,22 @@ currentNoke.sendCommands(commandString)
 
 * Once the Nokē device receives the command, it will verify that the keys are correct and unlock.
 
+**Note:** ION 2 locks (hardware type `5E`) do not use the session-based online unlock described above. They unlock with a phone key and a signed ACL instead (see [Unlocking Offline: ION 2 Locks](#unlocking-offline-ion-2-locks-hardware-type-5e)).
+
 #### Unlocking Offline ####
 
-* A Noke device can be unlocked without a network connection.  This requires an offline key and an unlock command, both of which can be received by the server via the [Noke Core API](https://github.com/noke-inc/noke-core-api-documentation). This two values should be cached on the phone to be used at a later time.
+Offline unlock works without a network connection once the required credentials are cached on the phone. The method depends on the lock hardware:
+
+| Lock type | Hardware | Offline credential |
+| --- | --- | --- |
+| ION 2 | `5E` / `E5` (`noke.isNokeIon2()` is `true`) | Phone key ACL (see below) |
+| All other locks (NOKE 1A, 3K, 4K, 4E, etc.) | everything else | Offline key + unlock command (from the Core API) |
+
+Route on `noke.isNokeIon2()` (or `noke.encryptionType`, which is `.signing` for ION 2).
+
+#### Unlocking Offline: Offline Key (1A, 3K, 4K, 4E, etc.) ####
+
+* This requires an offline key and an unlock command, both of which can be received by the server via the [Noke Core API](https://github.com/noke-inc/noke-core-api-documentation). These two values should be cached on the phone to be used at a later time. Not used for ION 2 locks, which have no offline key.
 
 The offline key and unlock command should be set on the Noke device object before being used:
 
@@ -194,7 +207,55 @@ Once the values are set, the offline unlock function can be called at any time t
  noke.offlineUnlock()
 ```
 
+`offlineUnlock` returns the timestamp used, or an empty string if the key or command has the wrong length (key: 32 hex characters, command: 40 hex characters). In that case `nokeErrorDidOccur` is also called with `nokeLibraryErrorInvalidOfflineKey`.
+
 Logs, errors, and callbacks will continue to function the same as when unlocking online.
+
+#### Unlocking Offline: ION 2 Locks (hardware type `5E`) ####
+
+ION 2 locks use a phone key and a signed ACL (access control list) instead of an offline key or server unlock command. The library depends on [PhoneKeyCore](https://github.com/noke-inc/PhoneKeyCore), which provides `BulkPhoneKeyAcl` and the phone key APIs. With Swift Package Manager it is resolved automatically. PhoneKeyCore is not published to the CocoaPods trunk, so with CocoaPods add it to your **Podfile** as well:
+
+```ruby
+target 'YourAppTargetName' do
+use_frameworks!
+pod 'NokeMobileLibrary'
+pod 'PhoneKeyCore', :git => 'https://github.com/noke-inc/PhoneKeyCore.git', :tag => 'v1.1.1'
+end
+```
+
+**Prerequisites**
+
+1. Create a P-256 phone key on the device using `PhoneKeyCore`.
+2. Provision the key with your backend (public key, phone UDID and user ID) and store the returned phone key id.
+3. While online, fetch the ACL(s) for the user's phone key and cache them (e.g. in the keychain) so they are available offline. Clear the cached ACLs if a different user signs in.
+
+Refer to the PhoneKeyCore documentation for the provisioning and ACL requests.
+
+**Unlocking**
+
+Get a valid (non-expired) ACL for the lock, connect to the lock, then call `offlineUnlock(context:)` with a signing context. The unlock is queued automatically until the lock's ION 2 characteristics have been discovered.
+
+```swift
+import PhoneKeyCore // required for BulkPhoneKeyAcl
+
+if noke.isNokeIon2() {
+    noke.offlineUnlock(
+        context: .signing(acl: acl, userId: userId, deviceID: deviceID),
+        onSuccess: {
+            //Unlocked
+        },
+        onFailure: { error in
+            debugPrint(error.description)
+        }
+    )
+} else {
+    _ = noke.offlineUnlock()
+}
+```
+
+* `acl` is the cached `BulkPhoneKeyAcl` for the lock's MAC address. `userId` and `deviceID` must match the user ID and device identifier (UUID) used when the phone key was created, otherwise a different key is used and the signature will not match the provisioned public key.
+* An optional `options:` argument (`UnlockOptionsRepresentable`) can be passed to `.signing`. If the user's access requires an override or emergency unlock, the ACL-based unlock fails with `NokeDeviceSigningError.requiresOverrideUnlock` or `.requiresEmergencyUnlock`.
+* Failures such as a missing, expired or rejected ACL (`NokeDeviceSigningError.missingAcl`, `.aclRejected`, `.aclTimeInvalid`, `.invalidAclSignature`) are reported through `onFailure`. If the ACL is rejected, fetch a fresh ACL while online and try again.
 
 
 ### Uploading Activity Logs ###
